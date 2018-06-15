@@ -1,6 +1,6 @@
-# Dotfiles
+# dotfiles
 
-### On macOS
+## On macOS
 
 1. Install Iterm2
 2. Download `secure.zip` in `~/Downloads`
