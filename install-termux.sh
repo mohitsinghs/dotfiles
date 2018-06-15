@@ -4,7 +4,7 @@
 touch ~/.hushlogin
 
 # Install required packages
-for tool in aria2 coreutils dnsutils git man mp3splt openssh p7zip python tree unrar vim  zip zsh; do
+for tool in aria2 coreutils dnsutils git man mp3splt nodejs openssh p7zip python tree unrar vim  zip zsh; do
   pkg install $tool -y
 done
 
