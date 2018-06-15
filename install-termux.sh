@@ -31,7 +31,7 @@ chsh -s zsh
 pip install --upgrade pip
 pip install youtube-dl
 
-ln -s gitignore-termux ~/.gitignore
+ln -s $DOTLOC/gitignore-termux ~/.gitignore
 
 # Insall pure prompt, syntax highlighing and autosuggestions
 ZSH_USERS=https://github.com/zsh-users
