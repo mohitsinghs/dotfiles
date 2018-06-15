@@ -1,0 +1,36 @@
+[user]
+  name = Mohit Singh
+  email = mohitsinghs.dev@gmail.com
+
+[github]
+  user = mohitsinghs
+
+[core]
+  excludesfile = ~/.gitignore
+
+[alias]
+  c = commit -am
+  u = pull
+  p = push
+  e = commit --amend --all
+  co = checkout
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  d = diff --stat
+  ds = diff --stat --staged
+  s = status
+  rmtag = "!git tag -d $1 && git push origin :refs/tags/$1"
+  agc="!git -c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0 -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc"
+
+
+[url "git@github.com:mohitsinghs/"]
+  insteadOf = "gh:"
+[url "git://github.com/"]
+  insteadOf = "github:"
+
+[push]
+  default = current
+  followTags = true
+
+[fetch]
+  prune = true
+

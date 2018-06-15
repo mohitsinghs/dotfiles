@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "prettier",
+    "prettier/react"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "classes": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jquery": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": false
+      }
+    ]
+  }
+}
