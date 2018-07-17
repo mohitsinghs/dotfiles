@@ -11,16 +11,7 @@ alias p="cd ~/Projects"
 # listing files
 alias t="tree"
 
-# npm shortcuts
-alias ni="npm info"
-alias nr="npm run"
-alias ns="npm search"
-alias nid="npm install -D"
-alias nis="npm install"
-alias nrm="npm uninstall"
-
 # extend keyboard's life
-alias tmux="tmux -2"
 alias a2c="aria2c -x 16 -s 16"
 alias mkdir="mkdir -p"
 alias g="hub"
@@ -57,10 +48,10 @@ elif [[ $(uname) == 'Linux' ]]; then
   alias d="cd /sdcard/Download"
 
   # Share files with mac
-  function up () {
-    scp $2 "mohit@192.168.$1:Downloads"
+  function ul () {
+    scp -r $1 "mohit@192.168.43.146:Downloads"
   }
-  function down () {
-    scp "mohit@192.168.$1:Downloads/$2" .
+  function dl () {
+    scp -r "mohit@192.168.43.146:Downloads/$1" .
   }
 fi

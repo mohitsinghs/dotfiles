@@ -4,7 +4,7 @@
 touch ~/.hushlogin
 
 # Install required packages
-for tool in aria2 coreutils dnsutils git man mp3splt nodejs openssh p7zip python tree unrar vim  zip zsh; do
+for tool in aria2 coreutils dnsutils git man mp3splt nodejs openssh p7zip python tree unrar vim zip zsh; do
   pkg install $tool -y
 done
 
@@ -30,8 +30,6 @@ chsh -s zsh
 # Upgrade pip and install youtube-dl
 pip install --upgrade pip
 pip install youtube-dl
-
-ln -s $DOTLOC/gitignore-termux ~/.gitignore
 
 # Insall pure prompt, syntax highlighing and autosuggestions
 ZSH_USERS=https://github.com/zsh-users

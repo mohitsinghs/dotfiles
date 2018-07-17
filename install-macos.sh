@@ -12,15 +12,13 @@ mkdir -p $DOTLOC
 git clone git@github.com:mohitsinghs/dotfiles.git $DOTLOC
 
 # Link required files
-for file in zshrc vimrc tmux.conf gitconfig eslintrc; do
+for file in zshrc vimrc gitconfig gitignore; do
   rm ~/.$file
   ln -s $DOTLOC/$file ~/.file
 done
-
-ln -s gitignore-macos ~/.gitignore
 
 # Install iStats for battery stats
 gem install iStats
 
 # Install global node modules
-npm install --global babel-eslint eslint eslint-config-prettier eslint-config-react eslint-plugin-prettier np npm prettier
+npm i -g np npm serve surge
