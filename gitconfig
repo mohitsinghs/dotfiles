@@ -18,6 +18,7 @@
   d = diff --stat
   ds = diff --stat --staged
   s = status
+  fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
   rmtag = "!git tag -d $1 && git push origin :refs/tags/$1"
   agc="!git -c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0 -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc"
 
