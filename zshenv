@@ -9,7 +9,7 @@ alias ~="cd ~"
 alias p="cd ~/Projects"
 
 # listing files
-alias t="tree"
+alias t="tree -I 'node_modules|.git|test|.DS_Store' --noreport -C -a --dirsfirst"
 
 # extend keyboard's life
 alias a2c="aria2c -x 16 -s 16"
@@ -41,7 +41,7 @@ if [[ $(uname) == 'Darwin' ]]; then
       echo "";
     done
   }
-elif [[ $(uname) == 'Linux' ]]; then
+elif [[ $OSTYPE == 'linux-android' ]]; then
   alias la="ls -laAhGg --color --group-directories-first"
   alias ls="ls -lACG --color --group-directories-first"
   alias tdf="transmission-daemon -f"
