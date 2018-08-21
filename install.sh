@@ -2,7 +2,7 @@
 
 # detect os
 os='unknown'
-if [[ $OSTYPE == 'linux-android' ]]; then
+if [[ $(uname -o) == 'Android' ]]; then
   os='android'
 elif [[ $(uname) == 'Darwin' ]]; then
   os='mac'
