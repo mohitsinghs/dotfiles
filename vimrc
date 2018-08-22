@@ -40,10 +40,14 @@ set tabstop=2 shiftwidth=2 expandtab
 set backspace=indent,eol,start
 set encoding=utf-8
 set fileencoding=utf-8
+set t_ZH=[3m
+set t_ZR=[23m
 
 " Syntax
 syntax on
 set termguicolors
+let g:oceanic_next_terminal_italic=1
+let g:oceanic_next_terminal_bold=1
 colorscheme OceanicNext
 
 map <C-S-tab> :tabprevious<CR>
