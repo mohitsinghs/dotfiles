@@ -45,7 +45,7 @@ if [[ $os == 'mac' ]]; then
   echo "Done"
   echo -n "=> Installing packages..."
   # install packages
-  brew bundle install $DOTLOC/Brewfile /dev/null
+  brew bundle install --file=$DOTLOC/Brewfile > /dev/null
   # install iStats for battery stats
   gem install iStats > /dev/null
   echo "Done"
