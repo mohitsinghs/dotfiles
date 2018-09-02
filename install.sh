@@ -24,7 +24,7 @@ touch ~/.hushlogin
 if [[ $os == 'android' ]]; then
   echo -n "=> Installing Packages..." 
   apt-get upgrade -y > /dev/null
-  for tool in aria2 coreutils dnsutils git hub man nodejs openssh p7zip python tree unrar vim-python zip zsh 
+  for tool in aria2 coreutils dnsutils git hub man nodejs openssh p7zip python tar transmission tree unrar vim-python zsh
   do
     apt-get install $tool -y > /dev/null
   done
@@ -64,9 +64,11 @@ echo "Done"
 chsh -s zsh
 
 if [[ $os == 'android' ]]; then
+  echo -n "=> Installing pip and youtube-dl..."
   # upgrade pip and install youtube-dl
   pip install -q --upgrade pip
   pip install -q youtube-dl
+  echo "Done"
   echo -n "=> Installing autosuggestion..."
   # install syntax highlighing and autosuggestions
   mkdir -p ~/.zsh
@@ -79,9 +81,6 @@ if [[ $os == 'android' ]]; then
   sed -ie "s/require('os').cpus().length/1/g" ~/../usr/lib/node_modules/npm/node_modules/worker-farm/lib/farm.js
 fi
 
-# Install global node modules
-npm i -g np npm serve surge standard babel-eslint prettier
-
 echo -n "=> Installing prompt..."
 # install pure prompt
 curl https://raw.githubusercontent.com/sindresorhus/pure/master/pure.zsh --create-dirs -fsSLo $FUNPATH/prompt_pure_setup
@@ -89,7 +88,11 @@ curl https://raw.githubusercontent.com/sindresorhus/pure/master/async.zsh -fsSLo
 chmod +x $FUNPATH/prompt_pure_setup
 chmod +x $FUNPATH/async
 echo "Done"
+
 # reload shell
 exec zsh
+termux-reload-settings
 
+# Install global node modules
+npm i -g np npm serve surge standard babel-eslint prettier
 
