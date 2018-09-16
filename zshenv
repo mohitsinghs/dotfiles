@@ -44,7 +44,6 @@ if [[ $(uname) == 'Darwin' ]]; then
 elif [[ $OSTYPE == 'linux-android' ]]; then
   alias la="ls -laAhGg --color --group-directories-first"
   alias ls="ls -lACG --color --group-directories-first"
-  alias tdf="transmission-daemon -f"
   alias d="cd /sdcard/Download"
 
   # Share files with mac

@@ -24,7 +24,7 @@ touch ~/.hushlogin
 if [[ $os == 'android' ]]; then
   echo -n "=> Installing Packages..." 
   apt-get upgrade -y > /dev/null
-  for tool in aria2 coreutils dnsutils git hub man nodejs openssh p7zip python tar transmission tree unrar vim-python zsh
+  for tool in aria2 coreutils dnsutils git hub man nodejs openssh p7zip python tar tree unrar vim-python zsh
   do
     apt-get install $tool -y > /dev/null
   done
@@ -77,8 +77,6 @@ if [[ $os == 'android' ]]; then
   echo -n "=> Installing syntax-highlighting..."
   git clone -q $ZSH_USERS/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
   echo "Done"
-  # Fix a bug which prevents npm from updating
-  sed -ie "s/require('os').cpus().length/1/g" ~/../usr/lib/node_modules/npm/node_modules/worker-farm/lib/farm.js
 fi
 
 echo -n "=> Installing prompt..."
