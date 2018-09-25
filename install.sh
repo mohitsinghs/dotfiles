@@ -24,7 +24,7 @@ touch ~/.hushlogin
 if [[ $os == 'android' ]]; then
   echo -n "=> Installing Packages..." 
   apt-get upgrade -y > /dev/null
-  for tool in aria2 coreutils dnsutils git hub man nodejs openssh p7zip python tar tree unrar vim-python zsh
+  for tool in aria2 coreutils dnsutils git hub man openssh p7zip python tar tree unrar vim-python zsh
   do
     apt-get install $tool -y > /dev/null
   done
@@ -90,7 +90,4 @@ echo "Done"
 # reload shell
 exec zsh
 termux-reload-settings
-
-# Install global node modules
-npm i -g np npm serve surge standard babel-eslint prettier
 

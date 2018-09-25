@@ -18,7 +18,6 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'mhartington/oceanic-next'
-Plug 'w0rp/ale'
 
 " Languages
 Plug 'pangloss/vim-javascript'
@@ -57,18 +56,6 @@ map <tab>     :bnext<CR>
 map <S-tab>   :bprevious<CR>
 map <C-b>     :NERDTreeToggle<CR>
 
-" ALE
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠︎'
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
-let g:ale_linters = {'javascript': ['standard'],'*': ['prettier']}
-let g:ale_fixers = {'javascript': ['standard'],'*': ['prettier']}
-let g:ale_fix_on_save = 1
-let g:ale_use_global_executables = 1
-let g:ale_javascript_standard_options = '--parser babel-eslint'
-let g:ale_javascript_prettier_options = '--single-quote --no-semi'
-
 " Emmet
 let g:user_emmet_expandabbr_key= '<c-e>'
 let g:user_emmet_settings = {
@@ -81,7 +68,6 @@ let g:user_emmet_settings = {
 let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts=1
 let g:airline_skip_empty_sections=1
-let g:airline#extensions#ale#enabled=1
 let g:airline#extensions#tabline#enabled=1
 if g:os == 'Linux'
   let g:airline_mode_map = {
