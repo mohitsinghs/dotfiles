@@ -7,7 +7,6 @@
 
 [core]
   excludesfile = ~/.gitignore
-  editor = subl
 
 [alias]
   c = commit -am
@@ -24,6 +23,10 @@
   insteadOf = "gh:"
 [url "git://github.com/"]
   insteadOf = "github:"
+[url "git@gitlab.com:mohitsinghs/"]
+  insteadOf = "gl:"
+[url "git://gitlab.com/"]
+  insteadOf = "gitlab:"
 
 [push]
   default = current
