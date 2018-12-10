@@ -9,7 +9,7 @@ alias -- -="cd -"
 # favourite locations
 alias ~="cd ~"
 alias p="cd ~/Projects"
-alias d="cd ~/Downloads"
+alias d="cd ~/Designs"
 alias m="cd ~/Movies"
 
 # A less noisy tree list
@@ -53,10 +53,7 @@ alias sudo="sudo "
 alias reload="exec $SHELL -l"
 alias path="echo -e ${PATH//:/\\n}"
 
-# use sublime text as default editor
-export EDITOR='subl'
-
-# avoid typing type cd
+# avoid typing cd
 setopt autocd
 
 # list orphan/unused brew packages so that they can be removed
