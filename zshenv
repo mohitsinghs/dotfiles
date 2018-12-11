@@ -65,3 +65,37 @@ function orphans () {
     echo "";
   done
 }
+
+# compress sketch files
+function sketchify () {
+  for file in "$@"
+  do
+    filename="${file%.*}"
+    if [[ -f "$filename.sketch" ]]; then
+      rm -rf "$filename.sketch"
+    fi
+    cd $filename
+    # compress everything inside
+    zip "../$filename.sketch" ./**/*
+    cd -
+  done
+}
+
+# decompress sketch files
+function desketchify () {
+  for file in "$@"
+  do
+    filename="${file%.*}"
+    if [[ -d $filename ]]; then
+      rm -rf $filename
+    fi
+    mkdir -p $filename
+    unzip -d $filename $file
+    # sort json keys with jq
+    for json in $filename/**/*.json
+    do
+     cat $json | jq -S '.' > $json.tmp
+     mv $json.tmp $json
+    done
+  done
+}
