@@ -51,7 +51,7 @@ alias yup="yarn upgrade-interactive --latest"
 # sudoed aliases, shell reloading and pretty paths
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
-alias path="echo -e ${PATH//:/\\n}"
+alias path="echo -e ${PATH//:/\\\n}"
 
 # avoid typing cd
 setopt autocd
