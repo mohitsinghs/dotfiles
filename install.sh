@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# exit if macos is not found
 if [[ $(uname) != 'Darwin' ]]; then
   echo "Sorry! found $(uname) instead of Darwin"
   exit 1
@@ -14,15 +15,20 @@ FUNPATH=/usr/local/share/zsh/site-functions
 touch ~/.hushlogin
 
 echo -n "=> Cloning dotfiles..."
+# cleanup dotfiles directory
+[[ -d $DOTLOC ]] && rm -rf $DOTLOC
 # create dotfiles directory and clone
 mkdir -p $DOTLOC
 git clone -q https://github.com/mohitsinghs/dotfiles.git $DOTLOC
 echo "Done"
 
-echo -n "=> Installing homebrew..."
-# install homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-echo "Done"
+# install homebrew if missing
+if [[ ! -x "$(command -v brew)" ]]; then
+  echo -n "=> Installing homebrew..."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  echo "Done"
+fi
+
 echo -n "=> Installing packages..."
 # install packages
 brew bundle install --file=$DOTLOC/Brewfile > /dev/null
@@ -43,6 +49,11 @@ echo "Done"
 chsh -s zsh
 
 echo -n "=> Installing prompt..."
+# cleanup old prompt files
+if [[ -x $FUNPATH/prompt_pure_setup && -x $FUNPATH/async ]]; then
+  rm -f $FUNPATH/prompt_pure_setup
+  rm -f $FUNPATH/async
+fi
 # install pure prompt
 curl https://raw.githubusercontent.com/sindresorhus/pure/master/pure.zsh --create-dirs -fsSLo $FUNPATH/prompt_pure_setup
 curl https://raw.githubusercontent.com/sindresorhus/pure/master/async.zsh -fsSLo $FUNPATH/async
