@@ -12,22 +12,34 @@
 
 set -e
 
-echo -n "Do you have VSCode installed (y/n)? "
+doing () {
+  echo -n "\\033[33m ➜ \\033[0m $1"
+}
+
+success () {
+  echo -n "\\033[32m ✔ \\033[0m $1"
+}
+
+doing "Do you have VSCode installed (y/n) ? "
 read answer
-if [[ ! "$answer" != "${answer#[Yy]}" ]]; then
+if [[ ! $answer =~ ^[Yy]$ ]]; then
+  doing "Installing latest VSCode...\\n"
   # get the latest VSCode
-  wget "https://update.code.visualstudio.com/latest/darwin/stable"
+  wget -nv --show-progress "https://update.code.visualstudio.com/latest/darwin/stable"
   # unzip it
   unzip stable
   # copy to Applications
   mv "Visual Studio Code.app" "/Applications/Visual Studio Code.app"
   # remove archive
   rm stable
-  ln -s '/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' '/usr/local/bin'
+  if [[ ! -h "/usr/local/bin/code" ]]; then
+    ln -s "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "/usr/local/bin"
+  fi
+  success "VSCode installed"
 fi
 
 # Install vscode extensions
-echo -n "=> Installing VSCode extensions..."
+doing "Installing VSCode extensions...\\n"
 plugins=( \
   alefragnani.project-manager \
   be5invis.vscode-custom-css \
@@ -49,13 +61,13 @@ for plugin in $plugins;
 do
   code --install-extension $plugin
 done
-echo "Done"
+success "Extensions installed\\n"
 
 # Link settings
+doing "Linking VSCode settings..."
 VSUSR="$HOME/Library/Application Support/Code/User"
-echo -n "=> Linking settings.json..."
-if [[ -f $VSUSR/settings.json ]]; then
+if [[ -a $VSUSR/settings.json ]]; then
   rm $VSUSR/settings.json
 fi
 ln -s "$HOME/Projects/dotfiles/settings.json" $VSUSR/settings.json
-echo "Done"
+echo "\\033[32m ✔ \\033[0m"

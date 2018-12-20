@@ -17,11 +17,20 @@
 
 set -e
 
-echo -n "Do you have Sublime Text installed (y/n)? "
-read answer
-if [[ ! "$answer" != "${answer#[Yy]}" ]]; then
+doing () {
+  echo -n "\\033[33m ➜ \\033[0m $1"
+}
+
+success () {
+  echo -n "\\033[32m ✔ \\033[0m $1"
+}
+
+doing "Do you have Sublime Text installed (y/n) ? "
+read installed
+if [[ ! $installed =~ ^[Yy]$  ]]; then
+  doing "Installing Sublime Text...\\n"
   # download Sublime Text 3
-  wget "https://download.sublimetext.com/Sublime Text Build 3176.dmg"
+  wget  -nv --show-progress "https://download.sublimetext.com/Sublime Text Build 3176.dmg"
   # Mount disk image
   hdiutil attach "Sublime Text Build 3176.dmg"
   # Copy Application
@@ -29,11 +38,19 @@ if [[ ! "$answer" != "${answer#[Yy]}" ]]; then
   # Eject disk image
   hdiutil eject "/Volumes/Sublime Text"
   rm "Sublime Text Build 3176.dmg"
+  success "Sublime Text installed"
 fi
 
-# clone setup repo
-g clone -q git@gitlab.com:mysublime/setup.git
-# run install script
-./setup/install.sh
-# remove setup repo
-rm -rf ./setup
+doing "Do you have access to \\033[36mgitlab.com/mysublime\\033[0m (y/n) ? "
+read canaccess
+if [[ $canaccess =~ ^[Yy]$ ]]; then
+  # clone setup repo
+  git clone -q git@gitlab.com:mysublime/setup.git $HOME/setup
+  # run install script
+  $HOME/setup/install.sh
+  # remove setup repo
+  rm -rf $HOME/setup
+else
+  echo -n "\\033[31m ✖ \\033[0m Sorry, You need access for setting up."
+  exit 1
+fi
