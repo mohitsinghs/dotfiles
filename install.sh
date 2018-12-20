@@ -16,7 +16,7 @@ fail () {
   exit 1
 }
 
-info () {
+doing () {
   printf "\\033[33m ➜ \\033[0m $1" >&2
 }
 
@@ -26,7 +26,7 @@ ZSH_USERS=https://github.com/zsh-users
 FUNPATH=/usr/local/share/zsh/site-functions
 
 # exit if macos is not found
-info "Checking system..."
+doing "Checking system..."
 if [[ $(uname) != 'Darwin' ]]; then
   fail "You are not on a mac."
 else
@@ -34,7 +34,7 @@ else
 fi
 
 # exit if dotfiles exists
-info "Looking for dotfiles..."
+doing "Looking for dotfiles..."
 if [[ -d  $DOTLOC ]]; then
   fail "\\033[2m$HOME/dotfiles\\033[0m already exists."
 else
@@ -45,7 +45,7 @@ fi
 touch ~/.hushlogin
 
 # create dotfiles directory and clone
-info "Cloning dotfiles..."
+doing "Cloning dotfiles..."
 [[ ! -d $HOME/Projects ]] && mkdir -p $HOME/Projects
 git clone -q https://github.com/mohitsinghs/dotfiles.git $DOTLOC
 success
@@ -53,28 +53,28 @@ success
 
 # install homebrew if missing
 if [[ ! -x "$(command -v brew)" ]]; then
-  info "Installing homebrew...\\n"
+  doing "Installing homebrew...\\n"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
-  info "Homebrew is already installed.\\n"
+  doing "Homebrew is already installed.\\n"
 fi
 
 # install packages
-info "Installing packages..."
+doing "Installing packages..."
 brew bundle install --file=$DOTLOC/Brewfile >/dev/null
 success
 
 # install iStats for battery stats
 if [[ ! -x "$(command -v iStats)" ]]; then
-  info "Installing iStats..."
+  doing "Installing iStats..."
   gem install iStats > /dev/null
   success
 else
-  info "iStats is already installed.\\n"
+  doing "iStats is already installed.\\n"
 fi
 
 # link required files
-info "Linking Files..."
+doing "Linking Files..."
 for file in zshrc zshenv gitconfig gitignore
 do
   rm ~/.$file &>/dev/null
@@ -85,7 +85,7 @@ success
 # change default shell to zsh
 chsh -s zsh
 
-info "Installing pure prompt..."
+doing "Installing pure prompt..."
 # cleanup old prompt files
 if [[ -x $FUNPATH/prompt_pure_setup && -x $FUNPATH/async ]]; then
   rm -f $FUNPATH/prompt_pure_setup
