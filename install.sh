@@ -8,16 +8,16 @@
 set -e
 
 success () {
-  printf "\\033[32m ✔ \\033[0m\\n" >&2
+  printf "\\033[32m ✔ \\033[0m\\n"
 }
 
 fail () {
-  printf "\\n\\033[31m ✖ \\033[0m $1\\n" >&2
+  printf "\\033[31m ✖ \\033[0m $1\\n"
   exit 1
 }
 
 doing () {
-  printf "\\033[33m ➜ \\033[0m $1" >&2
+  printf "\\033[33m ➜ \\033[0m $1"
 }
 
 # define variables

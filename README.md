@@ -11,13 +11,11 @@ curl -fsSL install.mohitsingh.in | bash
 ### Setting up Sublime Text
 
 ```sh
-cd ~/Projects/dotfiles
-./setup-sublime.sh
+curl -fsSL install.mohitsingh.in/sublime | bash
 ```
 
 ### Setting up Visual Studio Code
 
 ```sh
-cd ~/Projects/dotfiles
-./setup-vscode.sh
+curl -fsSL install.mohitsingh.in/vscode | bash
 ```

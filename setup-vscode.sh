@@ -1,51 +1,61 @@
-#!/usr/bin/env zsh
-
-# VSCode is full of features but there are some drawbacks of it.
-# Due to these drawbacks, I keep Sublime installed along with it.
-# Following are those drawbacks
-# 
-# - Eats battery due to being an electron app
-# - Font rendering is not as pleasant as Sublime
-# - Slower than sublime for some tasks
-#
-# Just run this script to get everything setup
-
+#!/usr/bin/env bash
 set -e
 
 doing () {
-  echo -n "\\033[33m ➜ \\033[0m $1"
+  printf "\\033[33m ➜ \\033[0m $1"
 }
 
 success () {
-  echo -n "\\033[32m ✔ \\033[0m $1"
+  printf "\\033[32m ✔ \\033[0m\\n"
 }
 
-doing "Do you have VSCode installed (y/n) ? "
-read answer
-if [[ ! $answer =~ ^[Yy]$ ]]; then
-  doing "Installing latest VSCode...\\n"
+fail () {
+  printf "\\n\\033[31m ✖ \\033[0m $1\\n"
+  exit 1
+}
+
+# exit if macos is not found
+doing "Checking system..."
+if [[ $(uname) != 'Darwin' ]]; then
+  fail "You are not on a mac."
+else
+  success
+fi
+
+doing "Looking for VSCode..."
+if [[ -d "/Applications/Visual Studio Code.app" ]]; then
+  fail "VSCode is already installed"
+else
+  success
+  doing "Installing latest VSCode..."
+  echo
   # get the latest VSCode
-  wget -nv --show-progress "https://update.code.visualstudio.com/latest/darwin/stable"
+  wget -q --show-progress "https://update.code.visualstudio.com/latest/darwin/stable"
+  # move cursor to end of previous line
+  printf "\\033[2A\\033[31C\\033[J"
   # unzip it
-  unzip stable
+  unzip stable >/dev/null
   # copy to Applications
   mv "Visual Studio Code.app" "/Applications/Visual Studio Code.app"
-  # remove archive
+  # remove downloaded file  
   rm stable
-  if [[ ! -h "/usr/local/bin/code" ]]; then
-    ln -s "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "/usr/local/bin"
-  fi
-  success "VSCode installed"
+  success
+fi
+
+if [[ ! -h "/usr/local/bin/code" ]]; then
+  doing "Linking \\033[36m code \\033[0m binary..."
+  ln -s "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "/usr/local/bin"
+  success
 fi
 
 # Install vscode extensions
-doing "Installing VSCode extensions...\\n"
+doing "Installing VSCode extensions..."
 plugins=( \
   alefragnani.project-manager \
   be5invis.vscode-custom-css \
   chenxsan.vscode-standardjs \
   christian-kohler.npm-intellisense \
-  christian-kohler.path-intellisense \
+  christian-kohler.path-intellisense\
   CoenraadS.bracket-pair-colorizer-2 \
   EditorConfig.EditorConfig \
   esbenp.prettier-vscode \
@@ -57,17 +67,23 @@ plugins=( \
   sdras.night-owl \
   wayou.vscode-todo-highlight \
 )
-for plugin in $plugins;
+echo
+for plugin in ${plugins[*]};
 do
-  code --install-extension $plugin
+  printf "\\033[2m      Installing $plugin\\033[0m"
+  code --install-extension $plugin >/dev/null
+  # clear current line
+  printf "\\r\\033[K"
 done
-success "Extensions installed\\n"
+# move cursor to end of previous line
+printf "\\033[1A\\033[35C"
+success
 
 # Link settings
 doing "Linking VSCode settings..."
 VSUSR="$HOME/Library/Application Support/Code/User"
 if [[ -a $VSUSR/settings.json ]]; then
-  rm $VSUSR/settings.json
+  rm "$VSUSR/settings.json"
 fi
-ln -s "$HOME/Projects/dotfiles/settings.json" $VSUSR/settings.json
-echo "\\033[32m ✔ \\033[0m"
+ln -s "$HOME/Projects/dotfiles/settings.json" "$VSUSR/settings.json"
+success
