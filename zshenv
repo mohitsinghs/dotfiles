@@ -99,3 +99,26 @@ function desketchify () {
     done
   done
 }
+
+
+# for moving quickly into my projects 
+function repo {
+    REPO_BASE="$HOME/Projects"
+    REPO_PATH=$(find "$REPO_BASE" -maxdepth 1 -type d -name "*$1*" | head -n 1)
+    if [[ -z $1 ]]; then
+        cd "$REPO_BASE"
+    else
+        cd "$REPO_PATH"
+        subl .
+    fi
+}
+
+#compdef repo
+function _repo {
+for r in $(find "$HOME/Projects" -maxdepth 1 -type d)
+do
+  if [[ ! $(basename $r) == '.git' ]]; then
+    compadd "$(basename $r)"
+  fi
+done
+}
