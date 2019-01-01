@@ -17,6 +17,7 @@ brew 'youtube-dl'
 brew 'zsh'
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
+brew 'zsh-history-substring-search'
 brew 'zsh-syntax-highlighting'
 
 tap 'caskroom/cask'
