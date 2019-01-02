@@ -98,5 +98,12 @@ chmod +x $FUNPATH/prompt_pure_setup
 chmod +x $FUNPATH/async
 success
 
+doing "Installing completions..."
+if [[ -x $FUNPATH/_repo ]]; then
+  rm -f $FUNPATH/_repo
+fi
+ln -s $DOTLOC/completions/_repo $FUNPATH/_repo
+success
+
 # reload shell
 exec zsh

@@ -109,16 +109,5 @@ function repo {
         cd "$REPO_BASE"
     else
         cd "$REPO_PATH"
-        subl .
     fi
-}
-
-#compdef repo
-function _repo {
-for r in $(find "$HOME/Projects" -maxdepth 1 -type d)
-do
-  if [[ ! $(basename $r) == '.git' ]]; then
-    compadd "$(basename $r)"
-  fi
-done
 }
