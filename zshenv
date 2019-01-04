@@ -104,7 +104,7 @@ function desketchify () {
 # for moving quickly into my projects 
 function repo {
     REPO_BASE="$HOME/Projects"
-    REPO_PATH=$(find "$REPO_BASE" -maxdepth 1 -type d -name "*$1*" | head -n 1)
+    REPO_PATH=$(find "$REPO_BASE" -mindepth 1 -maxdepth 1 -type d -name "*$1*" | head -n 1)
     if [[ -z $1 ]]; then
         cd "$REPO_BASE"
     else

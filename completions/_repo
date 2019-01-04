@@ -1,6 +1,6 @@
 #compdef repo
 function _repo {
-for r in $(find "$HOME/Projects" -maxdepth 1 -type d)
+for r in $(find "$HOME/Projects" -mindepth 1 -maxdepth 1 -type d)
 do
   if [[ ! $(basename $r) == '.git' ]]; then
     compadd "$(basename $r)"
