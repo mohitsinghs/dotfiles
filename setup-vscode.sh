@@ -2,7 +2,7 @@
 set -e
 
 doing () {
-  printf "\\033[33m ➜ \\033[0m $1"
+  printf "\\033[33m ➜ \\033[0m %s" "$1"
 }
 
 success () {
@@ -10,7 +10,7 @@ success () {
 }
 
 fail () {
-  printf "\\n\\033[31m ✖ \\033[0m $1\\n"
+  printf "\\n\\033[31m ✖ \\033[0m %s\\n" "$1"
   exit 1
 }
 
@@ -70,8 +70,8 @@ plugins=( \
 echo
 for plugin in ${plugins[*]};
 do
-  printf "\\033[2m      Installing $plugin\\033[0m"
-  code --install-extension $plugin >/dev/null
+  printf "\\033[2m      Installing %s\\033[0m" "$plugin"
+  code --install-extension "$plugin" >/dev/null
   # clear current line
   printf "\\r\\033[K"
 done

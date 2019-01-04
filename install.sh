@@ -12,17 +12,16 @@ success () {
 }
 
 fail () {
-  printf "\\033[31m ✖ \\033[0m $1\\n"
+  printf "\\033[31m ✖ \\033[0m %s\\n" "$1"
   exit 1
 }
 
 doing () {
-  printf "\\033[33m ➜ \\033[0m $1"
+  printf "\\033[33m ➜ \\033[0m %s" "$1"
 }
 
 # define variables
 DOTLOC=$HOME/Projects/dotfiles
-ZSH_USERS=https://github.com/zsh-users
 FUNPATH=/usr/local/share/zsh/site-functions
 
 # exit if macos is not found
@@ -46,8 +45,8 @@ touch ~/.hushlogin
 
 # create dotfiles directory and clone
 doing "Cloning dotfiles..."
-[[ ! -d $HOME/Projects ]] && mkdir -p $HOME/Projects
-git clone -q https://github.com/mohitsinghs/dotfiles.git $DOTLOC
+[[ ! -d "$HOME/Projects" ]] && mkdir -p "$HOME/Projects"
+git clone -q https://github.com/mohitsinghs/dotfiles.git "$DOTLOC"
 success
 
 
@@ -61,7 +60,7 @@ fi
 
 # install packages
 doing "Installing packages..."
-brew bundle install --file=$DOTLOC/Brewfile >/dev/null
+brew bundle install --file="$DOTLOC/Brewfile" >/dev/null
 success
 
 # install iStats for battery stats
@@ -78,7 +77,7 @@ doing "Linking Files..."
 for file in zshrc zshenv gitconfig gitignore
 do
   rm ~/.$file &>/dev/null
-  ln -s $DOTLOC/$file ~/.$file
+  ln -s "$DOTLOC/$file" ~/.$file
 done
 success
 
@@ -102,7 +101,7 @@ doing "Installing completions..."
 if [[ -x $FUNPATH/_repo ]]; then
   rm -f $FUNPATH/_repo
 fi
-ln -s $DOTLOC/completions/_repo $FUNPATH/_repo
+ln -s "$DOTLOC/completions/_repo" $FUNPATH/_repo
 success
 
 # reload shell
