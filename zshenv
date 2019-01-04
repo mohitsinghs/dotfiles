@@ -111,3 +111,34 @@ function repo {
         cd "$REPO_PATH"
     fi
 }
+
+# sync .sublime-project files and git hooks for all nodejs projects
+function synk {
+  REPO_BASE="$HOME/Projects"
+  TEMPLATES="$HOME/Projects/dotfiles/templates"
+  printf "\\033[33m ➜ \\033[0m Synchronizing Projects...\\n"
+  for r in $(find "$HOME/Projects" -mindepth 1 -maxdepth 1 -type d)
+  do
+    cd $r
+    printf "  \\033[0m\\033[36m$(basename $r)\\033[0m : \\033[2mChecking git-hooks\\033[0m"
+    if [[ -d .git && $(git rev-parse --is-inside-work-tree 2> /dev/null) ]]; then
+      # Check if current directory is a node project and standardjs hook exists
+      if [[ -f "$r/package.json" && $(cat "$TEMPLATES/standard") != $(cat "$r/.git/hooks/pre-commit") ]]; then
+        # copy standardjs hook
+        cp "$TEMPLATES/standard" "$r/.git/hooks/pre-commit"
+        # set executable premission
+        chmod +x "$r/.git/hooks/pre-commit"
+      fi
+      printf "\\r\\033[K"
+      printf "\\033[2m  \\033[0m\\033[36m$(basename $r)\\033[0m : \\033[2m Checking sublime-project\\033[0m"
+      if [[ ! -f "$r/$(basename $r).sublime-project" ]]; then
+        cp "$TEMPLATES/project" "$r/$(basename $r).sublime-project"
+      fi
+    fi
+    cd $REPO_BASE
+    printf "\\r\\033[K"
+  done  
+  # move cursor to end of previous line
+  printf "\\033[1A\\033[0C"
+  printf "\\033[32m✔ \\033[0m Synchronized Successfully\\033[0m"
+}
