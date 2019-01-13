@@ -1,0 +1,25 @@
+#!/bin/bash
+# Portable version of "xargs -r". The -r flag is a GNU extension that 
+# prevents xargs from running if there are no input files.  
+function xargs-r() {
+  if IFS= read -r -d $'\n' path; then
+    { echo "$path"; cat; } | xargs $@
+  fi
+}
+
+# Filter list of supported staged files
+files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.jsx\?\|\.tsx\?\|md\|vue|\|html\|css\|scss$' | tr '\n' ' ')
+[ -z "$files" ] && exit 0
+
+# Run prettierx for all supported staged files
+echo "$files" | xargs prettierx --write  --no-semi --single-quote --jsx-single-quote --space-before-function-paren --generator-star-spacing
+
+# Add back the modified/prettified files to staging
+echo "$files" | xargs git add
+
+# Run standard on js/jsx to check for linting errors
+git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard --verbose | snazzy
+if [[ $? -ne 0 ]]; then
+  echo 'Linting errors were detected. Aborting commit.'
+  exit 1
+fi

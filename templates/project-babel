@@ -1,0 +1,10 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "SublimeLinter.linters.standard.args": ["--parser", "babel-eslint"]
+  }
+}

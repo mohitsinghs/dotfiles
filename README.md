@@ -26,4 +26,8 @@ curl -fsSL install.mohitsingh.in/sublime | bash
 
 - **orphans** - check for brew packages that are not dependencies of others
 - **repo** - cd into project repos from anywhere and open them in sublime. (with tab completions)
-- **synk** - add/update `.sublime-project` files for all and standardjs pre-commit hook for nodejs projects (intended be a single command for odd jobs like this)
+- **synk** - add/update `.sublime-project` files for all and pre-commit hook for nodejs projects
+
+### Note
+
+> In order to pre-commit hooks to work, **standard**, **babel-eslint**, **prettierx** and **snazzy** need to be installed globally.
