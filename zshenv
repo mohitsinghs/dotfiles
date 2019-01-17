@@ -77,7 +77,7 @@ function repo {
     fi
 }
 
-# sync .sublime-project files and git hooks for all projects
+# sync git hooks for all projects
 function synk {
   local REPO_BASE="$HOME/Projects"
   local TEMPLATES="$HOME/Projects/dotfiles/templates"
@@ -123,19 +123,6 @@ function synk {
       fi
       printf "\\r\\033[K"
       # end check for git hooks
-
-      # check for sublime-project
-      printf "\\033[2m  \\033[0m\\033[36m%s\\033[0m : \\033[2m Checking sublime-project\\033[0m" "$(basename $r)"
-      local PROJECT="$r/$(basename "$r").sublime-project"
-      if __isNot $PROJECT "$TEMPLATES/project" || __isNot $PROJECT "$TEMPLATES/project-babel"; then
-        if __isBabel "$r"; then
-          cp "$TEMPLATES/project-babel" "$PROJECT"
-        else
-          cp "$TEMPLATES/project" "$PROJECT"
-        fi
-      fi 
-      printf "\\r\\033[K"
-      # end check for sublime-project
     fi
     cd $REPO_BASE
   done
