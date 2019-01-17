@@ -12,12 +12,12 @@ success () {
 }
 
 fail () {
-  printf "\\033[31m ✖ \\033[0m %s\\n" "$1"
+  printf "\\033[31m ✖ \\033[0m $1\\n"
   exit 1
 }
 
 doing () {
-  printf "\\033[33m ➜ \\033[0m %s" "$1"
+  printf "\\033[33m ➜ \\033[0m $1"
 }
 
 # define variables
