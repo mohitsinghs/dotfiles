@@ -20,7 +20,8 @@
   "extensions.autoUpdate": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
-    "*.js": "javascriptreact"
+    "*.js": "javascriptreact",
+    "*.html": "html"
   },
   "git.allowForcePush": true,
   "git.autofetch": true,
@@ -52,7 +53,7 @@
   "window.closeWhenEmpty": true,
   "window.restoreFullscreen": true,
   "window.zoomLevel": 0,
-  "workbench.activityBar.visible": false,
+  "workbench.activityBar.visible": true,
   "workbench.colorTheme": "Monokai Pro",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
