@@ -2,7 +2,7 @@
 set -e
 
 doing () {
-  printf "\\033[33m ➜ \\033[0m %s" "$1"
+  printf "\\033[33m ➜ \\033[0m $1"
 }
 
 success () {
@@ -10,7 +10,7 @@ success () {
 }
 
 fail () {
-  printf "\\n\\033[31m ✖ \\033[0m %s\\n" "$1"
+  printf "\\n\\033[31m ✖ \\033[0m $1\\n"
   exit 1
 }
 
@@ -57,13 +57,16 @@ plugins=( \
   christian-kohler.npm-intellisense \
   christian-kohler.path-intellisense\
   CoenraadS.bracket-pair-colorizer-2 \
+  eamodio.gitlens \
   EditorConfig.EditorConfig \
+  GitHub.vscode-pull-request-github \
   esbenp.prettier-vscode \
   jpoissonnier.vscode-styled-components \
   ms-python.python \
   msjsdiag.debugger-for-chrome \
   naumovs.color-highlight \
   octref.vetur \
+  ronnidc.nunjucks \
   sdras.night-owl \
   wayou.vscode-todo-highlight \
 )
