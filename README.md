@@ -16,6 +16,8 @@ curl -fsSL install.mohitsingh.in | bash
 curl -fsSL install.mohitsingh.in/vscode | bash
 ```
 
+> Looking for more scripts ? [install](https://github.com/mohitsinghs/install) repo contains this and some other useful scripts.
+
 ### Useful commands
 
 - **orphans** - check for brew packages that are not dependencies of others
