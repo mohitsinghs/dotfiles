@@ -12,7 +12,7 @@ success () {
 }
 
 fail () {
-  printf "\\033[31m ✖ \\033[0m $1\\n"
+  printf "\\n\\033[31m ✖ \\033[0m $1\\n"
   exit 1
 }
 
