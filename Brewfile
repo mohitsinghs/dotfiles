@@ -1,5 +1,6 @@
 brew 'aria2'
 brew 'coreutils'
+brew 'ffmpeg'
 brew 'git'
 brew 'highlight'
 brew 'hub'
