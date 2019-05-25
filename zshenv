@@ -29,6 +29,7 @@ alias g="hub"
 
 # youtube-dl
 alias ytd="youtube-dl"
+alias ytdmp3="youtube-dl -x --audio-format mp3 --audio-quality 0"
 
 # gnu coreutils ls for better output
 alias la="gls -laAhGg --color --group-directories-first"
