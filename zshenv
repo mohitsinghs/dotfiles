@@ -91,8 +91,9 @@ function __havePackageJSON {
 # Format current project with eslint and prettier
 function commit {
   if __isGit && __havePackageJSON $(pwd); then
-      prettier --write "**/*.{js,jsx,json,yaml,md,html,css,scss}"
-      eslint "**/*.{js,jsx}"
+      opts='--no-semi --single-quote --jsx-single-quote'
+      prettier --write ${opts} "**/*.{js,jsx,vue,json,yaml,md,html,css,scss}"
+      eslint "**/*.{js,jsx,vue}"
       exit_code=$?
       if [ ${exit_code} -ne 0 ]; then
         echo "Commit failed due to linting errors"
