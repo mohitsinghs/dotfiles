@@ -3,15 +3,15 @@
 DOTLOC="$HOME/Projects/dotfiles"
 
 # Include utilities
-source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/_utils`
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
 # Grab dotfiles if not found
 if [[ -x $DOTLOC ]]; then
-  source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/repo`
+  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
 fi
 
 # Setup homebrew
-source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/brew`
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/brew`"
 
 # Setup shell
-source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/shell`
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/shell`"

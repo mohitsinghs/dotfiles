@@ -5,11 +5,11 @@ FUNPATH=/usr/local/share/zsh/site-functions
 DOTLOC="$HOME/Projects/dotfiles"
 
 # Include utilities
-source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/_utils`
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
 # Install dotfiles if not found
 if [[ -x $DOTLOC ]]; then
-  source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/repo`
+  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
 fi
 
 # change default shell to zsh
