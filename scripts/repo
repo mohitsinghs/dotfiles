@@ -3,6 +3,9 @@
 # define variables
 DOTLOC="$HOME/Projects/dotfiles"
 
+# Include utilities
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+
 # exit if macos is not found
 doing "Checking system..."
 if [[ $(uname) != 'Darwin' ]]; then
