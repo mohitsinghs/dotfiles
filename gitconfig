@@ -10,6 +10,7 @@
 
 [alias]
   c = commit -am
+  cp = commit --patch
   e = commit --amend --all
   u = pull
   p = push
@@ -34,6 +35,3 @@
 
 [fetch]
   prune = true
-
-[help]
-  autocorrect = 1
