@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# define variables
+DOTLOC="$HOME/Projects/dotfiles"
+
+# Include utilities
+source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/_utils`
+
+# Install dotfiles if not found
+if [[ -x $DOTLOC ]]; then
+  source /dev/stdin <<< `curl -fsSL sh.mohitsingh.in/repo`
+fi
+
+# install homebrew if missing
+doing "Installing packages...\\n"
+if [[ $(uname) == 'Darwin' ]]; then
+  if [[ ! -x "$(command -v brew)" ]]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  brew bundle install --file="$DOTLOC/Brewfile" >/dev/null
+  if [[ ! -x "$(command -v iStats)" ]]; then
+    gem install iStats > /dev/null
+  fi
+else
+  fail "Current OS is not supported"
+fi
