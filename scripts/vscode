@@ -80,8 +80,8 @@ success
 
 # Link settings
 doing "Linking VSCode settings..."
-if [[ -a $VS_USR_PATH/settings.json ]]; then
-  rm "$VS_PATH/settings.json"
+if [[ -a "$VS_USR_PATH/settings.json" ]]; then
+  rm "$VS_USR_PATH/settings.json"
 fi
 ln -s "$HOME/Projects/dotfiles/settings.json" "$VS_USR_PATH/settings.json"
 success
