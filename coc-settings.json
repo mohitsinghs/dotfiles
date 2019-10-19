@@ -1,0 +1,18 @@
+{
+  "suggest.enablePreview": true,
+  "suggest.noselect": false,
+  "python.pythonPath": "venv/bin/python",
+  "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "black",
+  "eslint.enable": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.disableSuccessMessage": true,
+  "diagnostic.infoSign": "ℹ︎",
+  "diagnostic.hintSign": "☞",
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "⚠",
+  "javascript.validate.enable": false,
+  "coc.preferences.formatOnSaveFiletypes": ["*"]
+}
