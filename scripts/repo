@@ -15,17 +15,12 @@ else
 fi
 
 # exit if dotfiles exists
-doing "Looking for dotfiles..."
-if [[ -d  $DOTLOC ]]; then
-  fail "\\033[2m$HOME/dotfiles\\033[0m already exists."
-else
-  success
-fi
-
-# create dotfiles directory and clone
-doing "Fetching dotfiles..."
-[[ ! -d "$HOME/Projects" ]] && mkdir -p "$HOME/Projects"
-if [[ ! -x "$(command -v git)" ]]; then
-  git clone -q https://github.com/mohitsinghs/dotfiles.git "$DOTLOC"
+doing "Ensuring dotfiles..."
+if [[ ! -d $DOTLOC ]]; then
+  # create dotfiles directory and clone
+  [[ ! -d "$HOME/Projects" ]] && mkdir -p "$HOME/Projects"
+  if [[ ! -x "$(command -v git)" ]]; then
+    git clone -q https://github.com/mohitsinghs/dotfiles.git "$DOTLOC"
+  fi
 fi
 success
