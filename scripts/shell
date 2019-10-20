@@ -12,9 +12,6 @@ if [[ -x $DOTLOC ]]; then
   source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
 fi
 
-# change default shell to zsh
-chsh -s zsh
-
 # No help from next launch
 touch $HOME/.hushlogin
 
@@ -59,3 +56,6 @@ do
   ln -s "$DOTLOC/$file" "$HOME/.config/nvim/$file"
 done
 success
+
+# change default shell to zsh
+chsh -s zsh
