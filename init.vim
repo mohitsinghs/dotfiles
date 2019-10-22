@@ -40,10 +40,14 @@ set list lcs=tab:»·,trail:·
 " Theme Config
 colo iceberg
 
-" Make comments italic
+" Italics in tmux
 set t_ZH=[3m
 set t_ZR=[23m
-highlight Comment cterm=italic gui=italic
+
+" Italic comments and no vertical split
+hi Comment cterm=italic gui=italic
+" No vertical split
+hi VertSplit ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
 " Keynmaps
 let g:mapleader = ','
