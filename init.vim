@@ -66,6 +66,16 @@ inoremap <A-Down> <Esc>:m .+1<CR>==gi
 vnoremap <A-Up> :m '>-2<CR>gv=gv
 vnoremap <A-Down> :m '<+1<CR>gv=gv
 
+" Multiple cursors
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <expr> <silent> <C-d> <SID>select_current_word()
+function! s:select_current_word()
+  if !get(g:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
+
 " JavaScript and JSX
 let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
@@ -101,7 +111,12 @@ augroup NERDTree
   autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
 augroup END
 
+" Using CocList
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>l  :<C-u>CocList<cr>
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" Completion
 augroup Completion
   function! s:expand()
     if pumvisible()
