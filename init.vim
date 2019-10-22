@@ -96,7 +96,6 @@ let g:airline_symbols = { 'branch' : '' }
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#hunks#hunk_symbols = [' ', ' ', ' ']
 
 " NERDTree
 augroup NERDTree
