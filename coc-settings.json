@@ -9,15 +9,14 @@
   "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": true,
   "prettier.disableSuccessMessage": true,
-  "diagnostic.infoSign": "ℹ︎",
-  "diagnostic.hintSign": "☞",
   "git.addGlameToVirtualText": true,
   "git.addedSign.text": "▏",
   "git.removedSign.text": "▏",
   "git.changedSign.text": "▏",
   "git.changeRemovedSign.text": "▏",
+  "diagnostic.infoSign": "…",
+  "diagnostic.hintSign": "…",
   "diagnostic.errorSign": "✗",
-  "diagnostic.warningSign": "⚠",
-  "javascript.validate.enable": false,
+  "diagnostic.warningSign": "△",
   "coc.preferences.formatOnSaveFiletypes": ["*"]
 }
