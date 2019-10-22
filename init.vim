@@ -67,36 +67,25 @@ let g:vim_jsx_pretty_colorful_config = 1
 
 " Devicons
 let g:WebDevIconsOS = 'Darwin'
+let g:webdevicons_enable_nerdtree = 0
 
 " Airline
-let g:airline_mode_map = {
-\ '__'     : '-',
-\ 'c'      : 'C',
-\ 'i'      : 'I',
-\ 'ic'     : 'I',
-\ 'ix'     : 'I',
-\ 'n'      : 'N',
-\ 'multi'  : 'M',
-\ 'ni'     : 'N',
-\ 'no'     : 'N',
-\ 'R'      : 'R',
-\ 'Rv'     : 'R',
-\ 's'      : 'S',
-\ 'S'      : 'S',
-\ ''     : 'S',
-\ 't'      : 'T',
-\ 'v'      : 'V',
-\ 'V'      : 'V',
-\ ''     : 'V',
-\ }
 let g:airline_powerline_fonts = 1
 let g:airline_skip_empty_sections = 1
+let g:airline_left_sep = ' '
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = ''
 let g:airline_symbols = { 'branch' : '' }
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#hunks#hunk_symbols = [' ', ' ', ' ']
 
 " NERDTree
 augroup NERDTree
-  let NERDTreeDirArrowExpandable = " "
-  let NERDTreeDirArrowCollapsible = " "
+  let NERDTreeDirArrowExpandable = ""
+  let NERDTreeDirArrowCollapsible = ""
   let g:NERDTreeAutoDeleteBuffer = v:true
   let g:NERDTreeMinimalUI = v:true
   let g:NERDTreeMinimalMenu = v:true
