@@ -8,14 +8,10 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'cocopon/iceberg.vim'
 Plug 'mattn/emmet-vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
@@ -53,7 +49,7 @@ let g:mapleader = ','
 nmap <Leader>[ :bp<CR>
 nmap <Leader>] :bn<CR>
 nmap <Leader>w :bd<CR>
-nmap <Leader>p :CtrlP<CR>
+nmap <Leader>p :CocList files<CR>
 nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>b :NERDTreeToggle<CR>
 
@@ -68,13 +64,6 @@ vnoremap <A-Down> :m '<+1<CR>gv=gv
 " JavaScript and JSX
 let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
-
-" The Silver Searcher for ctrlp
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
 
 " Devicons
 let g:WebDevIconsOS = 'Darwin'
