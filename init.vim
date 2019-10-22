@@ -27,6 +27,7 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'plasticboy/vim-markdown'
 Plug 'jparise/vim-graphql'
 Plug 'hdima/python-syntax'
+Plug 'mohitsinghs/vim-jinja'
 
 call plug#end()
 
