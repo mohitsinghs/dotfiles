@@ -6,6 +6,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'cocopon/iceberg.vim'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
@@ -15,7 +16,6 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
@@ -41,9 +41,7 @@ set wig+=*/.git/*,*/node_modules/*,*/tmp/*,*.so,*.swp,*.zip,*.pyc
 set list lcs=tab:»·,trail:·
 
 " Theme Config
-let g:onedark_font_italics=1
-let g:onedark_hide_endofbuffer=1
-colo onedark
+colo iceberg
 
 " Make comments italic
 set t_ZH=[3m
