@@ -33,7 +33,7 @@ call plug#end()
 
 " Basic
 filetype plugin indent on
-set nu rnu ls=0 shm=aIFWc tgc mouse:a ts=2 sw=2 sts=2 et nofen fenc=utf-8
+set nu rnu ls=0 shm=aIFWc tgc mouse:a ts=2 sw=2 sts=2 et nofen fenc=utf-8 cb=unnamedplus
 set wig+=*/.git/*,*/node_modules/*,*/tmp/*,*.so,*.swp,*.zip,*.pyc
 set list lcs=tab:»·,trail:·
 
