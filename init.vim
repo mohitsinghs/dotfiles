@@ -15,18 +15,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
-
-" Languages
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'elzr/vim-json'
-Plug 'othree/html5.vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'plasticboy/vim-markdown'
-Plug 'jparise/vim-graphql'
-Plug 'hdima/python-syntax'
+Plug 'sheerun/vim-polyglot'
 Plug 'mohitsinghs/vim-jinja'
 
 call plug#end()
@@ -36,6 +25,7 @@ filetype plugin indent on
 set nu rnu ls=0 shm=aIFWc tgc mouse:a ts=2 sw=2 sts=2 et nofen fenc=utf-8 cb=unnamedplus
 set wig+=*/.git/*,*/node_modules/*,*/tmp/*,*.so,*.swp,*.zip,*.pyc
 set list lcs=tab:»·,trail:·
+let g:polyglot_disabled = ['jinja']
 
 " Theme Config
 colo iceberg
