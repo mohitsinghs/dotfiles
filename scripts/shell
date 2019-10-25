@@ -104,4 +104,7 @@ printf "\\033[1A\\033[32C"
 success
 
 # change default shell to zsh
-chsh -s zsh
+if [[ "$SHELL" != `which zsh` ]]; then
+  sudo sh -c "echo `which zsh` >> /etc/shells"
+  chsh -s `which zsh`
+fi
