@@ -3,6 +3,7 @@
 # define variables
 FUNPATH=/usr/local/share/zsh/site-functions
 DOTLOC="$HOME/Projects/dotfiles"
+COC_EXT_PATH="$HOME/.config/coc/extensions"
 
 # Include utilities
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
@@ -55,6 +56,51 @@ do
   rm "$HOME/.config/nvim/$file" &>/dev/null
   ln -s "$DOTLOC/$file" "$HOME/.config/nvim/$file"
 done
+success
+
+# Install coc extensions
+doing "Installing coc extensions...\\n"
+
+if [[ ! -d $COC_EXT_PATH ]]; then
+  mkdir -p "$HOME/.config/coc/extensions"
+fi
+
+cd "$HOME/.config/coc/extensions"
+
+if [[ ! -f package.json ]]; then
+  echo '{"dependencies":{}}'> package.json
+fi
+
+# coc extensions I use
+coc_extensions=(
+  \ coc-json
+  \ coc-css
+  \ coc-python
+  \ coc-vimlsp
+  \ coc-html
+  \ coc-tsserver
+  \ coc-snippets
+  \ coc-eslint
+  \ coc-prettier
+  \ coc-git
+  \ coc-yaml
+  \ coc-lists
+  \ coc-svg
+  \ coc-dictionary
+  \ coc-emoji
+  \ )
+
+flags="--global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod"
+
+for ext in ${coc_extensions[*]};
+do
+  printf "\\033[2m      Installing %s\\033[0m" "$ext"
+  npm install $flags $ext &>/dev/null
+  # clear current line
+  printf "\\r\\033[K"
+done
+# move cursor to end of previous line
+printf "\\033[1A\\033[32C"
 success
 
 # change default shell to zsh

@@ -13,5 +13,5 @@ fi
 # Setup homebrew
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/brew`"
 
-# Setup shell
+# Setup shell with neovim and coc extensions
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/shell`"
