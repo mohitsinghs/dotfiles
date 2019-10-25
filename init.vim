@@ -89,6 +89,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " NERDTree
 augroup NERDTree
+  let g:NERDTreeShowHidden = 1
+  let g:NERDTreeStatusline = ''
+  let g:NERDTreeRespectWildIgnore = 1
   let NERDTreeDirArrowExpandable = ""
   let NERDTreeDirArrowCollapsible = ""
   let g:NERDTreeAutoDeleteBuffer = v:true
