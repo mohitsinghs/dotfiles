@@ -7,7 +7,7 @@ DOTLOC="$HOME/Projects/dotfiles"
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
 # Install dotfiles if not found
-if [[ -x $DOTLOC ]]; then
+if [[ ! -d $DOTLOC ]]; then
   source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
 fi
 
