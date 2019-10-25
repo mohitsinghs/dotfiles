@@ -30,11 +30,11 @@ let g:polyglot_disabled = ['jinja']
 " Theme Config
 colo iceberg
 
-" Italics in tmux
+" Bold and italic in tmux
 set t_ZH=[3m
 set t_ZR=[23m
 
-" Italic comments and no vertical split
+" Italic comments
 hi Comment cterm=italic gui=italic
 " No vertical split
 hi VertSplit ctermbg=bg ctermfg=bg guibg=bg guifg=bg
