@@ -44,7 +44,7 @@ if [[ ! -h "/usr/local/bin/code" ]]; then
 fi
 
 # Install vscode extensions
-doing "Installing VSCode extensions..."
+doing "Installing VSCode extensions...\\n"
 
 # VSCode extensions I use
 extensions=(
@@ -65,7 +65,7 @@ extensions=(
   \ Prisma.vscode-graphql
   \ wayou.vscode-todo-highlight
   \ zhuangtongfa.Material-theme
-\ )
+  \ )
 
 for ext in ${extensions[*]};
 do
