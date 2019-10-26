@@ -20,12 +20,18 @@ To setup brew with packages I use
 curl -fsSL sh.mohitsingh.in/brew | bash
 ```
 
-To install **pure prompt** with **neovim** and **coc.nvim**
+To configure zsh with git and tmux
+
+```sh
+curl -fsSL sh.mohitsingh.in/shell | bash
+```
+
+To install neovim with coc.nvim and other extensions
 
 > Please make sure you have node installed before running this independently
 
 ```sh
-curl -fsSL sh.mohitsingh.in/shell | bash
+curl -fsSL sh.mohitsingh.in/vim | bash
 ```
 
 To install VSCodium with extensions
