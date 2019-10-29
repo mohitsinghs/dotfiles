@@ -1,5 +1,6 @@
 autoload -Uz compinit; compinit
 autoload -Uz promptinit; promptinit
+PURE_PROMPT_SYMBOL=" "
 prompt pure
 
 # enable zsh syntax highlighting and autosuggestions
@@ -13,6 +14,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Add homebrew python and ruby to the path
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Colorful files
+eval `gdircolors -b`
 
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
