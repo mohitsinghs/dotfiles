@@ -1,33 +1,24 @@
 [user]
   name = Mohit Singh
-  email = mohitsinghs.dev@gmail.com
-
-[github]
-  user = mohitsinghs
+  email = mohit@mohitsingh.in
 
 [core]
   excludesfile = ~/.gitignore
 
 [alias]
-  c = commit -am
-  cp = commit --patch
-  e = commit --amend --all
-  u = pull
-  p = push
-  co = checkout
+  s = status -s
   l = log --oneline
   d = diff
   ds = diff --staged
-  s = status -s
-
-[url "git@github.com:mohitsinghs/"]
-  insteadOf = "gh:"
-[url "git://github.com/"]
-  insteadOf = "github:"
-[url "git@gitlab.com:mohitsinghs/"]
-  insteadOf = "gl:"
-[url "git://gitlab.com/"]
-  insteadOf = "gitlab:"
+  r = restore
+  rs = restore --staged
+  c = commit -am
+  cp = commit --patch
+  ca = commit --amend --all
+  cu = commit --amend --all --no-edit
+  u = pull
+  p = push
+  co = checkout
 
 [push]
   default = current
