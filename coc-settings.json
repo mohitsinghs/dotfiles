@@ -1,15 +1,15 @@
 {
-  "suggest.enablePreview": true,
   "suggest.noselect": false,
-  "python.pythonPath": "venv/bin/python",
   "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
   "python.formatting.provider": "black",
+  "python.jediEnabled": false,
   "eslint.enable": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": true,
   "prettier.disableSuccessMessage": true,
-  "git.addGlameToVirtualText": true,
+  "git.addGBlameToBufferVar": true,
   "git.addedSign.text": "▎",
   "git.changedSign.text": "▎",
   "git.removedSign.text": "▎",
@@ -24,5 +24,18 @@
   "diagnostic.hintSign": "…",
   "diagnostic.errorSign": "✗",
   "diagnostic.warningSign": "△",
-  "coc.preferences.formatOnSaveFiletypes": ["*"]
+  "diagnostic.virtualText": true,
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true,
+        "completeUnimported": true,
+        "deepCompletion": true
+      }
+    }
+  }
 }
