@@ -18,5 +18,14 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 # Colorful files
 eval `gdircolors -b`
 
+# For the sake of go
+export GOPATH="/usr/local/lib/go"
+export GOROOT="/usr/local/opt/go/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+# Test and make directories
+test -d "${GOPATH}" || mkdir "${GOPATH}" &> /dev/null
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com" &> /dev/null
+
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
