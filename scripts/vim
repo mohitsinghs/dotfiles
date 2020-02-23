@@ -50,8 +50,6 @@ coc_extensions=(
   \ coc-yaml
   \ coc-lists
   \ coc-svg
-  \ coc-dictionary
-  \ coc-emoji
   \ )
 
 flags="--global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod"
