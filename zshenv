@@ -28,9 +28,9 @@ alias vi="nvim"
 alias vim="nvim"
 alias py="python"
 
-# youtube-dl shortcut
-alias ytd="youtube-dl --external-downloader aria2c"
-alias ytdm="youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail"
+# shortcut for my youtube-dl fork
+alias ytd="ytd --external-downloader aria2c"
+alias ytdm="ytd -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --crop-thumbnail --add-metadata -o '%(title)s.%(ext)s'"
 
 # better ls output
 alias la="gls -laAhGg --color --group-directories-first"
@@ -52,6 +52,29 @@ alias yu="yarn upgrade-interactive --latest"
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
 alias path="echo -e ${PATH//:/\\\n}"
+
+# Clear dns cache
+function cleardns {
+  sudo dscacheutil -flushcache
+  sudo killall -HUP mDNSResponder
+}
+
+# Update blocklist
+function upblock {
+  echo -n "Updating host files..."
+  curl -fsSL "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts" | sudo tee /etc/hosts > /dev/null
+  echo "Done."
+}
+
+# Update everything
+function upall {
+  brew upgrade
+  vim +PlugUpdate +qa
+  npm up -g
+  softwareupdate -ia
+  gem update --system
+  gem update
+}
 
 # list orphan/unused brew packages so that they can be removed
 function orphan {
