@@ -4,7 +4,7 @@
 
 ## Usage
 
-To install everything except VSCodium
+To install everything
 
 ```sh
 curl -fsSL sh.mohitsingh.in | bash
@@ -34,23 +34,13 @@ To install neovim with coc.nvim and other extensions
 curl -fsSL sh.mohitsingh.in/vim | bash
 ```
 
-To install VSCodium with extensions
-
-```
-curl -fsSL sh.mohitsingh.in/vscode | bash
-```
-
 ## Useful commands
 
+- **cleardns** - clear dns cache
+- **upblock** - update blocklist
+- **upall** - update almost everything I need
 - **orphan** - check for brew packages that are not dependencies of others
 - **repo** - cd into project repos from anywhere. (with tab completions)
-
-## Screenshots
-
----
-
-![](https://user-images.githubusercontent.com/4941333/67544882-ca7b5e00-f714-11e9-884e-becc97b5d98a.png 'zsh with pure prompt')
-![](https://user-images.githubusercontent.com/4941333/67544883-cb13f480-f714-11e9-8c68-cc841b9fa35e.png 'neovim running inside tmux')
 
 ## Contributing
 
