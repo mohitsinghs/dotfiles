@@ -6,29 +6,23 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'cocopon/iceberg.vim'
-Plug 'mattn/emmet-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdcommenter'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
-Plug 'mohitsinghs/vim-jinja'
+Plug 'preservim/nerdtree'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 call plug#end()
 
 " Basic
-filetype plugin indent on
-set nu rnu ls=0 shm=aIFWc tgc mouse:a ts=2 sw=2 sts=2 et nofen fenc=utf-8 cb=unnamedplus
-set wig+=*/.git,*/node_modules,*/tmp,*.so,*.swp,*.zip,*.pyc,.DS_Store
-set list lcs=tab:»·,trail:·
-let g:polyglot_disabled = ['jinja']
+set noswf nu rnu ls=0 shm=aIFWc tgc ts=2 sw=2 sts=2 et nofen fenc=utf-8 cb+=unnamedplus ut=300
+set wig+=*/.git,*/node_modules,*/venv,*/tmp,*.so,*.swp,*.zip,*.pyc,.DS_Store
+set list lcs=tab:··,trail:·
 
-" Theme Config
-colo iceberg
+" Theme Configs
+colo onedark
 
 " Bold and italic in tmux
 set t_ZH=[3m
@@ -39,53 +33,24 @@ hi Comment cterm=italic gui=italic
 " No vertical split
 hi VertSplit ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
-" Keynmaps
+" Leader
 let g:mapleader = ','
-nmap <Leader>[ :bp<CR>
-nmap <Leader>] :bn<CR>
-nmap <Leader>w :bd<CR>
-nmap <Leader>p :CocList files<CR>
-nmap <Leader>rn <Plug>(coc-rename)
-nmap <Leader>b :NERDTreeToggle<CR>
 
-" Moving single lines
-nnoremap <A-Up> :m .-2<CR>==
-nnoremap <A-Down> :m .+1<CR>==
-inoremap <A-Up> <Esc>:m .-2<CR>==gi
-inoremap <A-Down> <Esc>:m .+1<CR>==gi
-vnoremap <A-Up> :m '>-2<CR>gv=gv
-vnoremap <A-Down> :m '<+1<CR>gv=gv
+" Keymaps
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gp :Gpush<CR>
+nmap <leader>rn <Plug>(coc-rename)
+nmap <Leader>gi <Plug>(coc-git-chunkinfo)
+nnoremap <silent> <space>n  :<C-u>NERDTreeToggle<CR>
+nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
+nnoremap <silent> <space>p  :<C-u>CocList files<CR>
+nnoremap <silent> <space>f  :<C-u>CocList grep<CR>
+nnoremap <silent> <space>l  :<C-u>CocList<CR>
 
-" Multiple cursors
-nmap <silent> <C-c> <Plug>(coc-cursors-position)
-nmap <expr> <silent> <C-d> <SID>select_current_word()
-function! s:select_current_word()
-  if !get(g:, 'coc_cursors_activated', 0)
-    return "\<Plug>(coc-cursors-word)"
-  endif
-  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
-endfunc
-
-" JavaScript and JSX
+" Language tweaks
 let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
-let g:vim_markdown_frontmatter = 1
-
-" Devicons
-let g:WebDevIconsOS = 'Darwin'
-let g:webdevicons_enable_nerdtree = 0
-
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline_skip_empty_sections = 1
-let g:airline_left_sep = ' '
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ' '
-let g:airline_right_alt_sep = ''
-let g:airline_symbols = { 'branch' : '' }
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:markdown_enable_conceal = 1
 
 " NERDTree
 augroup NERDTree
@@ -103,27 +68,3 @@ augroup NERDTree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
 augroup END
-
-" Using CocList
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <space>l  :<C-u>CocList<cr>
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-" Completion
-augroup Completion
-  function! s:expand()
-    if pumvisible()
-      return "\<C-y>"
-    endif
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1]  =~# '\s'
-      return "\<Tab>"
-    endif
-    return "\<A-x>\<A-e>"
-  endfunction
-  " Close preview window after completion is done
-  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-  " Use <Tab> for confirm completion.
-  imap <silent><expr> <Tab> <SID>expand()
-augroup END
-
