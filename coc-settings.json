@@ -9,7 +9,6 @@
   "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": true,
   "prettier.disableSuccessMessage": true,
-  "git.addGBlameToBufferVar": true,
   "git.addedSign.text": "▎",
   "git.changedSign.text": "▎",
   "git.removedSign.text": "▎",
@@ -33,8 +32,7 @@
       "filetypes": ["go"],
       "initializationOptions": {
         "usePlaceholders": true,
-        "completeUnimported": true,
-        "deepCompletion": true
+        "completeUnimported": true
       }
     }
   }
