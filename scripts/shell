@@ -43,10 +43,10 @@ success
 
 # link required files
 doing "Linking zsh + git + tmux configs..."
-for file in zshrc zshenv gitconfig gitignore tmux.conf
+for file in $DOTLOC/{zsh,git,tmux}/*
 do
-  rm "$HOME/.$file" &>/dev/null
-  ln -s "$DOTLOC/$file" "$HOME/.$file"
+  [[ -e "$HOME/.`basename $file`" ]] && rm "$HOME/.`basename $file`" &>/dev/null
+  ln -s $file "$HOME/.`basename $file`"
 done
 success
 

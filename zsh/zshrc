@@ -1,6 +1,6 @@
 autoload -Uz compinit; compinit
 autoload -Uz promptinit; promptinit
-PURE_PROMPT_SYMBOL=" "
+PURE_PROMPT_SYMBOL="|>"
 prompt pure
 
 # enable zsh syntax highlighting and autosuggestions
@@ -18,12 +18,11 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 # Colorful files
 eval `gdircolors -b`
 
-# For the sake of go
+# Setup gopath and goroot
 export GOPATH="/usr/local/lib/go"
 export GOROOT="/usr/local/opt/go/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
-# Test and make directories
+# Test and make directories for go
 test -d "${GOPATH}" || mkdir "${GOPATH}" &> /dev/null
 test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com" &> /dev/null
 
@@ -37,3 +36,9 @@ export FZF_DEFAULT_OPTS='
 --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
 --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
 '
+
+# Add go and cargo to path
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin:$HOME/.cargo/bin"
+
+set show-all-if-ambiguous on
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

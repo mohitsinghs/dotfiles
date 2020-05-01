@@ -15,10 +15,11 @@ fi
 # setup nvim
 doing "Linking nvim config..."
 mkdir -p "$HOME/.config/nvim"
-for file in coc-settings.json init.vim
+for file in $DOTLOC/nvim/*
 do
-  rm "$HOME/.config/nvim/$file" &>/dev/null
-  ln -s "$DOTLOC/$file" "$HOME/.config/nvim/$file"
+  target="$HOME/.config/nvim/`basename $file`"
+  [[ -e $target ]] && rm $target &>/dev/null
+  ln -s $file $target
 done
 success
 

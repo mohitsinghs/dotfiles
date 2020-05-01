@@ -17,7 +17,7 @@ if [[ $(uname) == 'Darwin' ]]; then
   if [[ ! -x "$(command -v brew)" ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-  brew bundle install --file="$DOTLOC/Brewfile" >/dev/null
+  brew bundle install --file="$DOTLOC/brew/Brewfile" &>/dev/null
   if [[ ! -x "$(command -v iStats)" ]]; then
     gem install iStats > /dev/null
   fi

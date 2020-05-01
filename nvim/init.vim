@@ -7,6 +7,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'joshdick/onedark.vim'
+Plug 'haishanh/night-owl.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -52,9 +53,15 @@ let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:markdown_enable_conceal = 1
 
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_build_constraints = 1
+
 " minmal and better fzf layout
 let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-autocmd! FileType fzf set nosmd nonu nornu | autocmd BufLeave <buffer> set smd nu rnu
+autocmd! FileType fzf set ls=0 nosmd nonu nornu | autocmd BufLeave <buffer> set ls=0 smd nu rnu
 
 " ripgrep integration
 function! RipgrepFzf(query, fullscreen)
