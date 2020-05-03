@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# clone server scripts
+git clone https://github.com/mohitsinghs/fss.git --depth=1
+# create a directory for it
+mkdir -p scripts/s
+# copy cloned scripts to directory
+mv fss/scripts/* scripts/s
+# remove cloned
+rm -rf fss
+# remove itself
+rm -- "$0"
