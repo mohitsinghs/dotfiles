@@ -10,8 +10,6 @@ To install everything
 curl -fsSL sh.mohitsingh.in | bash
 ```
 
-## Modules
-
 > You can also setup things one by one
 
 To setup brew with packages I use
@@ -33,6 +31,8 @@ To install neovim with coc.nvim and other extensions
 ```sh
 curl -fsSL sh.mohitsingh.in/vim | bash
 ```
+
+I also have [scripts to setup my servers](https://github.com/mohitsinghs/fss).
 
 ## Useful commands
 
