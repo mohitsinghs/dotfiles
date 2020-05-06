@@ -7,7 +7,6 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'joshdick/onedark.vim'
-Plug 'haishanh/night-owl.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
