@@ -66,6 +66,11 @@ function upblock {
   echo "Done."
 }
 
+function upytd {
+  sudo wget https://github.com/mohitsinghs/ytd/releases/latest/download/ytd -O /usr/local/bin/ytd
+  sudo chmod a+rx /usr/local/bin/ytd
+}
+
 # Update everything
 function upall {
   brew upgrade
