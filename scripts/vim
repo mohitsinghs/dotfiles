@@ -38,19 +38,19 @@ fi
 
 # coc extensions I use
 coc_extensions=(
-  \ coc-json
-  \ coc-css
+  \ coc-go
+  \ coc-rls
   \ coc-python
+  \ coc-tsserver
   \ coc-vimlsp
   \ coc-html
-  \ coc-tsserver
-  \ coc-snippets
+  \ coc-css
+  \ coc-json
+  \ coc-yaml
+  \ coc-git
   \ coc-eslint
   \ coc-prettier
-  \ coc-git
-  \ coc-yaml
-  \ coc-lists
-  \ coc-svg
+  \ coc-snippets
   \ )
 
 flags="--global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod"

@@ -25,15 +25,7 @@
   "diagnostic.warningSign": "△",
   "diagnostic.virtualText": true,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
-  "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true,
-        "completeUnimported": true
-      }
-    }
+  "go.goplsOptions": {
+    "completeUnimported": true
   }
 }
