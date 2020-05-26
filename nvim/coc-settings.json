@@ -25,6 +25,7 @@
   "diagnostic.warningSign": "△",
   "diagnostic.virtualText": true,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.extensionUpdateCheck": "never",
   "go.goplsOptions": {
     "completeUnimported": true
   }
