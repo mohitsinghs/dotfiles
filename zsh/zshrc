@@ -15,9 +15,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
-# Colorful files
-eval `gdircolors -b`
-
 # Setup gopath and goroot
 export GOPATH="/usr/local/lib/go"
 export GOROOT="/usr/local/opt/go/libexec"
@@ -39,6 +36,5 @@ export FZF_DEFAULT_OPTS='
 
 # Add go and cargo to path
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin:$HOME/.cargo/bin"
-
-set show-all-if-ambiguous on
+export NODE_PATH="/usr/local/lib/node_modules"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

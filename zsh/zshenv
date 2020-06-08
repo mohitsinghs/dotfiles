@@ -32,9 +32,12 @@ alias py="python"
 alias ytd="ytd --external-downloader aria2c"
 alias ytdm="ytd -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --crop-thumbnail --add-metadata -o '%(title)s.%(ext)s'"
 
+alias cat="bat"
+
 # better ls output
-alias la="gls -laAhGg --color --group-directories-first"
-alias ls="gls -lACG --color --group-directories-first"
+alias la="exa -la --group-directories-first"
+alias ll="exa -l --group-directories-first"
+alias ls="exa"
 
 # brew shortcuts
 alias bstart="brew services start"
