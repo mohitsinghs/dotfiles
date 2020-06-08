@@ -24,6 +24,7 @@
   "diagnostic.errorSign": "✗",
   "diagnostic.warningSign": "△",
   "diagnostic.virtualText": true,
+  "css.validate": false,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
   "coc.preferences.extensionUpdateCheck": "never",
   "go.goplsOptions": {

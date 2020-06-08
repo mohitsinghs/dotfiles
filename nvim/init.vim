@@ -15,30 +15,12 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Experimental
-" Plug 'neovim/nvim-lsp'
-" Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'haorenW1025/completion-nvim'
-" Plug 'haorenW1025/diagnostic-nvim'
-" Plug 'vigoux/completion-treesitter'
-" Plug 'nvim-treesitter/nvim-treesitter'
-
 call plug#end()
 
 " Basic
 set mouse:a noswf nu rnu ls=0 shm=aIFWc tgc ts=2 sw=2 sts=2 et nofen fenc=utf-8 cb+=unnamedplus ut=300
 set wig+=*/.git,*/node_modules,*/venv,*/tmp,*.so,*.swp,*.zip,*.pyc,.DS_Store
 set list lcs=tab:··,trail:·
-" set tgc cot=menuone,noinsert
-
-" Experimental
-" lua require'colorizer'.setup()
-" lua require'treesitter'
-" lua require'lsp'
-" call sign_define("LspDiagnosticsErrorSign", {"text" : "✗", "texthl" : "LspDiagnosticsError"})
-" call sign_define("LspDiagnosticsWarningSign", {"text" : "⚠︎", "texthl" : "LspDiagnosticsWarning"})
-" call sign_define("LspDiagnosticInformationSign", {"text" : "ℹ︎", "texthl" : "LspDiagnosticsInformation"})
-" call sign_define("LspDiagnosticHintSign", {"text" : "⚡︎", "texthl" : "LspDiagnosticsHint"})
 
 " Theme Configs
 colo onedark
@@ -50,18 +32,18 @@ set t_ZR=[23m
 " Custom Highlights
 hi Comment cterm=italic gui=italic
 hi VertSplit ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-" hi link LspDiagnosticsError ErrorMsg
-" hi link LspDiagnosticsWarning WarningMsg
 
 " Leader
 let g:mapleader = ','
 
 " Keymaps
-nmap <Leader>gs :Gstatus<CR>
-nmap <Leader>gp :Gpush<CR>
-nmap <Leader>df :Goyo<CR>
-nmap <leader>rn <Plug>(coc-rename)
-nmap <Leader>gi <Plug>(coc-git-chunkinfo)
+nnoremap <Leader>w  :w<CR>
+nnoremap <Leader>wa :wa<CR>
+nnoremap <Leader>wtf :w !sudo tee >/dev/null %<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <leader>rn <Plug>(coc-rename)
+nnoremap <Leader>gi <Plug>(coc-git-chunkinfo)
 nnoremap <silent> <space>c  :<C-u>CocCommand<CR>
 nnoremap <silent> <space>l  :<C-u>CocList<CR>
 nnoremap <silent> <space>p  :<C-u>Files<CR>
@@ -71,12 +53,6 @@ nnoremap <silent> <space>f  :<C-u>Rg<CR>
 let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:markdown_enable_conceal = 1
-
-let g:go_highlight_operators = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_build_constraints = 1
 
 " minmal and better fzf layout
 let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
