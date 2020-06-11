@@ -14,6 +14,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 
 call plug#end()
 
@@ -36,18 +38,26 @@ hi VertSplit ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 " Leader
 let g:mapleader = ','
 
-" Keymaps
-nnoremap <Leader>w  :w<CR>
-nnoremap <Leader>wa :wa<CR>
-nnoremap <Leader>wtf :w !sudo tee >/dev/null %<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gp :Gpush<CR>
-nnoremap <leader>rn <Plug>(coc-rename)
-nnoremap <Leader>gi <Plug>(coc-git-chunkinfo)
-nnoremap <silent> <space>c  :<C-u>CocCommand<CR>
-nnoremap <silent> <space>l  :<C-u>CocList<CR>
-nnoremap <silent> <space>p  :<C-u>Files<CR>
-nnoremap <silent> <space>f  :<C-u>Rg<CR>
+" Write and quit keymaps
+nn <Leader>q :q<CR>
+nn <Leader>w :w<CR>
+nn <Leader>wa :wa<CR>
+nn <Leader>wtf :w !sudo tee >/dev/null %<CR>
+
+" Git and goyo keymaps
+nn <Leader>df :Goyo<CR>
+nn <Leader>gs :Gstatus<CR>
+nn <Leader>gp :Gpush<CR>
+
+" Coc keymaps
+nm <Leader>rn <Plug>(coc-rename)
+nm <Leader>gi <Plug>(coc-git-chunkinfo)
+nn <silent> <space>c  :<C-u>CocCommand<CR>
+nn <silent> <space>l  :<C-u>CocList<CR>
+
+" Fzf keymaps
+nn <silent> <space>p  :<C-u>Files<CR>
+nn <silent> <space>f  :<C-u>Rg<CR>
 
 " Language tweaks
 let g:javascript_plugin_jsdoc = 1
@@ -56,7 +66,6 @@ let g:markdown_enable_conceal = 1
 
 " minmal and better fzf layout
 let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-autocmd! FileType fzf set ls=0 nosmd nonu nornu | autocmd BufLeave <buffer> set ls=0 smd nu rnu
 
 " ripgrep integration
 function! RipgrepFzf(query, fullscreen)
@@ -67,4 +76,14 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+" ripgrep command
+com! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+
+" clean fzf
+au! FileType fzf set nosmd nonu nornu | au BufLeave <buffer> set smd nu rnu
+
+" Goyo
+aug Goyo
+  au! User GoyoEnter Limelight
+  au! User GoyoLeave Limelight!
+aug END
