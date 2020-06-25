@@ -27,6 +27,15 @@
   "css.validate": false,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
   "coc.preferences.extensionUpdateCheck": "never",
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
+  "vetur.validation.template": false,
+  "vetur.format.defaultFormatter.html": "prettier",
   "go.goplsOptions": {
     "completeUnimported": true
   }

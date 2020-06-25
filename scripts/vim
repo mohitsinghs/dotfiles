@@ -42,6 +42,7 @@ coc_extensions=(
   \ coc-rls
   \ coc-python
   \ coc-tsserver
+  \ coc-vetur
   \ coc-vimlsp
   \ coc-html
   \ coc-css
