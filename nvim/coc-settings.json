@@ -9,6 +9,7 @@
   "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": true,
   "prettier.disableSuccessMessage": true,
+  "prettier.disableLanguages": [],
   "git.addedSign.text": "▎",
   "git.changedSign.text": "▎",
   "git.removedSign.text": "▎",
@@ -35,7 +36,7 @@
     "vue"
   ],
   "vetur.validation.template": false,
-  "vetur.format.defaultFormatter.html": "prettier",
+  "vetur.format.enable": false,
   "go.goplsOptions": {
     "completeUnimported": true
   }
