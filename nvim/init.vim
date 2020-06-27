@@ -45,9 +45,9 @@ nn <Leader>wa :wa<CR>
 nn <Leader>wtf :w !sudo tee >/dev/null %<CR>
 
 " Git and goyo keymaps
-nn <Leader>df :Goyo<CR>
-nn <Leader>gs :Gstatus<CR>
-nn <Leader>gp :Gpush<CR>
+nn <silent> <Leader>df :Goyo<CR>
+nn <silent> <Leader>gs :Gstatus<CR>
+nn <silent> <Leader>gp :Gpush<CR>
 
 " Coc keymaps
 nm <Leader>rn <Plug>(coc-rename)
