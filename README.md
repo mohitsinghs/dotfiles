@@ -32,7 +32,11 @@ To install neovim with coc.nvim and other extensions
 curl -fsSL sh.mohitsingh.in/vim | bash
 ```
 
-I also have [scripts to setup my servers](https://github.com/mohitsinghs/fss).
+[**scripts to setup my servers**](https://github.com/mohitsinghs/fss).
+
+## Screenshot
+
+![](https://repository-images.githubusercontent.com/137441525/81066c80-c1d8-11ea-8df0-81fd0232a3fa)
 
 ## Useful commands
 
@@ -45,3 +49,4 @@ I also have [scripts to setup my servers](https://github.com/mohitsinghs/fss).
 ## Contributing
 
 Feel free to help improving this repo by creating issues for bugs or pull requests of things that I've missed.
+
