@@ -42,7 +42,6 @@ coc_extensions=(
   \ coc-rls
   \ coc-python
   \ coc-tsserver
-  \ coc-vetur
   \ coc-vimlsp
   \ coc-html
   \ coc-css
@@ -52,6 +51,7 @@ coc_extensions=(
   \ coc-eslint
   \ coc-prettier
   \ coc-snippets
+  \ coc-emmet
   \ )
 
 flags="--global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod"
