@@ -70,7 +70,7 @@ function upblock {
 }
 
 function upytd {
-  sudo wget https://github.com/mohitsinghs/ytd/releases/latest/download/ytd -O /usr/local/bin/ytd
+  sudo wget https://github.com/mohitsinghs/junkyard/releases/latest/download/ytd -O /usr/local/bin/ytd
   sudo chmod a+rx /usr/local/bin/ytd
 }
 
@@ -100,6 +100,7 @@ function repo {
     if [[ -z $1 ]]; then
         cd "$REPO_BASE"
     else
+        
         cd "$REPO_PATH"
     fi
 }
