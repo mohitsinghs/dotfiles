@@ -9,8 +9,6 @@ alias -- -="cd -"
 # favourite locations
 alias ~="cd ~"
 alias p="cd ~/Projects"
-alias d="cd ~/Designs"
-alias m="cd ~/Movies"
 
 # A less noisy tree list
 alias t="tree -I 'node_modules|.git|test|venv|env|.DS_Store' --noreport -C -a --dirsfirst"
