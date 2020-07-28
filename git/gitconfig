@@ -6,18 +6,22 @@
   excludesfile = ~/.gitignore
 
 [alias]
-  s = status -s
+  a = add
+  ap = add --patch
+  s = status
+  ss = status -s
   l = log --oneline
   d = diff
   ds = diff --staged
   r = restore
   rs = restore --staged
-  c = commit -am
+  c = commit -m
   cp = commit --patch
   ca = commit --amend --all
   cu = commit --amend --all --no-edit
   u = pull
   p = push
+  pf = push --force
   co = checkout
 
 [push]
