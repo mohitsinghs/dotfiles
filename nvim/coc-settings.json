@@ -3,6 +3,8 @@
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
   "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.config/nvim/py3env/bin/black",
+  "python.linting.flake8Path": "~/.config/nvim/py3env/bin/flake8",
   "python.jediEnabled": false,
   "eslint.enable": true,
   "prettier.semi": false,
@@ -31,4 +33,3 @@
     "completeUnimported": true
   }
 }
-

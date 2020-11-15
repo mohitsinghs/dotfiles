@@ -1,19 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/bash
+# Setup zsh with plugins and prompts
+#
+# Usage: curl -fsSL sh.mohitsingh.in/shell
+# Make sure that following packages are already installed
+# zsh, zsh-syntax-highlighting, zsh-autosuggestons
 
-# Setup zsh with git and tmux
-
-
-# Include utilities
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
 # Install dotfiles if not found
+DOTLOC="$HOME/Projects/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
   source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
 fi
 
 # define variables
-FUNPATH=/usr/local/share/zsh/site-functions
-DOTLOC="$HOME/Projects/dotfiles"
+FUNPATH="$HOME/.zsh"
 
 # No help from next launch
 touch $HOME/.hushlogin
@@ -51,7 +52,7 @@ done
 success
 
 # change default shell to zsh
-if [[ "$SHELL" != `which zsh` ]]; then
-  sudo sh -c "echo `which zsh` >> /etc/shells"
-  chsh -s `which zsh`
-fi
+# if [[ "$SHELL" != `which zsh` ]]; then
+#   sudo sh -c "echo `which zsh` >> /etc/shells"
+#   chsh -s `which zsh`
+# fi

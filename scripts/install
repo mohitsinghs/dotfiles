@@ -1,20 +1,17 @@
-#!/usr/bin/env bash
+#!/bin/bash
+# Bootstrap a system with my configs
+#
+# Usage: curl -fsSL sh.mohitsingh.in
 
-DOTLOC="$HOME/Projects/dotfiles"
-
-# Include utilities
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
+DOTLOC="$HOME/Projects/dotfiles"
 # Grab dotfiles if not found
 if [[ ! -d $DOTLOC ]]; then
   source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
 fi
 
-# Setup homebrew
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/brew`"
-
-# Setup zsh with git and tmux
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/shell`"
-
-# Setup neovim with coc.nvim and other extensions
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/vim`"
+for step in essential shell vim docker databases go node
+do
+  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/$step`"
+done

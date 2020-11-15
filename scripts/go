@@ -1,0 +1,26 @@
+#!/bin/bash
+# Install latest version of golang
+#
+# Usage : curl -fsSL sh.mohitsingh.in/go
+
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+
+doing "Verifying version..."
+GO_LATEST=`curl -s https://golang.org/dl/ | grep -oP '\/dl\/go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2`
+GO_LOCAL=`go version 2>/dev/null | cut -d ' ' -f 3 | cut -b 3-`
+success
+if [[ "$GO_LATEST" == "$GO_LOCAL" ]]; then
+  success_msg "Latest version of Go is already installed"
+  exit 0
+fi
+
+doing "Downloading Go v$GO_LATEST..."
+wget -cq "https://golang.org/dl/go$GO_LATEST.linux-amd64.tar.gz"
+success
+
+doing "Installing Go v$GO_LATEST..."
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$GO_LATEST.linux-amd64.tar.gz"
+sudo rm "go$GO_LATEST.linux-amd64.tar.gz"
+success
+

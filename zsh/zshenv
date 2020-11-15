@@ -5,13 +5,14 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias -- -="cd -"
-
-# favourite locations
 alias ~="cd ~"
 alias p="cd ~/Projects"
 
 # A less noisy tree list
-alias t="tree -I 'node_modules|.git|test|venv|env|.DS_Store' --noreport -C -a --dirsfirst"
+alias t="tree -I 'node_modules|.git|test|venv|env' --noreport -C -a --dirsfirst"
+
+# Use clipboard for xclip
+alias xclip="xclip -selection clipboard"
 
 # download with aria2 using 16 connections
 alias a2c="aria2c -x16 -s16"
@@ -26,22 +27,14 @@ alias vi="nvim"
 alias vim="nvim"
 alias py="python"
 
-# shortcut for my youtube-dl fork
-alias ytd="ytd --external-downloader aria2c"
-alias ytdm="ytd -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --crop-thumbnail --add-metadata -o '%(title)s.%(ext)s'"
+# shortcut for youtube-dl
+alias ytd="youtube-dl --external-downloader aria2c"
+alias ytdm="youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o '%(title)s.%(ext)s'"
 
-alias cat="bat"
-
-# better ls output
+# better ls output using exa
 alias la="exa -la --group-directories-first"
 alias ll="exa -l --group-directories-first"
 alias ls="exa"
-
-# brew shortcuts
-alias bstart="brew services start"
-alias bstop="brew services stop"
-alias blist="brew services list"
-alias bup="brew upgrade"
 
 # yarn shortcuts
 alias yi="yarn"
@@ -49,16 +42,20 @@ alias ya="yarn add"
 alias yd="yarn add --dev"
 alias yu="yarn upgrade-interactive --latest"
 
+# use apt-fast for apt
+alias aptf="apt-fast"
+
+# systemd services
+alias sstart="sudo systemctl start"
+alias sstop="sudo systemctl stop"
+alias sstatus="sudo systemctl status"
+alias sreload="sudo systemctl reload"
+alias srestart="sudo systemctl reload"
+
 # sudoed aliases, shell reloading and pretty paths
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
 alias path="echo -e ${PATH//:/\\\n}"
-
-# Clear dns cache
-function cleardns {
-  sudo dscacheutil -flushcache
-  sudo killall -HUP mDNSResponder
-}
 
 # Update blocklist
 function upblock {
@@ -67,29 +64,12 @@ function upblock {
   echo "Done."
 }
 
-function upytd {
-  sudo wget https://github.com/mohitsinghs/ytd/releases/latest/download/ytd -O /usr/local/bin/ytd
-  sudo chmod a+rx /usr/local/bin/ytd
-}
-
 # Update everything
 function upall {
-  brew upgrade
-  vim +PlugUpdate +qa
-  npm up -g
-  softwareupdate -ia
-  gem update --system
-  gem update
-}
-
-# list orphan/unused brew packages so that they can be removed
-function orphan {
-  brew list -1 | while read cask;
-  do
-    echo -ne "\x1B[1;34m $cask \x1B[0m";
-    brew uses $cask --installed | awk '{printf(" %s ", $0)}';
-    echo "";
-  done
+  sudo apt-get update
+  sudo apt-get upgrade
+  nvim +PlugUpdate +qa
+  sudo npm up -g
 }
 
 # for moving quickly into my projects

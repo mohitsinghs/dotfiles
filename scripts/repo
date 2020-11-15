@@ -1,20 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
+# Ensure that dotfiles exists
 
-# define variables
 DOTLOC="$HOME/Projects/dotfiles"
 
-# Include utilities
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
-# exit if macos is not found
-doing "Checking system..."
-if [[ $(uname) != 'Darwin' ]]; then
-  fail "You are not on a mac."
-else
-  success
-fi
-
-# exit if dotfiles exists
 doing "Ensuring dotfiles..."
 if [[ ! -d $DOTLOC ]]; then
   # create dotfiles directory and clone
