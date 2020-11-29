@@ -1,17 +1,19 @@
-<h1 align="center">dotfiles</h1><br><br>
+<h1 align="center">dotfiles</h1>
 <p align="center">
   <b>dotfiles for local machines and remote boxes running ubuntu</b><br/>
 </p>
 
 <br />
 
-# Install
+## Install
 
 To install everything
 
 ```sh
 curl -fsSL sh.mohitsingh.in | bash
 ```
+
+> For macOS setup see [macos branch](https://github.com/mohitsinghs/dotfiles/tree/macos)
 
 ## Scripts
 
