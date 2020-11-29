@@ -27,9 +27,9 @@ alias vi="nvim"
 alias vim="nvim"
 alias py="python"
 
-# shortcut for youtube-dl
-alias ytd="youtube-dl --external-downloader aria2c"
-alias ytdm="youtube-dl -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o '%(title)s.%(ext)s'"
+# shortcut for ytd
+alias ytd="ytd --external-downloader aria2c"
+alias ytdm="ytd -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --crop-thumbnail --add-metadata -o '%(title)s.%(ext)s'"
 
 # better ls output using exa
 alias la="exa -la --group-directories-first"
@@ -56,6 +56,12 @@ alias srestart="sudo systemctl reload"
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
 alias path="echo -e ${PATH//:/\\\n}"
+
+# Update ytd
+function upytd {
+  sudo wget https://github.com/mohitsinghs/ytd/releases/latest/download/ytd -O /usr/local/bin/ytd
+  sudo chmod a+rx /usr/local/bin/ytd
+}
 
 # Update blocklist
 function upblock {
