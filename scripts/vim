@@ -29,7 +29,7 @@ COC_EXT_PATH="$HOME/.config/coc/extensions"
 # list of coc extensions to install
 coc_extensions=(
   \ coc-go
-  \ coc-rls
+  \ coc-rust-analyzer
   \ coc-python
   \ coc-tsserver
   \ coc-vimlsp
@@ -39,6 +39,7 @@ coc_extensions=(
   \ coc-json
   \ coc-yaml
   \ coc-git
+  \ coc-docker
   \ coc-eslint
   \ coc-prettier
   \ coc-snippets
