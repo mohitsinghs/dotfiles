@@ -1,7 +1,5 @@
 # dotfiles
 
-> NOTE: Recently, I gave away my MacBook and built a linux machine. These dotfiles are still being updated.
-
 To install everything
 
 ```sh
