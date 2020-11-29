@@ -32,5 +32,8 @@
   "coc.preferences.extensionUpdateCheck": "never",
   "go.goplsOptions": {
     "completeUnimported": true
-  }
+  },
+  "rust-analyzer.cargo.allFeatures": true,
+  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+  "rust-analyzer.procMacro.enable": true
 }
