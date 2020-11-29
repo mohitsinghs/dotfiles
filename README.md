@@ -1,8 +1,8 @@
 <h1 align="center">dotfiles</h1>
 <p align="center">
-  <b>dotfiles for local machines and remote boxes running ubuntu</b><br/>
+  <b>automated configurations</b><br/>
+  <sub>for local machines and remote boxes running ubuntu</sub>
 </p>
-
 <br />
 
 ## Install
