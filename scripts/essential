@@ -32,32 +32,39 @@ sudo apt-get install -y\
   gnupg-agent\
   software-properties-common
 
-if [[ `lsb_release -cs` == 'focal' ]]; then
-  sudo apt-get install zsh-autosuggestions
-fi
-
 # git, vim -> neovim, diff -> diff-so-fancy, apt -> apt-fast
 [[ `repo_missing "git"` ]] && sudo apt-add-repository ppa:git-core/ppa
 [[ `repo_missing "neovim"` ]] && sudo add-apt-repository ppa:neovim-ppa/stable
 [[ `repo_missing "diff-so-fancy"` ]] && sudo add-apt-repository ppa:aos1/diff-so-fancy
 [[ `repo_missing "apt-fast"` ]] && sudo add-apt-repository ppa:apt-fast/stable
 sudo apt-get update
-sudo apt-get remove -y git
-sudo apt-get install -y neovim git hub diff-so-fancy apt-fast
+# sudo apt-get remove -y git
+sudo apt-get install -y neovim git diff-so-fancy apt-fast
+
+# focal only packages
+if [[ `lsb_release -cs` == 'focal' ]]; then
+  sudo apt-get install zsh-autosuggestions
+fi
 
 # grep -> ripgrep, cat -> bat, ls -> exa
 GH_API="https://api.github.com/repos"
 RIPGREP_URL=`curl -s "$GH_API/BurntSushi/ripgrep/releases/latest" | jq -r '.assets[].browser_download_url | select(endswith("deb"))'`
 BAT_URL=`curl -s "$GH_API/sharkdp/bat/releases/latest" | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))'`
 EXA_URL=`curl -s "$GH_API/ogham/exa/releases/latest" | jq -r '.assets[].browser_download_url | select(contains("linux"))'`
+HUB_URL=`curl -s "$GH_API/github/hub/releases/latest" | jq -r '.assets[].browser_download_url | select(contains("linux-amd64"))'`
+HUB_DIR=`basename -s .tgz $HUB_URL`
 curl -qL $RIPGREP_URL -o ripgrep.deb
 curl -qL $BAT_URL -o bat.deb
 curl -qL $EXA_URL -o exa.zip
+curl -qL $HUB_URL -o hub.tgz
 sudo dpkg -i ripgrep.deb
 sudo dpkg -i bat.deb
 unzip exa.zip
+tar -xvf hub.tgz
+( sudo "$HUB_DIR/install" )
 sudo mv exa-linux-x86_64 /usr/local/bin/exa
 sudo chmod +x /usr/local/bin/exa
 rm ripgrep.deb
 rm bat.deb
 rm exa.zip
+rm -rf "$HUB_DIR" hub.tgz
