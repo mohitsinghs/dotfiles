@@ -32,7 +32,7 @@ sudo apt-get install -y\
   gnupg-agent\
   software-properties-common
 
-if [[ `lsb_release -cs` -eq 'focal' ]]; then
+if [[ `lsb_release -cs` == 'focal' ]]; then
   sudo apt-get install zsh-autosuggestions
 fi
 
