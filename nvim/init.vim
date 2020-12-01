@@ -60,7 +60,7 @@ nn <silent> <space>p  :<C-u>Files<CR>
 nn <silent> <space>f  :<C-u>Rg<CR>
 
 " Language tweaks
-let g:python3_host_prog = '/home/mohit/.config/nvim/py3env/bin/python'
+let g:python3_host_prog = '~/.config/nvim/py3env/bin/python'
 let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:markdown_enable_conceal = 1
