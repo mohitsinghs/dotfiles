@@ -10,7 +10,8 @@ if [[ ! -d $DOTLOC ]]; then
   # create dotfiles directory and clone
   [[ ! -d "$HOME/Projects" ]] && mkdir -p "$HOME/Projects"
   if [[ ! -x "$(command -v git)" ]]; then
-    git clone -q https://github.com/mohitsinghs/dotfiles.git "$DOTLOC"
+    sudo apt-get install -y git
   fi
+  git clone -q https://github.com/mohitsinghs/dotfiles.git "$DOTLOC"
 fi
 success
