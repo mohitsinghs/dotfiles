@@ -41,6 +41,7 @@ let g:mapleader = ','
 " Write and quit keymaps
 nn <Leader>q :q<CR>
 nn <Leader>w :w<CR>
+nn <Leader>ws :noa w<CR>
 nn <Leader>wa :wa<CR>
 nn <Leader>wtf :w !sudo tee >/dev/null %<CR>
 
