@@ -66,29 +66,15 @@ let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:markdown_enable_conceal = 1
 
-" minmal and better fzf layout
+" Fzf tweaks
 let $FZF_DEFAULT_COMMAND='rg --files'
 let $FZF_DEFAULT_OPTS='
       \ --info=inline
+      \ --layout=reverse
       \ --color=dark
       \ --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
       \ --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef'
-let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-
-" ripgrep integration
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-" ripgrep command
-com! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
-
-" clean fzf
-au! FileType fzf set nosmd nonu nornu | au BufLeave <buffer> set smd nu rnu
+au! FileType fzf set nosmd | au BufLeave <buffer> set smd
 
 " Goyo
 aug Goyo
