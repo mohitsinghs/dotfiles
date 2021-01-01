@@ -13,9 +13,6 @@ sudo apt-get install -y\
   httpie\
   jq\
   htop\
-  nmap\
-  ffmpeg\
-  imagemagick\
   p7zip-full\
   p7zip-rar\
   python3\

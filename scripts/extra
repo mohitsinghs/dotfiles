@@ -1,0 +1,19 @@
+#!/bin/bash
+# Setup some extra tools
+#
+# Usage: curl -fsSL sh.mohitsingh.in/extra
+
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install -y\
+  nmap\
+  hashcat\
+  hydra\
+  telnet\
+  tor\
+  sqlcipher\
+  ffmpeg\
+  imagemagick
