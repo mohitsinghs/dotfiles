@@ -30,10 +30,9 @@ sudo apt-get install -y\
 repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
 repo_missing "neovim" && sudo add-apt-repository ppa:neovim-ppa/stable
 repo_missing "diff-so-fancy" && sudo add-apt-repository ppa:aos1/diff-so-fancy
-repo_missing "apt-fast" && sudo add-apt-repository ppa:apt-fast/stable
 sudo apt-get update
 sudo apt-get remove -y git
-DEBIAN_FRONTEND=noninteractive sudo apt-get install -y neovim git diff-so-fancy apt-fast
+sudo apt-get install -y neovim git diff-so-fancy
 
 # focal only packages
 if [[ `lsb_release -cs` == 'focal' ]]; then
