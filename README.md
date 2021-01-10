@@ -1,7 +1,7 @@
 <h1 align="center">dotfiles</h1>
 <p align="center">
   <b>automated configurations</b><br/>
-  <sub>for local machines and remote boxes running ubuntu</sub>
+  <sub>for local and remote machines running ubuntu</sub>
 </p>
 <br />
 
@@ -13,8 +13,6 @@ To install everything
 curl -fsSL sh.mohitsingh.in | bash
 ```
 
-> For macOS setup see [macos branch](https://github.com/mohitsinghs/dotfiles/tree/macos)
-
 ## Scripts
 
 - [`install`][1] - install everything.
@@ -24,9 +22,9 @@ curl -fsSL sh.mohitsingh.in | bash
 - [`docker`][5] - install docker and docker-compose.
 - [`databases`][6] - install mongo, postgres, mysql etc.
 - [`go`][7] - install latest golang.
-- [`node`][8] - intall node 14.x along with yarn.
-- [`user`][9] - create a new user ( for remote boxes ).
-- [`highload`][10] - tweak system for high load ( for remote boxes ).
+- [`node`][8] - install node 14.x along with yarn.
+- [`user`][9] - create a new user.
+- [`highload`][10] - tweak system for high load.
 
 [1]: scripts/install
 [2]: scripts/essential
@@ -44,7 +42,7 @@ curl -fsSL sh.mohitsingh.in | bash
 - **`repo`** - switch between my local repositories.
 - **`ytd`** - scrap videos from youtube
 - **`ytdm`** - scrap music from youtube
-- **`upytd`** - update local ytd ( my patched youtube-dl )
+- **`upytd`** - update local [ytd](https://github.com/mohitsinghs/ytd)
 - **`upblock`** - update host files to block crap
 - **`upall`** - for usual updates
 
