@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup some extra tools
 #
-# Usage: curl -fsSL sh.mohitsingh.in/extra
+# Usage: curl -fsSL sh.mohitsingh.in/extra | bash
 
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 

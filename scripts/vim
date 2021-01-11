@@ -1,7 +1,8 @@
 #!/bin/bash
 # Setup neovim with coc and other plugins
 #
-# Usage: curl -fsSL sh.mohitsingh.in/vim
+# Usage: curl -fsSL sh.mohitsingh.in/vim | bash
+#
 # Make sure that neovim and nodejs are available
 
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"

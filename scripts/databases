@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup mysql, postgresql and mongodb
 #
-# Usage: curl -fsSL sh.mohitsingh.in/databases
+# Usage: curl -fsSL sh.mohitsingh.in/databases | bash
 
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 

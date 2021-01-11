@@ -1,7 +1,7 @@
 #!/bin/bash
 # Create new user
 #
-# Usage: curl -fsSL sh.mohitsingh.in/user
+# Usage: curl -fsSL sh.mohitsingh.in/user | bash
 
 echo -n "Name of user you want to create : "
 read name </dev/tty

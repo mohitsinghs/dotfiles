@@ -1,7 +1,8 @@
 #!/bin/bash
 # Setup zsh with plugins and prompts
 #
-# Usage: curl -fsSL sh.mohitsingh.in/shell
+# Usage: curl -fsSL sh.mohitsingh.in/shell | bash
+
 # Make sure that following packages are already installed
 # zsh, zsh-syntax-highlighting, zsh-autosuggestons
 

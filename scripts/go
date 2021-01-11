@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install latest version of golang
 #
-# Usage : curl -fsSL sh.mohitsingh.in/go
+# Usage : curl -fsSL sh.mohitsingh.in/go | bash
 
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 

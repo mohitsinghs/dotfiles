@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup docker and docker-compose
 #
-# Usage: curl -fsSL sh.mohitsingh.in/docker
+# Usage: curl -fsSL sh.mohitsingh.in/docker | bash
 
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
