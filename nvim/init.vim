@@ -4,6 +4,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+let g:polyglot_disabled = ['coffee-script']
+
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'joshdick/onedark.vim'
