@@ -59,8 +59,11 @@ alias path="echo -e ${PATH//:/\\\n}"
 
 # Update ytd
 function upytd {
-  sudo wget https://github.com/mohitsinghs/ytd/releases/latest/download/ytd -O /usr/local/bin/ytd
-  sudo chmod a+rx /usr/local/bin/ytd
+  YTDHOME="$HOME/Projects/ytd"
+  cd $YTDHOME
+  ( "$YTDHOME/builder.sh" )
+  sudo mv "$YTDHOME/ytd" /usr/local/bin
+  cd -
 }
 
 # Update blocklist
