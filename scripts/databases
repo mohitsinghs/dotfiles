@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup mysql, postgresql and mongodb
+# Setup mysql and postgresql
 #
 # Usage: curl -fsSL sh.mohitsingh.in/databases | bash
 
