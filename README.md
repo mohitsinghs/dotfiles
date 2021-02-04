@@ -45,7 +45,7 @@ curl -fsSL sh.mohitsingh.in | bash
 - **`upytd`** - update local [ytd](https://github.com/mohitsinghs/ytd)
 - **`upblock`** - update host files to block crap
 - **`upall`** - for usual updates
-- **dk** - docker-compose with fuzzy files
+- **`dk`** - docker-compose with fuzzy files
 
 ## Contributing
 
