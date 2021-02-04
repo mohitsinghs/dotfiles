@@ -81,6 +81,37 @@ function upall {
   sudo npm up -g
 }
 
+# A shortcut for docker-compose
+# Usage: dk {up|down} <files>
+function dk {
+  candidates=($@);
+  params=""
+  for file in ${candidates[@]:1}
+  do
+    if _is_valid_compose $file; then
+      params="$params -f $file";
+    else
+      echo "Skipping $file, not a valid compose file"
+    fi
+  done
+  case "${candidates[1]}" in
+  up)
+    docker-compose `echo $params` up -d
+    ;;
+  down)
+    docker-compose `echo $params` down
+    ;;
+  *)
+    echo "Usage: dk {up|down} $params"
+    ;;
+  esac
+}
+
+function _is_valid_compose {
+ docker-compose -f $1 config -q &>/dev/null
+ return $?
+}
+
 # for moving quickly into my projects
 function repo {
     REPO_PATH=`find "$HOME/Projects" -mindepth 1 -maxdepth 2 -type d -name "$1*" | head -n 1`
