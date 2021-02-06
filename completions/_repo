@@ -2,14 +2,10 @@
 function _repo {
 for i in `find "$HOME/Projects" -mindepth 1 -maxdepth 2 -type d`
 do
-  if _is_git $i; then
+  if [[ -d "$i/.git" ]]; then
     compadd "$(basename $i)"
   fi
 done
-}
-
-function _is_git {
-  [[ -d "$1/.git" ]] && return 0 || return 1
 }
 
 _repo
