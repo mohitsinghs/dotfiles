@@ -18,7 +18,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'mohitsinghs/fxyz.vim'
+Plug 'mohitsinghs/fim'
 
 call plug#end()
 
