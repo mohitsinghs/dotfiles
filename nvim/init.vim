@@ -51,6 +51,8 @@ nn <Leader>wtf :w !sudo tee >/dev/null %<CR>
 nn <silent> <Leader>df :Goyo<CR>
 nn <silent> <Leader>gs :Gstatus<CR>
 nn <silent> <Leader>gp :Gpush<CR>
+nn <silent> <Leader>gf :Gpush --force<CR>
+nn <silent> <Leader>gu :Gpull<CR>
 
 " Coc keymaps
 nm <Leader>rn <Plug>(coc-rename)
