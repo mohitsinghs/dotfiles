@@ -83,7 +83,7 @@ let $FZF_DEFAULT_OPTS='
 au! FileType fzf set nosmd | au BufLeave <buffer> set smd
 
 " Repos command to switch between projects
-com! Repos call fzf#run(fzf#wrap({ 'source' : 'find "$HOME/Projects" -mindepth 1 -type d -wholename **/.git | xargs dirname', 'sink' : 'cd' }))
+com! Repos call fzf#run(fzf#wrap({ 'source' : 'find "$HOME/Projects" -mindepth 1 -type d -wholename "**/.git" | xargs dirname', 'sink' : 'cd' }))
 
 " Goyo
 aug Goyo
