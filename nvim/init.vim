@@ -59,6 +59,7 @@ nn <silent> <space>c  :<C-u>CocCommand<CR>
 nn <silent> <space>l  :<C-u>CocList<CR>
 
 " Fzf keymaps
+nn <silent> <space>r  :<C-u>Repos<CR>
 nn <silent> <space>p  :<C-u>Files<CR>
 nn <silent> <space>f  :<C-u>Rg<CR>
 nn <silent> <space>g  :<C-u>Commits<CR>
@@ -78,6 +79,9 @@ let $FZF_DEFAULT_OPTS='
       \ --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
       \ --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef'
 au! FileType fzf set nosmd | au BufLeave <buffer> set smd
+
+" Repos command to switch between projects
+com! Repos call fzf#run(fzf#wrap({ 'source' : 'find "$HOME/Projects" -mindepth 1 -type d -wholename **/.git | xargs dirname', 'sink' : 'cd' }))
 
 " Goyo
 aug Goyo
