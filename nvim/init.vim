@@ -18,6 +18,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'mohitsinghs/fxyz.vim'
 
 call plug#end()
 
@@ -61,29 +62,19 @@ nn <silent> <space>c  :<C-u>CocCommand<CR>
 nn <silent> <space>l  :<C-u>CocList<CR>
 
 " Fzf keymaps
-nn <silent> <space>r  :<C-u>Repos<CR>
 nn <silent> <space>p  :<C-u>Files<CR>
 nn <silent> <space>f  :<C-u>Rg<CR>
 nn <silent> <space>g  :<C-u>Commits<CR>
+
+" Fxyz keymaps
+nn <silent> <space>r  :<C-u>Repos<CR>
+nn <silent> <space>yr  :<C-u>Yr<CR>
 
 " Language tweaks
 let g:python3_host_prog = '~/.config/nvim/py3env/bin/python'
 let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:markdown_enable_conceal = 1
-
-" Fzf tweaks
-let $FZF_DEFAULT_COMMAND='rg --files'
-let $FZF_DEFAULT_OPTS='
-      \ --info=inline
-      \ --layout=reverse
-      \ --color=dark
-      \ --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe
-      \ --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef'
-au! FileType fzf set nosmd | au BufLeave <buffer> set smd
-
-" Repos command to switch between projects
-com! Repos call fzf#run(fzf#wrap({ 'source' : 'find "$HOME/Projects" -mindepth 1 -type d -wholename "**/.git" | xargs dirname', 'sink' : 'cd' }))
 
 " Goyo
 aug Goyo
