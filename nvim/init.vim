@@ -65,11 +65,7 @@ nn <silent> <space>l  :<C-u>CocList<CR>
 nn <silent> <space>p  :<C-u>Files<CR>
 nn <silent> <space>f  :<C-u>Rg<CR>
 nn <silent> <space>g  :<C-u>Commits<CR>
-
-" Fxyz keymaps
 nn <silent> <space>r  :<C-u>Repos<CR>
-nn <silent> <space>yr  :<C-u>Yr<CR>
-nn <silent> <space>yd  :<C-u>Yd<CR>
 
 " Language tweaks
 let g:python3_host_prog = '~/.config/nvim/py3env/bin/python'
