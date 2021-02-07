@@ -16,8 +16,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'mohitsinghs/fim'
 
 call plug#end()
@@ -49,7 +47,6 @@ nn <Leader>wa :wa<CR>
 nn <Leader>wtf :w !sudo tee >/dev/null %<CR>
 
 " Git and goyo keymaps
-nn <silent> <Leader>df :Goyo<CR>
 nn <silent> <Leader>gs :Gstatus<CR>
 nn <silent> <Leader>gp :Gpush<CR>
 nn <silent> <Leader>gf :Gpush --force<CR>
@@ -72,9 +69,3 @@ let g:python3_host_prog = '~/.config/nvim/py3env/bin/python'
 let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 let g:markdown_enable_conceal = 1
-
-" Goyo
-aug Goyo
-  au! User GoyoEnter Limelight
-  au! User GoyoLeave Limelight!
-aug END
