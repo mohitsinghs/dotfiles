@@ -18,7 +18,7 @@ test -d "${GOPATH}" || mkdir "${GOPATH}" &> /dev/null
 test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com" &> /dev/null
 
 # Add rust and go to path
-export PATH="$CARGOPATH/bin:$GOROOT/bin:$GOPATH/bin:$PATH"
+export PATH="$CARGOPATH/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.local/bin:$PATH"
 
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
