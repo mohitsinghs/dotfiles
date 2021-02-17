@@ -9,7 +9,7 @@ alias ~="cd ~"
 alias p="cd ~/Projects"
 
 # A less noisy tree list
-alias t="tree -I 'node_modules|.git|test|venv|env' --noreport -C -a --dirsfirst"
+alias t="tree -I 'node_modules|.git|test|venv|env|target|build|out|.next' --noreport -C -a --dirsfirst"
 
 # Use clipboard for xclip
 alias xclip="xclip -selection clipboard"
