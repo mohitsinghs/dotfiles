@@ -46,11 +46,11 @@ nn <Leader>ws :noa w<CR>
 nn <Leader>wa :wa<CR>
 nn <Leader>wtf :w !sudo tee >/dev/null %<CR>
 
-" Git and goyo keymaps
-nn <silent> <Leader>gs :Gstatus<CR>
-nn <silent> <Leader>gp :Gpush<CR>
-nn <silent> <Leader>gf :Gpush --force<CR>
-nn <silent> <Leader>gu :Gpull<CR>
+" Git keymaps
+nn <silent> <Leader>gs :Git<CR>
+nn <silent> <Leader>gp :Git push<CR>
+nn <silent> <Leader>gf :Git push --force<CR>
+nn <silent> <Leader>gu :Git pull<CR>
 
 " Coc keymaps
 nm <Leader>rn <Plug>(coc-rename)
