@@ -37,7 +37,7 @@ curl -fsSL sh.mohitsingh.in | bash
 [8]: scripts/node
 [9]: scripts/user
 [10]: scripts/highload
-[10]: scripts/kube
+[11]: scripts/kube
 
 ## Commands
 
