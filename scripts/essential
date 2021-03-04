@@ -6,9 +6,17 @@
 source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
 
 # Set timezone to +5:30
-ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" > /etc/timezone
+sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
 
-sudo apt-get upgrade
+# Add ppas
+repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
+repo_missing "neovim" && sudo add-apt-repository ppa:neovim-ppa/stable
+repo_missing "diff-so-fancy" && sudo add-apt-repository ppa:aos1/diff-so-fancy
+
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get remove -y git
+
 sudo apt-get install -y\
   aria2\
   curl\
@@ -24,43 +32,74 @@ sudo apt-get install -y\
   python3-pip\
   python3-venv\
   tmux\
+  neovim\
+  git\
+  diff-so-fancy\
   zsh\
   zsh-syntax-highlighting\
   apt-transport-https\
   software-properties-common
-
-# git, vim -> neovim, diff -> diff-so-fancy, apt -> apt-fast
-repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
-repo_missing "neovim" && sudo add-apt-repository ppa:neovim-ppa/stable
-repo_missing "diff-so-fancy" && sudo add-apt-repository ppa:aos1/diff-so-fancy
-sudo apt-get update
-sudo apt-get remove -y git
-sudo apt-get install -y neovim git diff-so-fancy
 
 # focal only packages
 if [[ `lsb_release -cs` == 'focal' ]]; then
   sudo apt-get install zsh-autosuggestions
 fi
 
-# grep -> ripgrep, cat -> bat, ls -> exa
-GH_API="https://api.github.com/repos"
-RIPGREP_URL=`curl -s "$GH_API/BurntSushi/ripgrep/releases/latest" | jq -r '.assets[].browser_download_url | select(endswith("deb"))'`
-BAT_URL=`curl -s "$GH_API/sharkdp/bat/releases/latest" | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))'`
-EXA_URL=`curl -s "$GH_API/ogham/exa/releases/latest" | jq -r '.assets[].browser_download_url | select(contains("linux"))'`
-HUB_URL=`curl -s "$GH_API/github/hub/releases/latest" | jq -r '.assets[].browser_download_url | select(contains("linux-amd64"))'`
-HUB_DIR=`basename -s .tgz $HUB_URL`
-curl -qL $RIPGREP_URL -o ripgrep.deb
-curl -qL $BAT_URL -o bat.deb
-curl -qL $EXA_URL -o exa.zip
-curl -qL $HUB_URL -o hub.tgz
-sudo dpkg -i ripgrep.deb
-sudo dpkg -i bat.deb
-unzip exa.zip
-tar -xvf hub.tgz
-( sudo "$HUB_DIR/install" )
-sudo mv exa-linux-x86_64 /usr/local/bin/exa
-sudo chmod +x /usr/local/bin/exa
-rm ripgrep.deb
-rm bat.deb
-rm exa.zip
-rm -rf "$HUB_DIR" hub.tgz
+function install_ripgrep {
+  doing "Verifying ripgrep version..."
+  RG_ENDPOINT="https://api.github.com/repos/BurntSushi/ripgrep/releases/latest"
+  RG_LOCAL=`rg -V 2>/dev/null | rg '[\d.]+' -o |  head -n 1`
+  RG_LATEST=`curl -s $RG_ENDPOINT | jq -r '.name'`
+  success
+  if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
+    success_msg "Latest ripgrep is installed ( v$RG_LATEST )"
+  else
+    doing "Installing ripgrep v$RG_LATEST..."
+    RG_URL=`curl -s $RG_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("deb"))'`
+    curl -sL $RIPGREP_URL -o ripgrep.deb
+    sudo dpkg -i ripgrep.deb
+    rm ripgrep.deb
+    success
+  fi
+}
+
+function install_bat {
+  doing "Verifying bat version..."
+  BAT_ENDPOINT="https://api.github.com/repos/sharkdp/bat/releases/latest"
+  BAT_LOCAL=`bat -V 2>/dev/null | rg '[\d.]+' -o |  head -n 1`
+  BAT_LATEST=`curl -s $BAT_ENDPOINT | jq -r '.name' | cut -b 2-`
+  success
+  if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
+    success_msg "Latest bat is installed ( v$BAT_LATEST )"
+  else
+    doing "Installing bat v$BAT_LATEST..."
+    BAT_URL=`curl -s $BAT_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))'`
+    curl -sL $BAT_URL -o bat.deb
+    sudo dpkg -i bat.deb
+    rm bat.deb
+    success
+  fi
+}
+
+function install_exa {
+  doing "Verifying exa version..."
+  EXA_ENDPOINT="https://api.github.com/repos/ogham/exa/releases/latest"
+  EXA_LOCAL=`exa -v 2>/dev/null | rg '[\d.]+' -o |  head -n 1`
+  EXA_LATEST=`curl -s $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-`
+  success
+  if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
+    success_msg "Latest exa is installed ( v$EXA_LATEST )"
+  else
+    doing "Installing exa v$EXA_LATEST..."
+    EXA_URL=`curl -s $EXA_ENDPOINT | jq -r '.assets[].browser_download_url | select(contains("linux"))'`
+    curl -sL $EXA_URL -o exa.zip
+    unzip -qq exa.zip
+    sudo install exa-linux-x86_64 /usr/local/bin/exa
+    rm exa.zip exa-linux-x86_64
+    success
+  fi
+}
+
+install_ripgrep
+install_bat
+install_exa

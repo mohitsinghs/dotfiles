@@ -21,7 +21,6 @@ alias a2c="aria2c -x16 -s16"
 alias mkdir="mkdir -p"
 
 # common shortcuts
-alias git="hub"
 alias g="git"
 alias vi="nvim"
 alias vim="nvim"
