@@ -52,6 +52,13 @@ alias sstatus="sudo systemctl status"
 alias sreload="sudo systemctl reload"
 alias srestart="sudo systemctl reload"
 
+# aliases for cloud tools
+alias d="docker"
+alias dk="docker-compose"
+alias k="kubectl"
+alias mk="minikube"
+alias tf="terraform"
+
 # sudoed aliases, shell reloading and pretty paths
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
@@ -79,37 +86,6 @@ function upall {
   sudo apt-get upgrade
   nvim +PlugUpdate +qa
   sudo npm up -g
-}
-
-# A shortcut for docker-compose
-# Usage: dk {up|down} <files>
-function dk {
-  candidates=($@);
-  params=""
-  for file in ${candidates[@]:1}
-  do
-    if _is_valid_compose $file; then
-      params="$params -f $file";
-    else
-      echo "Skipping $file, not a valid compose file"
-    fi
-  done
-  case "${candidates[1]}" in
-  up)
-    docker-compose `echo $params` up -d
-    ;;
-  down)
-    docker-compose `echo $params` down
-    ;;
-  *)
-    echo "Usage: dk {up|down} $params"
-    ;;
-  esac
-}
-
-function _is_valid_compose {
- docker-compose -f $1 config -q &>/dev/null
- return $?
 }
 
 # for moving quickly into my projects
