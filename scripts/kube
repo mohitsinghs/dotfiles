@@ -1,0 +1,47 @@
+#!/bin/bash
+# Install/Update kubectl, minikube, terraform and helm
+#
+# Usage : curl -fsSL sh.mohitsingh.in/kube | bash
+
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+
+doing "Verifying kubectl version"
+K_LATEST=`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt | cut -b 2-`
+K_LOCAL=`kubectl version -o json 2>/dev/null | jq -r '.clientVersion.gitVersion' | cut -b 2-`
+success
+if [[ "$K_LATEST" == "$K_LOCAL" ]]; then
+  success_msg "Latest version of kubectl is already installed"
+else
+  doing "Downloading kubectl v$K_LATEST..."
+  wget -cq "https://storage.googleapis.com/kubernetes-release/release/$(K_LATEST)/bin/linux/amd64/kubectl"
+  success
+  doing "Installing kubectl v$K_LATEST..."
+  sudo install kubectl /usr/local/bin/kubectl
+  sudo rm kubectl
+  success
+fi
+
+doing "Verifying minikube version"
+MK_LATEST=`curl -s https://api.github.com/repos/kubernetes/minikube/releases/latest 2>/dev/null | jq -r '.name' | cut -b 2-`
+MK_LOCAL=`minikube version -o json 2>/dev/null | jq -r '.minikubeVersion' | cut -b 2-`
+success
+if [[ "$MK_LATEST" == "$MK_LOCAL" ]]; then
+  success_msg "Latest version of minikube is already installed"
+else
+  doing "Downloading minikube v$K_LATEST..."
+  wget -cq https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  success
+  doing "Installing minikube v$K_LATEST..."
+  sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  rm minikube-linux-amd64
+  success
+fi
+
+# Install terraform, it's language server and helm
+key_missing "hashicorp" && curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+repo_missing "hashicorp" && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+key_missing  "helm" && curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+repo_missing "helm" && sudo apt-add-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
+sudo apt-get update -y
+sudo apt-get install -y terraform terraform-ls helm
+
