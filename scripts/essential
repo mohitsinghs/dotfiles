@@ -56,7 +56,7 @@ function install_ripgrep {
   else
     doing "Installing ripgrep v$RG_LATEST..."
     RG_URL=`curl -sL $RG_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("deb"))'`
-    curl -sL $RIPGREP_URL -o ripgrep.deb
+    curl -sL $RG_URL -o ripgrep.deb
     sudo dpkg -i ripgrep.deb
     rm ripgrep.deb
     success
