@@ -1,0 +1,53 @@
+#!/bin/bash
+# Setup a new server with
+#  - A user with my name
+#  - modern and minimal shell
+#  - better code editor
+#  - minimal tmux
+#  - docker and docker-compose
+#  - other useful tools (rg, exa, bat, httpie, jq, aria2, diff-so-fancy etc)
+#
+# Usage: curl -fsSL sh.mohitsingh.in/server | bash
+#
+
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/essential`"
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/docker`"
+
+# Create new user
+NAME="mohit"
+if id "$NAME" &>/dev/null; then
+  success_msg "User $NAME already exists, Skipping..."
+else
+  adduser --disabled-password --gecos '' $NAME
+  usermod -aG sudo,docker $NAME
+  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+  cp -r .ssh /home/$NAME
+  chown -R $NAME:$NAME /home/$NAME/.ssh
+fi
+
+FUNPATH="/home/$NAME/.zsh"
+PURE_REPO="https://raw.githubusercontent.com/sindresorhus/pure/master"
+DOTFILES_REPO="https://raw.githubusercontent.com/mohitsinghs/dotfiles/master"
+
+# Cleanup old prompt files
+if [[ -x $FUNPATH/prompt_pure_setup && -x $FUNPATH/async ]]; then
+  rm -f $FUNPATH/prompt_pure_setup
+  rm -f $FUNPATH/async
+fi
+
+# Install pure prompt
+curl "$PURE_REPO/pure.zsh" --create-dirs -fsSLo $FUNPATH/prompt_pure_setup
+curl "$PURE_REPO/async.zsh" -fsSLo $FUNPATH/async
+chmod +x $FUNPATH/prompt_pure_setup
+chmod +x $FUNPATH/async
+
+# Install configs
+curl "$DOTFILES_REPO/tmux/tmux.conf" -fsSLo "/home/$NAME/.tmux.conf"
+curl -fsSL "$DOTFILES_REPO/zsh/zshrc" | rg '(CARGO|GO|go|rust)' -v | uniq -u > "/home/$NAME/.zshrc"
+curl -fsSL "$DOTFILES_REPO/zsh/zshenv" | rg -U '(#.*\n.*(repo|upblock|upall|upytd)\s+\{[^}]*}|ytd)' -v | uniq -u > "/home/$NAME/.zshenv"
+sudo -u $NAME mkdir -p "/home/$NAME/.config/nvim"
+curl -fsSL "$DOTFILES_REPO/nvim/init.vim" | rg -U '(Coc|coc|python)' -v | uniq -u > "/home/$NAME/.config/nvim/init.vim"
+
+# Fix ownership
+chown -R $NAME:$NAME /home/$NAME/{.zshrc,.zshenv,.tmux.conf,.config,.zsh}
