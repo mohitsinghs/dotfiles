@@ -49,13 +49,13 @@ function install_ripgrep {
   doing "Verifying ripgrep version..."
   RG_ENDPOINT="https://api.github.com/repos/BurntSushi/ripgrep/releases/latest"
   RG_LOCAL=`rg -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
-  RG_LATEST=`curl -s $RG_ENDPOINT | jq -r '.name'`
+  RG_LATEST=`curl -sL $RG_ENDPOINT | jq -r '.name'`
   success
   if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
     success_msg "Latest ripgrep is installed ( v$RG_LATEST )"
   else
     doing "Installing ripgrep v$RG_LATEST..."
-    RG_URL=`curl -s $RG_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("deb"))'`
+    RG_URL=`curl -sL $RG_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("deb"))'`
     curl -sL $RIPGREP_URL -o ripgrep.deb
     sudo dpkg -i ripgrep.deb
     rm ripgrep.deb
@@ -67,13 +67,13 @@ function install_bat {
   doing "Verifying bat version..."
   BAT_ENDPOINT="https://api.github.com/repos/sharkdp/bat/releases/latest"
   BAT_LOCAL=`bat -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
-  BAT_LATEST=`curl -s $BAT_ENDPOINT | jq -r '.name' | cut -b 2-`
+  BAT_LATEST=`curl -sL $BAT_ENDPOINT | jq -r '.name' | cut -b 2-`
   success
   if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
     success_msg "Latest bat is installed ( v$BAT_LATEST )"
   else
     doing "Installing bat v$BAT_LATEST..."
-    BAT_URL=`curl -s $BAT_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))'`
+    BAT_URL=`curl -sL $BAT_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))'`
     curl -sL $BAT_URL -o bat.deb
     sudo dpkg -i bat.deb
     rm bat.deb
@@ -85,13 +85,13 @@ function install_exa {
   doing "Verifying exa version..."
   EXA_ENDPOINT="https://api.github.com/repos/ogham/exa/releases/latest"
   EXA_LOCAL=`exa -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
-  EXA_LATEST=`curl -s $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-`
+  EXA_LATEST=`curl -sL $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-`
   success
   if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
     success_msg "Latest exa is installed ( v$EXA_LATEST )"
   else
     doing "Installing exa v$EXA_LATEST..."
-    EXA_URL=`curl -s $EXA_ENDPOINT | jq -r '.assets[].browser_download_url | select(contains("linux"))'`
+    EXA_URL=`curl -sL $EXA_ENDPOINT | jq -r '.assets[].browser_download_url | select(contains("linux"))'`
     curl -sL $EXA_URL -o exa.zip
     unzip -qq exa.zip
     sudo install exa-linux-x86_64 /usr/local/bin/exa
