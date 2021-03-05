@@ -48,7 +48,7 @@ fi
 function install_ripgrep {
   doing "Verifying ripgrep version..."
   RG_ENDPOINT="https://api.github.com/repos/BurntSushi/ripgrep/releases/latest"
-  RG_LOCAL=`rg -V 2>/dev/null | rg '[\d.]+' -o |  head -n 1`
+  RG_LOCAL=`rg -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
   RG_LATEST=`curl -s $RG_ENDPOINT | jq -r '.name'`
   success
   if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
@@ -66,7 +66,7 @@ function install_ripgrep {
 function install_bat {
   doing "Verifying bat version..."
   BAT_ENDPOINT="https://api.github.com/repos/sharkdp/bat/releases/latest"
-  BAT_LOCAL=`bat -V 2>/dev/null | rg '[\d.]+' -o |  head -n 1`
+  BAT_LOCAL=`bat -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
   BAT_LATEST=`curl -s $BAT_ENDPOINT | jq -r '.name' | cut -b 2-`
   success
   if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
@@ -84,7 +84,7 @@ function install_bat {
 function install_exa {
   doing "Verifying exa version..."
   EXA_ENDPOINT="https://api.github.com/repos/ogham/exa/releases/latest"
-  EXA_LOCAL=`exa -v 2>/dev/null | rg '[\d.]+' -o |  head -n 1`
+  EXA_LOCAL=`exa -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
   EXA_LATEST=`curl -s $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-`
   success
   if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
