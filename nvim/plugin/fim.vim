@@ -3,11 +3,6 @@ if !has('unix')
   finish
 endif
 
-if !exists('g:loaded_fzf_vim')
-  echoerr "fzf.vim must be installed"
-  finish
-endif
-
 if !executable('rg')
   echoerr "ripgrep must be installed"
   finish
