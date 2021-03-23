@@ -16,7 +16,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'mohitsinghs/fim'
 
 call plug#end()
 
