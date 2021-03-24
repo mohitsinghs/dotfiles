@@ -95,3 +95,11 @@ function repo {
         cd "$REPO_PATH"
     fi
 }
+
+# cleanup local docker mess
+function dclean {
+  # Remove all stopped containers
+  docker rm `docker ps -qa` 2>/dev/null
+  # Remove all dangling images
+  docker rmi `docker images -qa --filter="dangling=true"` 2>/dev/null
+}
