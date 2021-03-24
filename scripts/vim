@@ -48,6 +48,7 @@ coc_extensions=(
   \ coc-yaml
   \ coc-git
   \ coc-docker
+  \ coc-sql
   \ coc-eslint
   \ coc-prettier
   \ coc-snippets
