@@ -55,7 +55,6 @@ alias srestart="sudo systemctl reload"
 alias d="docker"
 alias dk="docker-compose"
 alias k="kubectl"
-alias mk="minikube"
 alias tf="terraform"
 
 # sudoed aliases, shell reloading and pretty paths
