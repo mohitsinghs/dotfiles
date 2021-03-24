@@ -45,10 +45,4 @@ curl -fsSL sh.mohitsingh.in | bash
 - **`upytd`** - update local [ytd](https://github.com/mohitsinghs/ytd)
 - **`upblock`** - update host files to block crap
 - **`upall`** - for usual updates
-
-## Contributing
-
-Feel free to help improving this repo by
-
-- creating issues for things that are broken
-- creating pull requests of things that I've missed
+- **`dclean`** - cleanup docker images
