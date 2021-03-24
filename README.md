@@ -40,9 +40,6 @@ curl -fsSL sh.mohitsingh.in | bash
 ## Commands
 
 - **`repo`** - switch between my local repositories.
-- **`ytd`** - scrap videos from youtube
-- **`ytdm`** - scrap music from youtube
-- **`upytd`** - update local [ytd](https://github.com/mohitsinghs/ytd)
 - **`upblock`** - update host files to block crap
 - **`upall`** - for usual updates
 - **`dclean`** - cleanup docker images
