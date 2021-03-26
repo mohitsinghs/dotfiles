@@ -35,7 +35,20 @@
   prune = true
 
 [core]
-    pager = diff-so-fancy | less --tabs=2 -RFX
+    pager = delta
 
 [init]
 	defaultBranch = main
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = line-numbers
+  syntax-theme=OneHalfDark
+  commit-decoration-style = yellow box ul
+  file-style = yellow ul
+  file-decoration-style = none
+  line-numbers-minus-style = red
+  line-numbers-plus-style = green
+  line-numbers-zero-style = brightblack

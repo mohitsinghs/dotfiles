@@ -11,7 +11,6 @@ sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolka
 # Add ppas
 repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
 repo_missing "neovim" && sudo add-apt-repository ppa:neovim-ppa/stable
-repo_missing "diff-so-fancy" && sudo add-apt-repository ppa:aos1/diff-so-fancy
 
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -34,7 +33,6 @@ sudo apt-get install -y\
   tmux\
   neovim\
   git\
-  diff-so-fancy\
   zsh\
   zsh-syntax-highlighting\
   apt-transport-https\
@@ -44,6 +42,10 @@ sudo apt-get install -y\
 if [[ `lsb_release -cs` == 'focal' ]]; then
   sudo apt-get install zsh-autosuggestions
 fi
+
+function latest_version {
+  repo=$1
+}
 
 function install_ripgrep {
   doing "Verifying ripgrep version..."
@@ -100,6 +102,25 @@ function install_exa {
   fi
 }
 
+function install_delta {
+  doing "Verifying delta version..."
+  DELTA_ENDPOINT="https://api.github.com/repos/dandavison/delta/releases/latest"
+  DELTA_LOCAL=`delta -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
+  DELTA_LATEST=`curl -sL $DELTA_ENDPOINT | jq -r '.tag_name'`
+  success
+  if [[ "$DELTA_LATEST" == "$DELTA_LOCAL" ]]; then
+    success_msg "Latest delta is installed ( v$DELTA_LATEST )"
+  else
+    doing "Installing delta v$DELTA_LATEST..."
+    DELTA_URL=`curl -sL $DELTA_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("amd64.deb"))'`
+    curl -sL $DELTA_URL -o delta.deb
+    sudo dpkg -i delta.deb
+    rm delta.deb
+    success
+  fi
+}
+
 install_ripgrep
 install_bat
 install_exa
+install_delta
