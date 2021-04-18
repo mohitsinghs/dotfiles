@@ -22,6 +22,23 @@ else
   success
 fi
 
+# Install minikube
+doing "Verifying minikube version"
+MK_LATEST=`curl -s https://api.github.com/repos/kubernetes/minikube/releases/latest 2>/dev/null | jq -r '.name' | cut -b 2-`
+MK_LOCAL=`minikube version -o json 2>/dev/null | jq -r '.minikubeVersion' | cut -b 2-`
+success
+if [[ "$MK_LATEST" == "$MK_LOCAL" ]]; then
+  success_msg "Latest version of minikube is already installed"
+else
+  doing "Downloading minikube v$MK_LATEST..."
+  wget -cq https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  success
+  doing "Installing minikube v$MK_LATEST..."
+  sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  rm minikube-linux-amd64
+  success
+fi
+
 # Install helm
 key_missing  "helm" && curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
 repo_missing "helm" && sudo apt-add-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
