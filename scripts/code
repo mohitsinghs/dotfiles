@@ -1,0 +1,78 @@
+#!/bin/bash
+# Setup VSCodium with extensions
+#
+# Usage: curl -fsSL sh.mohitsingh.in/code | bash
+
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+
+# install dotfiles if not found
+DOTLOC="$HOME/Projects/dotfiles"
+if [[ ! -d $DOTLOC ]]; then
+  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
+fi
+
+# user location
+CONFIG_PATH="$HOME/.config/VSCodium"
+USER_PATH="$CONFIG_PATH/User"
+
+doing "Verifying VSCodium version..."
+VSC_ENDPOINT="https://api.github.com/repos/VSCodium/vscodium/releases/latest"
+VSC_LOCAL=`codium --version 2>/dev/null | head -n 1`
+VSC_LATEST=`curl -sL $VSC_ENDPOINT | jq -r '.tag_name'`
+success
+if [[ "$VSC_LATEST" == "$VSC_LOCAL" ]]; then
+  success_msg "Latest VSCodium is installed ( v$VSC_LATEST )"
+else
+  doing "Installing VSCodium v$VSC_LATEST"
+  VSC_URL=`curl -sL $VSC_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("amd64.deb"))'`
+  curl -sL $VSC_URL -o vscodium.deb
+  sudo dpkg -i vscodium.deb
+  rm vscodium.deb
+  success
+fi
+
+# Link config
+doing "Linking VSCodium config..."
+mkdir -p "$USER_PATH"
+[[ -e "$USER_PATH/settings.json" ]] && rm "$USER_PATH/settings.json"
+[[ -e "$CONFIG_PATH/product.json" ]] && rm "$CONFIG_PATH/product.json"
+ln -s "$DOTLOC/code/settings.json" "$USER_PATH/settings.json"
+ln -s "$DOTLOC/code/product.json" "$CONFIG_PATH/product.json"
+success
+
+# VSCodium extensions
+extensions=(
+  \ alefragnani.project-manager
+  \ be5invis.vscode-custom-css
+  \ bradlc.vscode-tailwindcss
+  \ christian-kohler.npm-intellisense
+  \ christian-kohler.path-intellisense
+  \ dbaeumer.vscode-eslint
+  \ eamodio.gitlens
+  \ EditorConfig.EditorConfig
+  \ esbenp.prettier-vscode
+  \ file-icons.file-icons
+  \ firefox-devtools.vscode-firefox-debug
+  \ golang.go
+  \ hashicorp.terraform
+  \ ms-python.python
+  \ ms-toolsai.jupyter
+  \ naumovs.color-highlight
+  \ redhat.vscode-yaml
+  \ rust-lang.rust
+  \ zhuangtongfa.material-theme
+  \ )
+
+# Install vscode extensions
+doing "Installing VSCodium extensions...\\n"
+for ext in ${extensions[*]};
+do
+  printf "\\033[2m      Installing %s\\033[0m" "$ext"
+  codium --install-extension "$ext" >/dev/null
+  # clear current line
+  printf "\\r\\033[K"
+done
+# move cursor to end of previous line
+printf "\\033[1A\\033[35C"
+success
+
