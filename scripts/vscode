@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+# define variables
+DOTLOC="$HOME/Projects/dotfiles"
+
+# Include utilities
+source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+
+# Install dotfiles if not found
+if [[ ! -d $DOTLOC ]]; then
+  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
+fi
+
+if [[ $(uname) == 'Darwin' ]]; then
+  FNAME="VSCodium-darwin"
+  VS_EXTPATH="$HOME/.vscode-oss/extensions"
+  VS_USR_PATH="$HOME/Library/Application Support/VSCodium/User"
+  VS_BIN_PATH="/Applications/VSCodium.app/Contents/Resources/app/bin/code"
+else
+  fail "Your system is not supported"
+fi
+
+doing "Ensuring latest VSCode..."
+if [[ ! -d "/Applications/VSCodium.app" ]]; then
+  echo
+  # get the latest VSCode
+  wget -q --show-progress -O vscode.zip $(wget -O- -q https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep "VSCodium-darwin")
+  # move cursor to end of previous line
+  printf "\\033[2A\\033[31C\\033[J"
+  # unzip it
+  unzip vscode.zip >/dev/null
+  # copy to Applications
+  mv "VSCodium.app" "/Applications/VSCodium.app"
+  # remove downloaded file
+  rm vscode.zip
+fi
+success
+
+if [[ ! -h "/usr/local/bin/code" ]]; then
+  doing "Linking \\033[36m code \\033[0m binary..."
+  unlink "/usr/local/bin/code"
+  ln -s $VS_BIN_PATH "/usr/local/bin"
+  success
+fi
+
+# Install vscode extensions
+doing "Installing VSCode extensions...\\n"
+
+# VSCode extensions I use
+extensions=(
+  \ alefragnani.project-manager
+  \ be5invis.vscode-custom-css
+  \ christian-kohler.npm-intellisense
+  \ christian-kohler.path-intellisense
+  \ dbaeumer.vscode-eslint
+  \ eamodio.gitlens
+  \ EditorConfig.EditorConfig
+  \ esbenp.prettier-vscode
+  \ file-icons.file-icons
+  \ jpoissonnier.vscode-styled-components
+  \ ms-python.python
+  \ ms-vscode.cpptools
+  \ msjsdiag.debugger-for-chrome
+  \ naumovs.color-highlight
+  \ Prisma.vscode-graphql
+  \ wayou.vscode-todo-highlight
+  \ zhuangtongfa.Material-theme
+  \ )
+
+for ext in ${extensions[*]};
+do
+  printf "\\033[2m      Installing %s\\033[0m" "$ext"
+  code --install-extension "$ext" >/dev/null
+  # clear current line
+  printf "\\r\\033[K"
+done
+# move cursor to end of previous line
+printf "\\033[1A\\033[35C"
+success
+
+# Link settings
+doing "Linking VSCode settings..."
+if [[ -a "$VS_USR_PATH/settings.json" ]]; then
+  rm "$VS_USR_PATH/settings.json"
+fi
+ln -s "$HOME/Projects/dotfiles/settings.json" "$VS_USR_PATH/settings.json"
+success
