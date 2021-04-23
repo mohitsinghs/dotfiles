@@ -43,10 +43,6 @@ if [[ `lsb_release -cs` == 'focal' ]]; then
   sudo apt-get install zsh-autosuggestions
 fi
 
-function latest_version {
-  repo=$1
-}
-
 function install_ripgrep {
   doing "Verifying ripgrep version..."
   RG_ENDPOINT="https://api.github.com/repos/BurntSushi/ripgrep/releases/latest"
