@@ -4,6 +4,9 @@
 
 [core]
   excludesfile = ~/.gitignore
+  pager = delta
+  editor = nvim
+
 
 [alias]
   a = add
@@ -33,9 +36,6 @@
 
 [fetch]
   prune = true
-
-[core]
-    pager = delta
 
 [init]
 	defaultBranch = main
