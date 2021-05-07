@@ -30,7 +30,7 @@ curl -fsSL sh.mohitsingh.in | bash
 - [`go`][8] - install latest golang.
 - [`node`][9] - install node 14.x along with yarn.
 - [`highload`][10] - tweak system for high load.
-- [`kube`][11] - install kubectl, minikube, terraform and helm
+- [`kube`][11] - install kube\*, terraform and helm
 
 [1]: scripts/install
 [2]: scripts/essential
