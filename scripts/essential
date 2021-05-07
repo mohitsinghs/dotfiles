@@ -10,7 +10,7 @@ sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolka
 
 # Add ppas
 repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
-repo_missing "neovim" && sudo add-apt-repository ppa:neovim-ppa/stable
+repo_missing "neovim" && sudo add-apt-repository ppa:neovim-ppa/unstable
 
 sudo apt-get update
 sudo apt-get upgrade -y
