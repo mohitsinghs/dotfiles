@@ -25,7 +25,7 @@ curl -fsSL sh.mohitsingh.in | bash
 - [`shell`][3] - setup zsh with a nice looking useful prompt.
 - [`vim`][4] - setup neovim with coc, fzf and other useful plugins.
 - [`code`][5] - setup vscodium with extensions.
-- [`docker`][6] - install docker and docker-compose.
+- [`docker`][6] - install docker.
 - [`databases`][7] - install postgres, mysql etc.
 - [`go`][8] - install latest golang.
 - [`node`][9] - install node 14.x along with yarn.

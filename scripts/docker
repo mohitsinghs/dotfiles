@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup docker and docker-compose
+# Setup docker
 #
 # Usage: curl -fsSL sh.mohitsingh.in/docker | bash
 
@@ -12,8 +12,3 @@ repo_missing "docker" && sudo add-apt-repository "deb [arch=amd64] https://downl
 sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 sudo usermod -aG docker `whoami`
-
-# Install docker-compose
-COMPOSE_URL=`curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.assets[].browser_download_url | select(endswith("Linux-x86_64"))'`
-sudo curl -L $COMPOSE_URL -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose

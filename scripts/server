@@ -4,7 +4,7 @@
 #  - modern and minimal shell
 #  - better code editor
 #  - minimal tmux
-#  - docker and docker-compose
+#  - docker
 #  - other useful tools (rg, exa, bat, httpie, jq, aria2, diff-so-fancy etc)
 #
 # Usage: curl -fsSL sh.mohitsingh.in/server | bash
