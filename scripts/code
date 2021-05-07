@@ -59,12 +59,18 @@ extensions=(
   \ hashicorp.terraform
   \ matklad.rust-analyzer
   \ ms-azuretools.vscode-docker
+  \ ms-kubernetes-tools.kind-vscode
+  \ ms-kubernetes-tools.vscode-kubernetes-tools
   \ ms-python.python
   \ ms-toolsai.jupyter
+  \ mtxr.sqltools
+  \ mtxr.sqltools-driver-pg
   \ naumovs.color-highlight
+  \ pflannery.vscode-versionlens
   \ redhat.vscode-yaml
-  \ XadillaX.viml
+  \ usernamehw.errorlens
   \ vadimcn.vscode-lldb
+  \ XadillaX.viml
   \ zhuangtongfa.material-theme
   \ )
 
