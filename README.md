@@ -13,11 +13,6 @@ To install everything
 curl -fsSL sh.mohitsingh.in | bash
 ```
 
-## Screenshots
-
-![vscode](https://user-images.githubusercontent.com/4941333/115149391-7fc87100-a081-11eb-9efa-dc9026190fa7.png)
-![vim+tmux](https://user-images.githubusercontent.com/4941333/115153605-8b716300-a094-11eb-82ff-a9090f887887.png)
-
 ## Scripts
 
 - [`install`][1] - install everything.

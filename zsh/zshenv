@@ -53,7 +53,6 @@ alias srestart="sudo systemctl reload"
 
 # aliases for cloud tools
 alias d="docker"
-alias dk="docker-compose"
 alias k="kubectl"
 alias tf="terraform"
 
@@ -61,15 +60,6 @@ alias tf="terraform"
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
 alias path="echo -e ${PATH//:/\\\n}"
-
-# Update ytd
-function upytd {
-  YTDHOME="$HOME/Projects/ytd"
-  cd $YTDHOME
-  ( "$YTDHOME/builder.sh" )
-  sudo mv "$YTDHOME/ytd" /usr/local/bin
-  cd -
-}
 
 # Update blocklist
 function upblock {
