@@ -42,6 +42,7 @@ success
 
 # VSCodium extensions
 extensions=(
+  \ aaron-bond.better-comments
   \ alefragnani.project-manager
   \ be5invis.vscode-custom-css
   \ bradlc.vscode-tailwindcss
@@ -57,17 +58,26 @@ extensions=(
   \ GitHub.github-vscode-theme
   \ golang.go
   \ hashicorp.terraform
+  \ inercia.vscode-k3d
   \ matklad.rust-analyzer
   \ ms-azuretools.vscode-docker
-  \ ms-kubernetes-tools.kind-vscode
   \ ms-kubernetes-tools.vscode-kubernetes-tools
   \ ms-python.python
+  \ ms-python.vscode-pylance
   \ ms-toolsai.jupyter
+  \ ms-vscode-remote.remote-ssh
+  \ ms-vscode-remote.remote-ssh-edit
+  \ ms-vscode.cmake-tools
+  \ ms-vscode.cpptools
   \ mtxr.sqltools
   \ mtxr.sqltools-driver-pg
   \ naumovs.color-highlight
   \ pflannery.vscode-versionlens
+  \ redhat.vscode-commons
   \ redhat.vscode-yaml
+  \ silvenon.mdx
+  \ streetsidesoftware.code-spell-checker
+  \ twxs.cmake
   \ usernamehw.errorlens
   \ vadimcn.vscode-lldb
   \ XadillaX.viml
