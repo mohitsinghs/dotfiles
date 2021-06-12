@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup setup cloud tools on local
+# Setup setup terraform and k3d on local
 #
 # Usage: curl -fsSL sh.mohitsingh.in/cloud | bash
 

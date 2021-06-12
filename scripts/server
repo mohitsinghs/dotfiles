@@ -48,6 +48,7 @@ curl -fsSL "$DOTFILES_REPO/zsh/zshrc" | rg '(CARGO|GO|go|rust)' -v | uniq -u > "
 curl -fsSL "$DOTFILES_REPO/zsh/zshenv" | rg -U '(#.*\n.*(repo|upblock|upall|upytd)\s+\{[^}]*}|ytd)' -v | uniq -u > "/home/$NAME/.zshenv"
 sudo -u $NAME mkdir -p "/home/$NAME/.config/nvim"
 curl -fsSL "$DOTFILES_REPO/nvim/init.vim" | rg -U '(Coc|coc|python)' -v | uniq -u > "/home/$NAME/.config/nvim/init.vim"
+curl -fsSL "$DOTFILES_REPO/nvim/plugin/keymaps.vim | uniq -u >> "/home/$NAME/.config/nvim/init.vim"
 
 # Fix ownership
 chown -R $NAME:$NAME /home/$NAME/{.zshrc,.zshenv,.tmux.conf,.config,.zsh}
