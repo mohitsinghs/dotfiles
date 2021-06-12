@@ -41,6 +41,9 @@ alias ya="yarn add"
 alias yd="yarn add --dev"
 alias yu="yarn upgrade-interactive --latest"
 
+# npm global alias
+alias npmg="sudo npm -g"
+
 # use apt-fast for apt
 alias aptf="apt-fast"
 
