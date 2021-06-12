@@ -13,7 +13,8 @@
   ap = add --patch
   s = status
   ss = status -s
-  l = log --oneline
+  l = log
+  lg = log --graph --all
   d = diff
   ds = diff --staged
   r = restore
@@ -52,3 +53,9 @@
   line-numbers-minus-style = red
   line-numbers-plus-style = green
   line-numbers-zero-style = brightblack
+
+[format]
+	pretty = %C(yellow)%h%Creset %C(auto)%d%Creset %s %C(green)%ar%Creset %C(cyan)%aN%Creset
+
+[log]
+	abbrevCommit = true
