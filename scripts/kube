@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install/Update kubectl, minikube, terraform and helm
+# Install/Update kubectl and helm
 #
 # Usage : curl -fsSL sh.mohitsingh.in/kube | bash
 
@@ -15,10 +15,3 @@ key_missing  "helm" && curl https://baltocdn.com/helm/signing.asc | sudo apt-key
 repo_missing "helm" && sudo apt-add-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
 sudo apt-get update -y
 sudo apt-get install helm
-
-# Install terraform and terraform-ls
-key_missing "hashicorp" && curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-repo_missing "hashicorp" && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt-get update -y
-sudo apt-get install -y terraform terraform-ls
-
