@@ -7,39 +7,132 @@
 
 ## Install
 
-To install everything
+To install most of the things
 
 ```sh
 curl -fsSL sh.mohitsingh.in | bash
 ```
 
-## Scripts
+## Overview
 
-- [`install`][1] - install everything.
-- [`essential`][2] - install tools that I use frequently.
-- [`shell`][3] - setup zsh with a nice looking useful prompt.
-- [`vim`][4] - setup neovim with coc, fzf and other useful plugins.
-- [`code`][5] - setup vscodium with extensions.
-- [`docker`][6] - install docker.
-- [`databases`][7] - install postgres, mysql etc.
-- [`go`][8] - install latest golang.
-- [`node`][9] - install node 14.x along with yarn.
-- [`highload`][10] - tweak system for high load.
-- [`kube`][11] - install kube\*, terraform and helm
+### Basics
 
-[1]: scripts/install
-[2]: scripts/essential
-[3]: scripts/shell
-[4]: scripts/vim
-[5]: scripts/code
-[6]: scripts/docker
-[7]: scripts/databases
-[8]: scripts/go
-[9]: scripts/node
-[10]: scripts/highload
-[11]: scripts/kube
+- zsh with pure prompt, zsh-syntax-highlighting, zsh-autosuggestions instead of bash
+- jq for json processing
+- tmux for terminal multiplexing
+- htop for monitoring system resources
+- unstable neovim replaces vim
+- aria2 replaces wget
+- httpie replaces curl
+- ripgrep replaces grep
+- bat replaces cat
+- exa replaces ls
+- delta for diff highlighting
+- latest git ppa
+- some archiving and compression tools
+- python3
+
+These can be installed by running
+
+```bash
+curl -fsSL sh.mohitsingh.in/essential | bash
+```
+
+For shell related configs
+
+```bash
+curl -fsSL sh.mohitsingh.in/shell | bash
+```
+
+and, for neovim configs
+
+```bash
+curl -fsSL sh.mohitsingh.in/vim | bash
+```
+
+### VSCodium
+
+Although, my primary editor is neovim, I switch between that and VSCodium. For installing VSCodium along with extensions and configs I use
+
+```bash
+curl -fsSL sh.mohitsingh.in/code | bash
+```
+
+### Languages
+
+For installing node 16.x
+
+```bash
+curl -fsSL sh.mohitsingh.in/node | bash
+```
+
+To install or upgrade golang
+
+```bash
+curl -fsSL sh.mohitsingh.in/go | bash
+```
+
+For rust I use [rustup](https://rustup.rs/)
+
+### Databases
+
+PostgreSQL is my favorite database, that along with MySQL can be installed using
+
+```bash
+curl -fsSL sh.mohitsingh.in/databases | bash
+```
+
+Normally, I prefer docker for using databases.
+
+### Cloud
+
+Docker can installed using
+
+```bash
+curl -fsSL sh.mohitsingh.in/docker | bash
+```
+
+For kubernetes family (kubectl, kubelet and kubeadm) and helm
+
+```
+curl -fsSL sh.mohitsingh.in/kube | bash
+```
+
+I provision my infra with terraform and use k3d for local kubernetes cluster both of which can be installed using
+
+```bash
+curl -fsSL sh.mohitsingh.in/cloud | bash
+```
+
+### More on cloud
+
+I've a script for initial setup of my remote machines which handles creating a user with my name, installing docker and setting up essential tools on server along with my shell.
+
+```bash
+curl -fsSL sh.mohitsingh.in/server | bash
+```
+
+For modifying system limits of remote machines I use
+
+```bash
+curl -fsSL sh.mohitsingh.in/highload | bash
+```
+
+### Finally
+
+Some useful utilities
+
+```bash
+curl -fsSL sh.mohitsingh.in/extra | bash
+```
+
+### Scripts
+
+All the scripts can be found in [/scripts](/scripts) directory.
 
 ## Commands
+
+These are some useful commands/functions
 
 - **`repo`** - switch between my local repositories.
 - **`upblock`** - update host files to block crap
