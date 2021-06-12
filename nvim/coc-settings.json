@@ -5,7 +5,6 @@
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "~/.config/nvim/py3env/bin/black",
   "python.linting.flake8Path": "~/.config/nvim/py3env/bin/flake8",
-  "python.jediEnabled": false,
   "eslint.probe": ["javascript", "javascriptreact", "html", "markdown"],
   "prettier.semi": false,
   "prettier.singleQuote": true,
@@ -34,7 +33,6 @@
   },
   "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.procMacro.enable": true,
-  "sql.database": "postgresql",
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",

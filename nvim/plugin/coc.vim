@@ -8,7 +8,7 @@ nn <silent> <space>l  :<C-u>CocList<CR>
 let g:coc_global_extensions = [
   \ 'coc-go',
   \ 'coc-rust-analyzer',
-  \ 'coc-python',
+  \ 'coc-pyright',
   \ 'coc-tsserver',
   \ 'coc-vimlsp',
   \ 'coc-html',
