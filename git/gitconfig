@@ -15,6 +15,7 @@
   ss = status -s
   l = log
   lg = log --graph --all
+  sl = shortlog --summary --all --email
   d = diff
   ds = diff --staged
   r = restore
