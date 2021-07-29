@@ -47,13 +47,6 @@ alias npmg="sudo npm -g"
 # use apt-fast for apt
 alias aptf="apt-fast"
 
-# systemd services
-alias sstart="sudo systemctl start"
-alias sstop="sudo systemctl stop"
-alias sstatus="sudo systemctl status"
-alias sreload="sudo systemctl reload"
-alias srestart="sudo systemctl reload"
-
 # aliases for cloud tools
 alias d="docker"
 alias k="kubectl"
@@ -67,7 +60,7 @@ alias path="echo -e ${PATH//:/\\\n}"
 # Update blocklist
 function upblock {
   echo -n "Updating host files..."
-  curl -fsSL "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts" | sudo tee /etc/hosts > /dev/null
+  curl -fsSL "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts" | sudo tee /etc/hosts >/dev/null
   echo "Done."
 }
 
@@ -81,18 +74,18 @@ function upall {
 
 # for moving quickly into my projects
 function repo {
-    REPO_PATH=`find "$HOME/Projects" -mindepth 1 -maxdepth 2 -type d -name "$1" | head -n 1`
-    if [[ -z $1 ]]; then
-        cd "$REPO_BASE"
-    else
-        cd "$REPO_PATH"
-    fi
+  REPO_PATH=$(find "$HOME/Projects" -mindepth 1 -maxdepth 2 -type d -name "$1" | head -n 1)
+  if [[ -z $1 ]]; then
+    cd "$REPO_BASE"
+  else
+    cd "$REPO_PATH"
+  fi
 }
 
 # cleanup local docker mess
 function dclean {
   # Remove all stopped containers
-  docker rm `docker ps -qa` 2>/dev/null
+  docker rm $(docker ps -qa) 2>/dev/null
   # Remove all dangling images
-  docker rmi `docker images -qa --filter="dangling=true"` 2>/dev/null
+  docker rmi $(docker images -qa --filter="dangling=true") 2>/dev/null
 }
