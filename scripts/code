@@ -3,12 +3,12 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/code | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # install dotfiles if not found
 DOTLOC="$HOME/Projects/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
-  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
+  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
 
 # user location
@@ -17,14 +17,14 @@ USER_PATH="$CONFIG_PATH/User"
 
 doing "Verifying VSCodium version..."
 VSC_ENDPOINT="https://api.github.com/repos/VSCodium/vscodium/releases/latest"
-VSC_LOCAL=`codium --version 2>/dev/null | head -n 1`
-VSC_LATEST=`curl -sL $VSC_ENDPOINT | jq -r '.tag_name'`
+VSC_LOCAL=$(codium --version 2>/dev/null | head -n 1)
+VSC_LATEST=$(curl -sL $VSC_ENDPOINT | jq -r '.tag_name')
 success
 if [[ "$VSC_LATEST" == "$VSC_LOCAL" ]]; then
   success_msg "Latest VSCodium is installed ( v$VSC_LATEST )"
 else
   doing "Installing VSCodium v$VSC_LATEST"
-  VSC_URL=`curl -sL $VSC_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("amd64.deb"))'`
+  VSC_URL=$(curl -sL $VSC_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("amd64.deb"))')
   curl -sL $VSC_URL -o vscodium.deb
   sudo dpkg -i vscodium.deb
   rm vscodium.deb
@@ -42,52 +42,53 @@ success
 
 # VSCodium extensions
 extensions=(
-  \ aaron-bond.better-comments
-  \ alefragnani.project-manager
-  \ be5invis.vscode-custom-css
-  \ bradlc.vscode-tailwindcss
-  \ bungcip.better-toml
-  \ christian-kohler.npm-intellisense
-  \ christian-kohler.path-intellisense
-  \ dbaeumer.vscode-eslint
-  \ eamodio.gitlens
-  \ EditorConfig.EditorConfig
-  \ esbenp.prettier-vscode
-  \ file-icons.file-icons
-  \ firefox-devtools.vscode-firefox-debug
-  \ GitHub.github-vscode-theme
-  \ golang.go
-  \ hashicorp.terraform
-  \ inercia.vscode-k3d
-  \ matklad.rust-analyzer
-  \ ms-azuretools.vscode-docker
-  \ ms-kubernetes-tools.vscode-kubernetes-tools
-  \ ms-python.python
-  \ ms-python.vscode-pylance
-  \ ms-toolsai.jupyter
-  \ ms-vscode-remote.remote-ssh
-  \ ms-vscode-remote.remote-ssh-edit
-  \ ms-vscode.cmake-tools
-  \ ms-vscode.cpptools
-  \ mtxr.sqltools
-  \ mtxr.sqltools-driver-pg
-  \ naumovs.color-highlight
-  \ pflannery.vscode-versionlens
-  \ redhat.vscode-commons
-  \ redhat.vscode-yaml
-  \ silvenon.mdx
-  \ streetsidesoftware.code-spell-checker
-  \ twxs.cmake
-  \ usernamehw.errorlens
-  \ vadimcn.vscode-lldb
-  \ XadillaX.viml
-  \ zhuangtongfa.material-theme
+  \  alefragnani.project-manager
+  \  be5invis.vscode-custom-css
+  \  bradlc.vscode-tailwindcss
+  \  bradymholt.pgformatter
+  \  bungcip.better-toml
+  \  christian-kohler.npm-intellisense
+  \  christian-kohler.path-intellisense
+  \  csstools.postcss
+  \  davidlday.languagetool-linter
+  \  dbaeumer.vscode-eslint
+  \  eamodio.gitlens
+  \  EditorConfig.EditorConfig
+  \  esbenp.prettier-vscode
+  \  file-icons.file-icons
+  \  firefox-devtools.vscode-firefox-debug
+  \  foxundermoon.shell-format
+  \  GitHub.github-vscode-theme
+  \  golang.go
+  \  hashicorp.terraform
+  \  heybourn.headwind
+  \  inercia.vscode-k3d
+  \  IronGeek.vscode-env
+  \  matklad.rust-analyzer
+  \  mikestead.dotenv
+  \  ms-azuretools.vscode-docker
+  \  ms-kubernetes-tools.vscode-kubernetes-tools
+  \  ms-python.python
+  \  ms-python.vscode-pylance
+  \  ms-toolsai.jupyter
+  \  mtxr.sqltools
+  \  mtxr.sqltools-driver-pg
+  \  naumovs.color-highlight
+  \  pflannery.vscode-versionlens
+  \  redhat.vscode-commons
+  \  redhat.vscode-yaml
+  \  sdras.night-owl
+  \  streetsidesoftware.code-spell-checker
+  \  usernamehw.errorlens
+  \  vadimcn.vscode-lldb
+  \  wix.vscode-import-cost
+  \  XadillaX.viml
+  \  zhuangtongfa.material-theme
   \ )
 
 # Install vscode extensions
 doing "Installing VSCodium extensions...\\n"
-for ext in ${extensions[*]};
-do
+for ext in ${extensions[*]}; do
   printf "\\033[2m      Installing %s\\033[0m" "$ext"
   codium --install-extension "$ext" >/dev/null
   # clear current line
@@ -96,4 +97,3 @@ done
 # move cursor to end of previous line
 printf "\\033[1A\\033[35C"
 success
-
