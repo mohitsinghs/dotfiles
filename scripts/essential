@@ -3,59 +3,66 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/essential | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Set timezone to +5:30
 sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
 
-# Add ppas
-repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
-repo_missing "neovim" && sudo add-apt-repository ppa:neovim-ppa/unstable
-
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get remove -y git
 
-sudo apt-get install -y\
-  aria2\
-  curl\
-  httpie\
-  jq\
-  htop\
-  p7zip-full\
-  p7zip-rar\
-  zip\
-  unzip\
-  tar\
-  python3\
-  python3-pip\
-  python3-venv\
-  tmux\
-  neovim\
-  git\
-  zsh\
-  zsh-syntax-highlighting\
-  zstd\
-  apt-transport-https\
-  software-properties-common
+sudo apt-get install -y aria2 curl httpie jq htop p7zip-full p7zip-rar zip unzip tar python3 python3-pip python3-venv tmux zsh zsh-syntax-highlighting zstd apt-transport-https software-properties-common
 
 # focal only packages
-if [[ `lsb_release -cs` == 'focal' ]]; then
+if [[ $(lsb_release -cs) == 'focal' ]]; then
   sudo apt-get install zsh-autosuggestions
 fi
+
+function install_git {
+  doing "Verifying git version..."
+  GIT_LOCAL=$(git --version | cut -d " " -f 3-)
+  GIT_LATEST=$(curl -sL https://git-scm.com | rg --pcre2 -U '(?<=version">\n)(\s+)' | tr -d " ")
+  success
+  if [[ "$GIT_LATEST" == "$GIT_LOCAL" ]]; then
+    success_msg "Latest git is installed ( v$GIT_LATEST )"
+  else
+    repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
+    sudo apt-get remove -y git
+    sudo apt-get install git
+  fi
+}
+
+function install_neovim {
+  doing "Verifying neovim version..."
+  NVIM_ENDPOINT="https://api.github.com/repos/neovim/neovim/releases/latest"
+  NVIM_LOCAL=$(nvim -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  NVIM_LATEST=$(curl -sL $NVIM_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+  success
+  if [[ "$NVIM_LATEST" == "$NVIM_LOCAL" ]]; then
+    success_msg "Latest neovim is installed ( v$NVIM_LATEST )"
+  else
+    doing "Installing neovim v$NVIM_LATEST..."
+    NVIM_URL=$(curl -sL $NVIM_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("appimage"))')
+    curl -sL $NVIM_URL -o nvim.appimage
+    chmod u+x nvim.appimage
+    sudo install nvim.appimage /usr/local/bin/nvim
+    rm neovim.appimage
+    success
+  fi
+}
 
 function install_ripgrep {
   doing "Verifying ripgrep version..."
   RG_ENDPOINT="https://api.github.com/repos/BurntSushi/ripgrep/releases/latest"
-  RG_LOCAL=`rg -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
-  RG_LATEST=`curl -sL $RG_ENDPOINT | jq -r '.name'`
+  RG_LOCAL=$(rg -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  RG_LATEST=$(curl -sL $RG_ENDPOINT | jq -r '.name')
   success
   if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
     success_msg "Latest ripgrep is installed ( v$RG_LATEST )"
   else
     doing "Installing ripgrep v$RG_LATEST..."
-    RG_URL=`curl -sL $RG_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("deb"))'`
-    curl -sL $RG_URL -o ripgrep.deb
+    RG_URL=$(curl -sL $RG_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("deb"))')
+    curl -sL $RG_URL -o ripgrep.deb >/dev/null
     sudo dpkg -i ripgrep.deb
     rm ripgrep.deb
     success
@@ -65,16 +72,16 @@ function install_ripgrep {
 function install_bat {
   doing "Verifying bat version..."
   BAT_ENDPOINT="https://api.github.com/repos/sharkdp/bat/releases/latest"
-  BAT_LOCAL=`bat -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
-  BAT_LATEST=`curl -sL $BAT_ENDPOINT | jq -r '.name' | cut -b 2-`
+  BAT_LOCAL=$(bat -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  BAT_LATEST=$(curl -sL $BAT_ENDPOINT | jq -r '.name' | cut -b 2-)
   success
   if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
     success_msg "Latest bat is installed ( v$BAT_LATEST )"
   else
     doing "Installing bat v$BAT_LATEST..."
-    BAT_URL=`curl -sL $BAT_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))'`
+    BAT_URL=$(curl -sL $BAT_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
     curl -sL $BAT_URL -o bat.deb
-    sudo dpkg -i bat.deb
+    sudo dpkg -i bat.deb >/dev/null
     rm bat.deb
     success
   fi
@@ -83,18 +90,24 @@ function install_bat {
 function install_exa {
   doing "Verifying exa version..."
   EXA_ENDPOINT="https://api.github.com/repos/ogham/exa/releases/latest"
-  EXA_LOCAL=`exa -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
-  EXA_LATEST=`curl -sL $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-`
+  EXA_LOCAL=$(exa -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  EXA_LATEST=$(curl -sL $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
   success
   if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
     success_msg "Latest exa is installed ( v$EXA_LATEST )"
   else
     doing "Installing exa v$EXA_LATEST..."
-    EXA_URL=`curl -sL $EXA_ENDPOINT | jq -r '.assets[].browser_download_url | select(contains("linux"))'`
+    EXA_URL=$(curl -sL $EXA_ENDPOINT | jq -r '.assets[].browser_download_url | select((contains("exa-linux-x86_64")) and (contains("musl") | not))')
     curl -sL $EXA_URL -o exa.zip
-    unzip -qq exa.zip
-    sudo install exa-linux-x86_64 /usr/local/bin/exa
-    rm exa.zip exa-linux-x86_64
+    unzip -qq exa.zip -d exa
+    (
+      cd exa
+      sudo install bin/exa /usr/local/bin/exa
+      manloc="$(manpath | cut -d ":" -f1)/man1"
+      cp man/* "$manloc"
+      cp completions/exa.zsh "$HOME/.zsh"
+    )
+    rm -rf exa exa.zip
     success
   fi
 }
@@ -102,21 +115,23 @@ function install_exa {
 function install_delta {
   doing "Verifying delta version..."
   DELTA_ENDPOINT="https://api.github.com/repos/dandavison/delta/releases/latest"
-  DELTA_LOCAL=`delta -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null |  head -n 1`
-  DELTA_LATEST=`curl -sL $DELTA_ENDPOINT | jq -r '.tag_name'`
+  DELTA_LOCAL=$(delta -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  DELTA_LATEST=$(curl -sL $DELTA_ENDPOINT | jq -r '.tag_name')
   success
   if [[ "$DELTA_LATEST" == "$DELTA_LOCAL" ]]; then
     success_msg "Latest delta is installed ( v$DELTA_LATEST )"
   else
     doing "Installing delta v$DELTA_LATEST..."
-    DELTA_URL=`curl -sL $DELTA_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("amd64.deb"))'`
+    DELTA_URL=$(curl -sL $DELTA_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
     curl -sL $DELTA_URL -o delta.deb
-    sudo dpkg -i delta.deb
+    sudo dpkg -i delta.deb >/dev/null
     rm delta.deb
     success
   fi
 }
 
+install_git
+install_neovim
 install_ripgrep
 install_bat
 install_exa
