@@ -3,7 +3,7 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/docker | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Install docker
 sudo apt-get update -y
@@ -11,4 +11,4 @@ key_missing "docker" && curl -fsSL https://download.docker.com/linux/ubuntu/gpg 
 repo_missing "docker" && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-sudo usermod -aG docker `whoami`
+sudo usermod -aG docker $(whoami)

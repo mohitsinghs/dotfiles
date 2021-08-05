@@ -10,9 +10,9 @@
 # Usage: curl -fsSL sh.mohitsingh.in/server | bash
 #
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/essential`"
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/docker`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/essential)"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/docker)"
 
 # Create new user
 NAME="mohit"
@@ -21,7 +21,7 @@ if id "$NAME" &>/dev/null; then
 else
   adduser --disabled-password --gecos '' $NAME
   usermod -aG sudo,docker $NAME
-  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
   cp -r .ssh /home/$NAME
   chown -R $NAME:$NAME /home/$NAME/.ssh
 fi
@@ -44,11 +44,11 @@ chmod +x $FUNPATH/async
 
 # Install configs
 curl "$DOTFILES_REPO/tmux/tmux.conf" -fsSLo "/home/$NAME/.tmux.conf"
-curl -fsSL "$DOTFILES_REPO/zsh/zshrc" | rg '(CARGO|GO|go|rust)' -v | uniq -u > "/home/$NAME/.zshrc"
-curl -fsSL "$DOTFILES_REPO/zsh/zshenv" | rg -U '(#.*\n.*(repo|upblock|upall|upytd)\s+\{[^}]*}|ytd)' -v | uniq -u > "/home/$NAME/.zshenv"
+curl -fsSL "$DOTFILES_REPO/zsh/zshrc" | rg '(CARGO|GO|go|rust)' -v | uniq -u >"/home/$NAME/.zshrc"
+curl -fsSL "$DOTFILES_REPO/zsh/zshenv" | rg -U '(#.*\n.*(repo|upblock|upall|upytd)\s+\{[^}]*}|ytd)' -v | uniq -u >"/home/$NAME/.zshenv"
 sudo -u $NAME mkdir -p "/home/$NAME/.config/nvim"
-curl -fsSL "$DOTFILES_REPO/nvim/init.vim" | rg -U '(Coc|coc|python)' -v | uniq -u > "/home/$NAME/.config/nvim/init.vim"
-curl -fsSL "$DOTFILES_REPO/nvim/plugin/keymaps.vim | uniq -u >> "/home/$NAME/.config/nvim/init.vim"
+curl -fsSL "$DOTFILES_REPO/nvim/init.vim" | rg -U '(Coc|coc|python)' -v | uniq -u >"/home/$NAME/.config/nvim/init.vim"
+curl -fsSL "$DOTFILES_REPO/nvim/plugin/keymaps.vim | uniq -u" >>"/home/$NAME/.config/nvim/init.vim"
 
 # Fix ownership
 chown -R $NAME:$NAME /home/$NAME/{.zshrc,.zshenv,.tmux.conf,.config,.zsh}

@@ -3,7 +3,7 @@
 
 DOTLOC="$HOME/Projects/dotfiles"
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 doing "Ensuring dotfiles..."
 if [[ ! -d $DOTLOC ]]; then

@@ -5,20 +5,19 @@
 #
 # Make sure that neovim and nodejs are available
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # install dotfiles if not found
 DOTLOC="$HOME/Projects/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
-  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
+  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
 
 # setup nvim config
 doing "Linking nvim config..."
 mkdir -p "$HOME/.config/nvim"
-for file in $DOTLOC/nvim/*
-do
-  target="$HOME/.config/nvim/`basename $file`"
+for file in $DOTLOC/nvim/*; do
+  target="$HOME/.config/nvim/$(basename $file)"
   [[ -e $target ]] && rm $target &>/dev/null
   ln -s $file $target
 done
@@ -27,7 +26,6 @@ success
 # setup python3 provider for neovim in a venv
 doing "Setting up python provider..."
 cd ~/.config/nvim
-( python3 -m venv py3env && source ./py3env/bin/activate && ./py3env/bin/pip install pynvim flake8 black &>/dev/null )
+(python3 -m venv py3env && source ./py3env/bin/activate && ./py3env/bin/pip install pynvim flake8 black &>/dev/null)
 cd -
 success
-

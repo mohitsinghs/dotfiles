@@ -6,12 +6,12 @@
 # Make sure that following packages are already installed
 # zsh, zsh-syntax-highlighting, zsh-autosuggestons
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Install dotfiles if not found
 DOTLOC="$HOME/Projects/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
-  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
+  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
 
 # define variables
@@ -46,9 +46,8 @@ success
 
 # link required files
 doing "Linking zsh + git + tmux configs..."
-for file in $DOTLOC/{zsh,git,tmux}/*
-do
-  [[ -e "$HOME/.`basename $file`" ]] && rm "$HOME/.`basename $file`" &>/dev/null
-  ln -s $file "$HOME/.`basename $file`"
+for file in $DOTLOC/{zsh,git,tmux}/*; do
+  [[ -e "$HOME/.$(basename $file)" ]] && rm "$HOME/.$(basename $file)" &>/dev/null
+  ln -s $file "$HOME/.$(basename $file)"
 done
 success

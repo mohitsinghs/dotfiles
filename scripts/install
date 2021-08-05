@@ -3,15 +3,14 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 DOTLOC="$HOME/Projects/dotfiles"
 # Grab dotfiles if not found
 if [[ ! -d $DOTLOC ]]; then
-  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/repo`"
+  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
 
-for step in essential shell vim docker databases go node
-do
-  source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/$step`"
+for step in essential shell vim docker databases go node; do
+  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/$step)"
 done

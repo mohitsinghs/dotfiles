@@ -3,7 +3,7 @@
 #
 # Usage : curl -fsSL sh.mohitsingh.in/kube | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 key_missing "google" && curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 repo_missing "kubernetes" && sudo apt-add-repository "deb [arch=amd64] https://apt.kubernetes.io/ kubernetes-xenial main"
@@ -11,7 +11,7 @@ sudo apt-get update -y
 sudo apt-get install kubectl kubeadm kubelet
 
 # Install helm
-key_missing  "helm" && curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+key_missing "helm" && curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
 repo_missing "helm" && sudo apt-add-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
 sudo apt-get update -y
 sudo apt-get install helm

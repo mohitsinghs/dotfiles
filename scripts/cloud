@@ -3,7 +3,7 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/cloud | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Install terraform and terraform-ls
 key_missing "hashicorp" && curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
@@ -14,17 +14,16 @@ sudo apt-get install -y terraform terraform-ls
 # Install k3d
 doing "Verifying k3d version..."
 K3D_ENDPOINT="https://api.github.com/repos/rancher/k3d/releases/latest"
-K3D_LOCAL=`k3d version 2>/dev/null | head -n 1 | rg '[\d.]+{3}' -o 2>/dev/null`
-K3D_LATEST=`curl -sL $K3D_ENDPOINT | jq -r '.tag_name' | cut -b 2-`
+K3D_LOCAL=$(k3d version 2>/dev/null | head -n 1 | rg '[\d.]+{3}' -o 2>/dev/null)
+K3D_LATEST=$(curl -sL $K3D_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
 success
 if [[ "$K3D_LATEST" == "$K3D_LOCAL" ]]; then
   success_msg "Latest k3d is installed ( v$K3D_LATEST )"
 else
   doing "Installing k3d v$K3D_LATEST..."
-  K3D_URL=`curl -sL $K3D_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("linux-amd64"))'`
+  K3D_URL=$(curl -sL $K3D_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("linux-amd64"))')
   curl -sL $K3D_URL -o k3d
   sudo install k3d /usr/local/bin/k3d
   rm k3d
   success
 fi
-

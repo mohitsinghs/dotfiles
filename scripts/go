@@ -3,11 +3,11 @@
 #
 # Usage : curl -fsSL sh.mohitsingh.in/go | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 doing "Verifying version..."
-GO_LATEST=`curl -s https://golang.org/dl/ | grep -oP '\/dl\/go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2`
-GO_LOCAL=`go version 2>/dev/null | cut -d ' ' -f 3 | cut -b 3-`
+GO_LATEST=$(curl -s https://golang.org/dl/ | grep -oP '\/dl\/go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2)
+GO_LOCAL=$(go version 2>/dev/null | cut -d ' ' -f 3 | cut -b 3-)
 success
 if [[ "$GO_LATEST" == "$GO_LOCAL" ]]; then
   success_msg "Latest version of Go is already installed"
@@ -23,4 +23,3 @@ sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$GO_LATEST.linux-amd64.tar.gz"
 sudo rm "go$GO_LATEST.linux-amd64.tar.gz"
 success
-

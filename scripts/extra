@@ -3,19 +3,10 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/extra | bash
 
-source /dev/stdin <<< "`curl -fsSL sh.mohitsingh.in/_utils`"
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 repo_missing "apt-fast" && sudo add-apt-repository ppa:apt-fast/stable
 
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y\
-  nmap\
-  hashcat\
-  hydra\
-  telnet\
-  tor\
-  sqlcipher\
-  apt-fast\
-  ffmpeg\
-  imagemagick
+sudo apt-get install -y nmap hashcat hydra telnet tor sqlcipher apt-fast ffmpeg imagemagick
