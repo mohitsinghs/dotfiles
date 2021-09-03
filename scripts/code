@@ -50,7 +50,6 @@ extensions=(
   \  christian-kohler.npm-intellisense
   \  christian-kohler.path-intellisense
   \  csstools.postcss
-  \  davidlday.languagetool-linter
   \  dbaeumer.vscode-eslint
   \  eamodio.gitlens
   \  EditorConfig.EditorConfig
@@ -60,6 +59,7 @@ extensions=(
   \  foxundermoon.shell-format
   \  GitHub.github-vscode-theme
   \  golang.go
+  \  GraphQL.vscode-graphql
   \  hashicorp.terraform
   \  heybourn.headwind
   \  inercia.vscode-k3d
@@ -76,14 +76,18 @@ extensions=(
   \  naumovs.color-highlight
   \  pflannery.vscode-versionlens
   \  redhat.vscode-commons
+  \  redhat.vscode-xml
   \  redhat.vscode-yaml
   \  sdras.night-owl
   \  streetsidesoftware.code-spell-checker
+  \  sumneko.lua
+  \  tamasfe.even-better-toml
   \  usernamehw.errorlens
   \  vadimcn.vscode-lldb
   \  wix.vscode-import-cost
   \  XadillaX.viml
   \  zhuangtongfa.material-theme
+  \  zxh404.vscode-proto3
   \ )
 
 # Install vscode extensions
