@@ -84,8 +84,12 @@ function repo {
 
 # cleanup local docker mess
 function dclean {
-  # Remove all stopped containers
+  # remove all stopped containers
   docker rm $(docker ps -qa) 2>/dev/null
-  # Remove all dangling images
+  # remove all dangling images
   docker rmi $(docker images -qa --filter="dangling=true") 2>/dev/null
+  # remove unused volumes
+  docker volume prune -f
+  # remove unused networks
+  docker network prune -f
 }
