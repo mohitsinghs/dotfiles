@@ -22,3 +22,6 @@ export PATH="$CARGOPATH/bin:$GOROOT/bin:$GOPATH/bin:$HOME/.local/bin:$PATH"
 
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export JDK_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
