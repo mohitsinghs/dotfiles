@@ -74,7 +74,9 @@ extensions=(
   \  mtxr.sqltools
   \  mtxr.sqltools-driver-pg
   \  naumovs.color-highlight
+  \  Orta.vscode-jest
   \  pflannery.vscode-versionlens
+  \  redhat.java
   \  redhat.vscode-commons
   \  redhat.vscode-xml
   \  redhat.vscode-yaml

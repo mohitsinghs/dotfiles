@@ -1,4 +1,8 @@
 {
+  "Lua.telemetry.enable": false,
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -37,21 +41,54 @@
   "extensions.autoCheckUpdates": false,
   "extensions.autoUpdate": "onlyEnabledExtensions",
   "extensions.ignoreRecommendations": true,
+  "files.autoSave": "off",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true
+  },
   "files.insertFinalNewline": true,
   "git.allowForcePush": true,
   "git.autofetch": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
+  "go.formatTool": "gofumports",
+  "go.lintOnSave": "package",
+  "go.lintTool": "golangci-lint",
+  "gopls": {
+    "build.experimentalWorkspaceModule": true
+  },
   "html.format.enable": false,
+  "java.completion.enabled": true,
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-1.8",
+      "path": "/usr/lib/jvm/java-8-openjdk-amd64"
+    },
+    {
+      "name": "JavaSE-16",
+      "path": "/usr/lib/jvm/java-16-openjdk-amd64"
+    }
+  ],
+  "java.home": "/usr/lib/jvm/java-16-openjdk-amd64",
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "languageToolLinter.languageTool.motherTongue": "en-US",
+  "jest.autoRun": "off",
+  "jest.coverageColors": {
+    "covered": "rgba(64,128,128,0.5)",
+    "partially-covered": "rgba(235, 198, 52, 0.25)",
+    "uncovered": "rgba(128,64,64,0.25)"
+  },
   "npm.runSilent": true,
   "pgFormatter.keywordCase": "lowercase",
   "prettier.jsxSingleQuote": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "projectManager.git.baseFolders": ["/home/mohit/Projects"],
+  "projectManager.git.baseFolders": [
+    "/home/mohit/Projects",
+    "/home/mohit/Work"
+  ],
   "python.formatting.blackPath": "/usr/local/bin/black",
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
@@ -80,10 +117,10 @@
   "vscode_custom_css.statusbar": false,
   "window.closeWhenEmpty": true,
   "window.dialogStyle": "custom",
-  "window.menuBarVisibility": "toggle",
+  "window.menuBarVisibility": "compact",
   "window.restoreFullscreen": true,
   "window.titleBarStyle": "custom",
-  "workbench.colorTheme": "One Dark Pro",
+  "workbench.colorTheme": "One Dark Pro Darker",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
