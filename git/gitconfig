@@ -1,62 +1,61 @@
 [user]
-  name = Mohit Singh
-  email = mohit@mohitsingh.in
+name = Mohit Singh
+email = mohit@mohitsingh.in
 
 [core]
-  excludesfile = ~/.gitignore
-  pager = delta
-  editor = nvim
-
+excludesfile = ~/.gitignore
+pager = delta
+editor = nvim
 
 [alias]
-  a = add
-  ap = add --patch
-  s = status
-  ss = status -s
-  l = log
-  lg = log --graph --all
-  sl = shortlog --summary --all --email
-  d = diff
-  ds = diff --staged
-  r = restore
-  rs = restore --staged
-  c = commit -m
-  cp = commit --patch
-  ca = commit --amend --all
-  cu = commit --amend --all --no-edit
-  u = pull
-  p = push
-  pf = push --force
-  co = checkout
+a = add
+ap = add --patch
+s = status
+ss = status -s
+l = log
+lg = log --graph --all
+sl = shortlog --summary --all --email
+d = diff
+ds = diff --staged
+r = restore
+rs = restore --staged
+c = commit -m
+cp = commit --patch
+ca = commit --amend --all
+cu = commit --amend --all --no-edit
+u = pull
+p = push
+pf = push --force
+co = checkout
 
 [push]
-  default = current
-  followTags = true
+default = current
+followTags = true
 
 [pull]
-  ff = only
+ff = only
 
 [fetch]
-  prune = true
+prune = true
 
 [init]
-	defaultBranch = main
+defaultBranch = main
 
 [interactive]
-  diffFilter = delta --color-only
+diffFilter = delta --color-only
 
 [delta]
-  features = line-numbers
-  syntax-theme=OneHalfDark
-  commit-decoration-style = yellow box ul
-  file-style = yellow ul
-  file-decoration-style = none
-  line-numbers-minus-style = red
-  line-numbers-plus-style = green
-  line-numbers-zero-style = brightblack
+features = line-numbers
+syntax-theme=OneHalfDark
+commit-decoration-style = yellow box ul
+file-style = yellow ul
+file-decoration-style = none
+line-numbers-minus-style = red
+line-numbers-plus-style = green
+line-numbers-zero-style = brightblack
 
 [format]
-	pretty = %C(yellow)%h%Creset %C(auto)%d%Creset %s %C(green)%ar%Creset %C(cyan)%aN%Creset
+pretty = "%C(yellow)%h%Creset %C(auto)%d%Creset %s %C(green)%ar%Creset %C(cyan)%aN%Creset"
 
 [log]
-	abbrevCommit = true
+abbrevCommit = true
