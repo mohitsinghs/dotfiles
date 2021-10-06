@@ -33,6 +33,3 @@ set t_ZH=[3m
 set t_ZR=[23m
 
 hi Comment cterm=italic gui=italic
-
-" Language tweaks
-let g:python3_host_prog = '~/.config/nvim/py3env/bin/python'

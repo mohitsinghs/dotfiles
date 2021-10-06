@@ -1,0 +1,21 @@
+#!/bin/bash
+# Install python3 with some tools
+#
+# Usage : curl -fsSL sh.mohitsingh.in/python | bash
+
+source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
+
+sudo apt-get update
+
+sudo apt-get install -y \
+  python3 \
+  python3-pip \
+  python3-venv \
+
+python3 -m pip install --user \
+  flake8 \
+  black \
+  pylint \
+  pynvim \
+  pipdeptree \
+  pip-autoremove
