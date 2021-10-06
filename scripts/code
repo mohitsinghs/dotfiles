@@ -56,6 +56,7 @@ extensions=(
   \  esbenp.prettier-vscode
   \  file-icons.file-icons
   \  firefox-devtools.vscode-firefox-debug
+  \  firsttris.vscode-jest-runner
   \  foxundermoon.shell-format
   \  GitHub.github-vscode-theme
   \  golang.go
@@ -64,6 +65,7 @@ extensions=(
   \  heybourn.headwind
   \  inercia.vscode-k3d
   \  IronGeek.vscode-env
+  \  jeff-hykin.better-cpp-syntax
   \  matklad.rust-analyzer
   \  mikestead.dotenv
   \  ms-azuretools.vscode-docker
@@ -71,19 +73,21 @@ extensions=(
   \  ms-python.python
   \  ms-python.vscode-pylance
   \  ms-toolsai.jupyter
+  \  ms-toolsai.jupyter-keymap
+  \  ms-vscode.cmake-tools
+  \  ms-vscode.cpptools
   \  mtxr.sqltools
   \  mtxr.sqltools-driver-pg
   \  naumovs.color-highlight
   \  Orta.vscode-jest
   \  pflannery.vscode-versionlens
-  \  redhat.java
-  \  redhat.vscode-commons
   \  redhat.vscode-xml
   \  redhat.vscode-yaml
   \  sdras.night-owl
   \  streetsidesoftware.code-spell-checker
   \  sumneko.lua
   \  tamasfe.even-better-toml
+  \  twxs.cmake
   \  usernamehw.errorlens
   \  vadimcn.vscode-lldb
   \  wix.vscode-import-cost
