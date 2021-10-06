@@ -1,8 +1,13 @@
 " Keymaps
 nm <Leader>rn <Plug>(coc-rename)
-nm <Leader>gi <Plug>(coc-git-chunkinfo)
+
+nm <silent> gr <Plug>(coc-references)
+nm <silent> gd <Plug>(coc-definition)
+nm <silent> gy <Plug>(coc-type-definition)
+nm <silent> gi <Plug>(coc-implementation)
+
 nn <silent> <space>c  :<C-u>CocCommand<CR>
-nn <silent> <space>l  :<C-u>CocList<CR>
+nn <silent> <space>l  :<C-u>CocFzfList<CR>
 
 " Coc Extensions
 let g:coc_global_extensions = [
@@ -24,3 +29,7 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ ]
 
+" Make coc-fzf same
+" as other commands
+let g:coc_fzf_preview = ''
+let g:coc_fzf_opts = []

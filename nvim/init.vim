@@ -11,14 +11,15 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-" lua require('treesitter')
+lua require('treesitter')
 
 " Basic
 set mouse:a noswf nu rnu ls=0 shm=aIFWc tgc ts=2 sw=2 sts=2 et nofen fenc=utf-8 cb+=unnamedplus ut=300
