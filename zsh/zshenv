@@ -26,9 +26,9 @@ alias vi="nvim"
 alias vim="nvim"
 alias py="python"
 
-# shortcut for ytd
+# shortcut for yt-dlp
 alias ytd="yt-dlp --external-downloader aria2c"
-alias ytdm="yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o '%(title)s.%(ext)s'"
+alias ytdm="yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o '%(title)s.%(ext)s' --ppa \"EmbedThumbnail+ffmpeg_o:-c:v mjpeg -vf crop=\\\"'if(gt(ih,iw),iw,ih)':'if(gt(iw,ih),ih,iw)'\\\"\""
 
 # better ls output using exa
 alias la="exa -la --group-directories-first"
