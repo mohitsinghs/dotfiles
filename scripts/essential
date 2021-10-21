@@ -36,7 +36,7 @@ function install_neovim {
   doing "Verifying neovim version..."
   NVIM_ENDPOINT="https://api.github.com/repos/neovim/neovim/releases/latest"
   NVIM_LOCAL=$(nvim -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
-  NVIM_LATEST=$(curl -sL $NVIM_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+  NVIM_LATEST=$(curl -sL $NVIM_ENDPOINT | jq -r '.name' | rg '[\d.]+' -o 2>/dev/null | head -n 1)
   success
   if [[ "$NVIM_LATEST" == "$NVIM_LOCAL" ]]; then
     success_msg "Latest neovim is installed ( v$NVIM_LATEST )"
@@ -46,7 +46,7 @@ function install_neovim {
     curl -sL $NVIM_URL -o nvim.appimage
     chmod u+x nvim.appimage
     sudo install nvim.appimage /usr/local/bin/nvim
-    rm neovim.appimage
+    rm nvim.appimage
     success
   fi
 }
