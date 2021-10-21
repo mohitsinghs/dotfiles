@@ -6,8 +6,12 @@ nm <silent> gd <Plug>(coc-definition)
 nm <silent> gy <Plug>(coc-type-definition)
 nm <silent> gi <Plug>(coc-implementation)
 
-nn <silent> <space>c  :<C-u>CocCommand<CR>
+nn <silent> <space>c  :<C-u>CocFzfList commands<CR>
 nn <silent> <space>l  :<C-u>CocFzfList<CR>
+
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <silent> <C-d> <Plug>(coc-cursors-word)
+xmap <silent> <C-d> <Plug>(coc-cursors-range)
 
 " Coc Extensions
 let g:coc_global_extensions = [
