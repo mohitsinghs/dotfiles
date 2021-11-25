@@ -6,7 +6,7 @@
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 doing "Verifying version..."
-GO_LATEST=$(curl -s https://golang.org/dl/ | grep -oP '\/dl\/go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2)
+GO_LATEST=$(curl -s https://go.dev/dl/ | grep -oP '\/dl\/go([0-9\.]+)\.linux-amd64\.tar\.gz' | head -n 1 | grep -oP 'go[0-9\.]+' | grep -oP '[0-9\.]+' | head -c -2)
 GO_LOCAL=$(go version 2>/dev/null | cut -d ' ' -f 3 | cut -b 3-)
 success
 if [[ "$GO_LATEST" == "$GO_LOCAL" ]]; then
