@@ -6,7 +6,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'joshdick/onedark.vim'
+Plug 'folke/tokyonight.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -27,7 +27,7 @@ set wig+=*/.git,*/node_modules,*/venv,*/tmp,*.so,*.swp,*.zip,*.pyc
 set list lcs=tab:··,trail:·
 
 " Theme Configs
-colo onedark
+colo tokyonight
 
 " Bold and italic in tmux
 set t_ZH=[3m
