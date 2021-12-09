@@ -11,7 +11,25 @@ sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolka
 sudo apt-get update
 sudo apt-get upgrade -y
 
-sudo apt-get install -y aria2 curl jq htop p7zip-full p7zip-rar zip unzip tar python3 python3-pip python3-venv tmux zsh zsh-syntax-highlighting zstd apt-transport-https software-properties-common
+sudo apt-get install -y \
+  aria2 \
+  curl \
+  jq \
+  htop \
+  p7zip-full \
+  p7zip-rar \
+  zip \
+  unzip \
+  tar \
+  python3 \
+  python3-pip \
+  python3-venv \
+  tmux \
+  zsh \
+  zsh-syntax-highlighting \
+  zstd \
+  apt-transport-https \
+  software-properties-common
 
 # focal only packages
 if [[ $(lsb_release -cs) == 'focal' ]]; then
@@ -32,11 +50,20 @@ function install_git {
   fi
 }
 
+function _extract_version {
+  echo "$1" | rg '[\d.]+' -o 2>/dev/null | head -n 1
+}
+
+function _get_release {
+  echo "https://api.github.com/repos/$1/releases/latest"
+}
+
 function install_neovim {
   doing "Verifying neovim version..."
-  NVIM_ENDPOINT="https://api.github.com/repos/neovim/neovim/releases/latest"
-  NVIM_LOCAL=$(nvim -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
-  NVIM_LATEST=$(curl -sL $NVIM_ENDPOINT | jq -r '.name' | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  NVIM_ENDPOINT=$(_get_release "neovim/neovim")
+  NVIM_LOCAL=$(_extract_version "$(nvim -v 2>/dev/null)")
+  NVIM_LATEST=$(_extract_version "$(curl -sL $NVIM_ENDPOINT | jq -r '.name')")
+
   success
   if [[ "$NVIM_LATEST" == "$NVIM_LOCAL" ]]; then
     success_msg "Latest neovim is installed ( v$NVIM_LATEST )"
@@ -53,7 +80,7 @@ function install_neovim {
 
 function install_ripgrep {
   doing "Verifying ripgrep version..."
-  RG_ENDPOINT="https://api.github.com/repos/BurntSushi/ripgrep/releases/latest"
+  RG_ENDPOINT=$(_get_release "BurntSushi/ripgrep")
   RG_LOCAL=$(rg -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
   RG_LATEST=$(curl -sL $RG_ENDPOINT | jq -r '.name')
   success
@@ -71,7 +98,7 @@ function install_ripgrep {
 
 function install_bat {
   doing "Verifying bat version..."
-  BAT_ENDPOINT="https://api.github.com/repos/sharkdp/bat/releases/latest"
+  BAT_ENDPOINT=$(_get_release "sharkdp/bat")
   BAT_LOCAL=$(bat -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
   BAT_LATEST=$(curl -sL $BAT_ENDPOINT | jq -r '.name' | cut -b 2-)
   success
@@ -89,7 +116,7 @@ function install_bat {
 
 function install_exa {
   doing "Verifying exa version..."
-  EXA_ENDPOINT="https://api.github.com/repos/ogham/exa/releases/latest"
+  EXA_ENDPOINT=$(_get_release "ogham/exa")
   EXA_LOCAL=$(exa -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
   EXA_LATEST=$(curl -sL $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
   success
@@ -114,7 +141,7 @@ function install_exa {
 
 function install_delta {
   doing "Verifying delta version..."
-  DELTA_ENDPOINT="https://api.github.com/repos/dandavison/delta/releases/latest"
+  DELTA_ENDPOINT=$(_get_release "dandavison/delta")
   DELTA_LOCAL=$(delta -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
   DELTA_LATEST=$(curl -sL $DELTA_ENDPOINT | jq -r '.tag_name')
   success
@@ -130,9 +157,53 @@ function install_delta {
   fi
 }
 
+function install_kitty {
+  doing "Verifying kitty version..."
+  KITTY_ENDPOINT=$(_get_release "kovidgoyal/kitty")
+  KITTY_LOCAL=$(_extract_version "$(kitty -v 2>/dev/null)")
+  KITTY_LATEST=$(curl -sL $KITTY_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+  success
+  if [[ "$KITTY_LATEST" == "$KITTY_LOCAL" ]]; then
+    success_msg "Latest kitty is installed ( v$KITTY_LATEST )"
+  else
+    doing "Installing kitty v$KITTY_LATEST..."
+    KITTY_URL=$(curl -sL $KITTY_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("x86_64.txz"))')
+    KITTY_LOC="$HOME/.local/kitty.app"
+    KITTY_TARGET="$HOME/.local/bin/kitty"
+    curl -sL $KITTY_URL -o kitty.txz
+    mkdir -p "$KITTY_LOC"
+    tar xf kitty.txz -C $KITTY_LOC >/dev/null
+    [[ -e "$KITTY_TARGET" ]] && rm "$KITTY_TARGET" &>/dev/null
+    ln -s "$KITTY_LOC/bin/kitty" "$KITTY_TARGET"
+    rm kitty.txz
+    success
+  fi
+}
+
+function install_starship {
+  doing "Verifying starship version..."
+  STARSHIP_ENDPOINT=$(_get_release "starship/starship")
+  STARSHIP_LOCAL=$(_extract_version "$(starship -V 2>/dev/null)")
+  STARSHIP_LATEST=$(curl -sL $STARSHIP_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+  success
+  if [[ "$STARSHIP_LATEST" == "$STARSHIP_LOCAL" ]]; then
+    success_msg "Latest starship is installed ( v$STARSHIP_LATEST )"
+  else
+    doing "Installing starship v$STARSHIP_LATEST..."
+    STARSHIP_URL=$(curl -sL $STARSHIP_ENDPOINT | jq -r '.assets[].browser_download_url | select(contains("starship-x86_64") and endswith("gnu.tar.gz"))')
+    curl -sL $STARSHIP_URL -o starship.tgz
+    tar xf starship.tgz >/dev/null
+    sudo install starship /usr/local/bin/starship
+    rm starship starship.tgz
+    success
+  fi
+}
+
 install_git
 install_neovim
 install_ripgrep
 install_bat
 install_exa
 install_delta
+install_kitty
+install_starship

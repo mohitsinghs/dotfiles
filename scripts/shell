@@ -20,22 +20,6 @@ FUNPATH="$HOME/.zsh"
 # No help from next launch
 touch $HOME/.hushlogin
 
-doing "Installing pure prompt..."
-
-# cleanup old prompt files
-if [[ -x $FUNPATH/prompt_pure_setup && -x $FUNPATH/async ]]; then
-  rm -f $FUNPATH/prompt_pure_setup
-  rm -f $FUNPATH/async
-fi
-
-# install pure prompt
-PURE_REPO="https://raw.githubusercontent.com/sindresorhus/pure/master"
-curl "$PURE_REPO/pure.zsh" --create-dirs -fsSLo $FUNPATH/prompt_pure_setup
-curl "$PURE_REPO/async.zsh" -fsSLo $FUNPATH/async
-chmod +x $FUNPATH/prompt_pure_setup
-chmod +x $FUNPATH/async
-success
-
 # Install custom completions
 doing "Installing completions..."
 if [[ -x $FUNPATH/_repo ]]; then
@@ -50,4 +34,12 @@ for file in $DOTLOC/{zsh,git,tmux}/*; do
   [[ -e "$HOME/.$(basename $file)" ]] && rm "$HOME/.$(basename $file)" &>/dev/null
   ln -s $file "$HOME/.$(basename $file)"
 done
+
+# link other config
+doing "Linking other configs..."
+for file in $DOTLOC/config/*; do
+  [[ -e "$HOME/.config/$file" ]] && rm -rf "$HOME/.config/$file" &>/dev/null
+  ln -s "$DOTLOC/$file" "$HOME/.config/$file"
+done
+
 success

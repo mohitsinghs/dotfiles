@@ -4,8 +4,8 @@ autoload -Uz compinit
 compinit
 autoload -Uz promptinit
 promptinit
-PURE_PROMPT_SYMBOL="▲"
-prompt pure
+
+eval "$(starship init zsh)"
 
 # enable zsh syntax highlighting and autosuggestions
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
