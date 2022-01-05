@@ -5,10 +5,6 @@
 </p>
 <br />
 
-## Screenshot
-
-![screen](https://user-images.githubusercontent.com/4941333/134054505-832be028-4a65-4714-bc57-0f3cff5828ef.png)
-
 ## Install
 
 To install most of the things
