@@ -52,10 +52,36 @@ alias d="docker"
 alias k="kubectl"
 alias tf="terraform"
 
+# muslup/muslbuild for rust-musl-cross
+alias muslup='docker run --rm \
+  -v "$(pwd)":/home/rust/src \
+  -v "$HOME/.musl-cache":/root/.cargo/registry \
+  -v "$(pwd)/target":/home/rust/src/target \
+  messense/rust-musl-cross:x86_64-musl'
+
+# docker and swarm aliases
+alias dbuild="docker buildx b"
+alias dslogs="d service logs -f"
+alias dsrm="d service rm"
+alias dsps="d service ps"
+alias dsls="d service ls"
+alias dsll="d stack ps"
+alias dsup="d stack deploy -c"
+alias dsdown="d stack rm"
+
 # sudoed aliases, shell reloading and pretty paths
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
 alias path="echo -e ${PATH//:/\\\n}"
+
+function muslbuild {
+  binary_name="$(basename $(pwd))"
+  muslup cargo build --release 
+  muslup cp \
+    /home/rust/src/target/x86_64-unknown-linux-musl/release/$binary_name \
+    /home/rust/src
+      sudo chown $(whoami):$(whoami) "$(pwd)/$binary_name"
+}
 
 # Update blocklist
 function upblock {
