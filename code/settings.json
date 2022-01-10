@@ -7,7 +7,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[sql]": {
     "editor.defaultFormatter": "bradymholt.pgformatter"
@@ -34,9 +34,14 @@
     "postcss": "css"
   },
   "emmet.triggerExpansionOnTab": true,
-  "errorLens.excludeBySource": ["cSpell"],
+  "errorLens.excludeBySource": [
+    "cSpell"
+  ],
   "eslint.nodePath": "/usr/lib/node_modules",
-  "eslint.validate": ["javascript", "javascriptreact"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
   "explorer.confirmDelete": false,
   "explorer.decorations.colors": false,
   "extensions.autoCheckUpdates": false,
@@ -67,11 +72,15 @@
     "showInlineError": true
   },
   "npm.runSilent": true,
+  "pgFormatter.formatType": true,
   "pgFormatter.keywordCase": "lowercase",
   "prettier.jsxSingleQuote": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "projectManager.git.baseFolders": ["~/Projects", "~/Work"],
+  "projectManager.git.baseFolders": [
+    "~/Projects",
+    "~/Work"
+  ],
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.linting.flake8Enabled": true,
@@ -81,10 +90,13 @@
   "search.showLineNumbers": true,
   "search.useGlobalIgnoreFiles": true,
   "security.workspace.trust.enabled": false,
+  "tailwindCSS.includeLanguages": {
+    "mdx": "html"
+  },
   "telemetry.telemetryLevel": "off",
-  "terminal.integrated.fontFamily": "Operator Mono,DroidSansMono Nerd Font,apple color emoji",
-  "terminal.integrated.fontSize": 12,
-  "terminal.integrated.lineHeight": 1.25,
+  "terminal.integrated.fontFamily": "Operator Mono,monospace",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontWeightBold": "normal",
   "typescript.format.enable": false,
   "typescript.surveys.enabled": false,
   "update.mode": "none",
@@ -98,7 +110,7 @@
   "window.menuBarVisibility": "compact",
   "window.restoreFullscreen": true,
   "window.titleBarStyle": "custom",
-  "workbench.colorTheme": "One Dark Pro",
+  "workbench.colorTheme": "Tokyo Night Storm",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,

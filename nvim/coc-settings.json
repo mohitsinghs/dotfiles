@@ -24,15 +24,6 @@
     "experimentalWorkspaceModule": true,
     "hoverKind": "FullDocumentation"
   },
-  "languageserver": {
-    "terraform": {
-      "args": ["serve"],
-      "command": "terraform-ls",
-      "filetypes": ["terraform", "tf"],
-      "initializationOptions": {},
-      "settings": {}
-    }
-  },
   "prettier.disableSuccessMessage": true,
   "prettier.jsxSingleQuote": true,
   "prettier.semi": false,

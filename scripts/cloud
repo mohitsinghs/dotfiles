@@ -1,15 +1,9 @@
 #!/bin/bash
-# Setup setup terraform and k3d on local
+# Setup k3d on local
 #
 # Usage: curl -fsSL sh.mohitsingh.in/cloud | bash
 
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
-
-# Install terraform and terraform-ls
-key_missing "hashicorp" && curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-repo_missing "hashicorp" && sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt-get update -y
-sudo apt-get install -y terraform terraform-ls
 
 # Install k3d
 doing "Verifying k3d version..."

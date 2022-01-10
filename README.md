@@ -65,7 +65,7 @@ For kubernetes family (kubectl, kubelet and kubeadm) and helm
 curl -fsSL sh.mohitsingh.in/kube | bash
 ```
 
-For terraform, terraform-ls and k3d
+For k3d
 
 ```bash
 curl -fsSL sh.mohitsingh.in/cloud | bash
