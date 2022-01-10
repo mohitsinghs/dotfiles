@@ -19,7 +19,17 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-lua require('treesitter')
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = 'maintained',
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  }
+}
+EOF
 
 " Basic
 set mouse:a noswf nu rnu ls=0 shm=aIFWc tgc ts=2 sw=2 sts=2 et nofen fenc=utf-8 cb+=unnamedplus ut=300
