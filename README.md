@@ -59,16 +59,10 @@ Docker can installed using
 curl -fsSL sh.mohitsingh.in/docker | bash
 ```
 
-For kubernetes family (kubectl, kubelet and kubeadm) and helm
+For k3d, kubectl and helm
 
 ```
 curl -fsSL sh.mohitsingh.in/kube | bash
-```
-
-For k3d
-
-```bash
-curl -fsSL sh.mohitsingh.in/cloud | bash
 ```
 
 For setting up a ubuntu server with docker and other essentials.
