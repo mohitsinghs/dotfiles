@@ -6,8 +6,12 @@
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Set timezone to +5:30
-sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
-
+if [[ /etc/localtime -ef /usr/share/zoneinfo/Asia/Kolkata && $(cat /etc/timezone) == "Asia/Kolkata" ]]; then
+  success_msg "Timezone is already set to Asia/Kotkata"
+else
+  sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
+  success_msg "Setting timezone to Asia/Kotkata"
+fi
 sudo apt-get update
 sudo apt-get upgrade -y
 
@@ -51,7 +55,7 @@ function install_git {
 }
 
 function _extract_version {
-  echo "$1" | rg '[\d.]+' -o 2>/dev/null | head -n 1
+  echo "$1" | rg '\d{1,3}\.\d{1,3}(\.\d{1,3})?' -o 2>/dev/null | head -n 1
 }
 
 function _get_release {
@@ -81,7 +85,7 @@ function install_neovim {
 function install_ripgrep {
   doing "Verifying ripgrep version..."
   RG_ENDPOINT=$(_get_release "BurntSushi/ripgrep")
-  RG_LOCAL=$(rg -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  RG_LOCAL=$(_extract_version "$(rg -V 2>/dev/null)")
   RG_LATEST=$(curl -sL $RG_ENDPOINT | jq -r '.name')
   success
   if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
@@ -99,8 +103,8 @@ function install_ripgrep {
 function install_bat {
   doing "Verifying bat version..."
   BAT_ENDPOINT=$(_get_release "sharkdp/bat")
-  BAT_LOCAL=$(bat -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
-  BAT_LATEST=$(curl -sL $BAT_ENDPOINT | jq -r '.name' | cut -b 2-)
+  BAT_LOCAL=$(_extract_version "$(bat -V 2>/dev/null)")
+  BAT_LATEST=$(_extract_version "$(curl -sL $BAT_ENDPOINT | jq -r '.name')")
   success
   if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
     success_msg "Latest bat is installed ( v$BAT_LATEST )"
@@ -117,8 +121,8 @@ function install_bat {
 function install_exa {
   doing "Verifying exa version..."
   EXA_ENDPOINT=$(_get_release "ogham/exa")
-  EXA_LOCAL=$(exa -v 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
-  EXA_LATEST=$(curl -sL $EXA_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+  EXA_LOCAL=$(_extract_version "$(exa -v 2>/dev/null)")
+  EXA_LATEST=$(_extract_version "$(curl -sL $EXA_ENDPOINT | jq -r '.tag_name')")
   success
   if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
     success_msg "Latest exa is installed ( v$EXA_LATEST )"
@@ -142,7 +146,7 @@ function install_exa {
 function install_delta {
   doing "Verifying delta version..."
   DELTA_ENDPOINT=$(_get_release "dandavison/delta")
-  DELTA_LOCAL=$(delta -V 2>/dev/null | rg '[\d.]+' -o 2>/dev/null | head -n 1)
+  DELTA_LOCAL=$(_extract_version "$(delta -V 2>/dev/null)")
   DELTA_LATEST=$(curl -sL $DELTA_ENDPOINT | jq -r '.tag_name')
   success
   if [[ "$DELTA_LATEST" == "$DELTA_LOCAL" ]]; then
@@ -161,7 +165,7 @@ function install_kitty {
   doing "Verifying kitty version..."
   KITTY_ENDPOINT=$(_get_release "kovidgoyal/kitty")
   KITTY_LOCAL=$(_extract_version "$(kitty -v 2>/dev/null)")
-  KITTY_LATEST=$(curl -sL $KITTY_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+  KITTY_LATEST=$(_extract_version "$(curl -sL $KITTY_ENDPOINT | jq -r '.tag_name')")
   success
   if [[ "$KITTY_LATEST" == "$KITTY_LOCAL" ]]; then
     success_msg "Latest kitty is installed ( v$KITTY_LATEST )"
@@ -184,7 +188,7 @@ function install_starship {
   doing "Verifying starship version..."
   STARSHIP_ENDPOINT=$(_get_release "starship/starship")
   STARSHIP_LOCAL=$(_extract_version "$(starship -V 2>/dev/null)")
-  STARSHIP_LATEST=$(curl -sL $STARSHIP_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+  STARSHIP_LATEST=$(_extract_version "$(curl -sL $STARSHIP_ENDPOINT | jq -r '.tag_name')")
   success
   if [[ "$STARSHIP_LATEST" == "$STARSHIP_LOCAL" ]]; then
     success_msg "Latest starship is installed ( v$STARSHIP_LATEST )"
