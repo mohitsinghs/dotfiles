@@ -1,17 +1,33 @@
 #!/bin/bash
-# Install/Update kubectl and helm
+# Install k3d/kubectl/helm
 #
-# Usage : curl -fsSL sh.mohitsingh.in/kube | bash
+# Usage: curl -fsSL sh.mohitsingh.in/kube | bash
 
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
+# Install k3d
+doing "Verifying k3d version..."
+K3D_ENDPOINT="https://api.github.com/repos/rancher/k3d/releases/latest"
+K3D_LOCAL=$(k3d version 2>/dev/null | head -n 1 | rg '[\d.]+{3}' -o 2>/dev/null)
+K3D_LATEST=$(curl -sL $K3D_ENDPOINT | jq -r '.tag_name' | cut -b 2-)
+success
+if [[ "$K3D_LATEST" == "$K3D_LOCAL" ]]; then
+  success_msg "Latest k3d is installed ( v$K3D_LATEST )"
+else
+  doing "Installing k3d v$K3D_LATEST..."
+  K3D_URL=$(curl -sL $K3D_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("linux-amd64"))')
+  curl -sL $K3D_URL -o k3d
+  sudo install k3d /usr/local/bin/k3d
+  rm k3d
+  success
+fi
+
+# Add google cloud and helm repos
 key_missing "google" && curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 repo_missing "kubernetes" && sudo apt-add-repository "deb [arch=amd64] https://apt.kubernetes.io/ kubernetes-xenial main"
-sudo apt-get update -y
-sudo apt-get install kubectl kubeadm kubelet
-
-# Install helm
 key_missing "helm" && curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
 repo_missing "helm" && sudo apt-add-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
+
+# Install kubectl and helm
 sudo apt-get update -y
-sudo apt-get install helm
+sudo apt-get install kubectl helm
