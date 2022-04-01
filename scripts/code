@@ -42,6 +42,7 @@ success
 
 # VSCodium extensions
 extensions=(
+  \  42Crunch.vscode-openapi
   \  alefragnani.project-manager
   \  be5invis.vscode-custom-css
   \  bradlc.vscode-tailwindcss
@@ -72,14 +73,17 @@ extensions=(
   \  ms-toolsai.jupyter
   \  ms-toolsai.jupyter-keymap
   \  ms-toolsai.jupyter-renderers
+  \  ms-vscode.hexeditor
   \  mtxr.sqltools
   \  mtxr.sqltools-driver-pg
+  \  mtxr.sqltools-driver-sqlite
   \  naumovs.color-highlight
   \  Orta.vscode-jest
   \  pflannery.vscode-versionlens
   \  redhat.vscode-xml
   \  redhat.vscode-yaml
   \  silvenon.mdx
+  \  SonarSource.sonarlint-vscode
   \  streetsidesoftware.code-spell-checker
   \  sumneko.lua
   \  tamasfe.even-better-toml
