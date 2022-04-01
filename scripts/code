@@ -3,6 +3,8 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/code | bash
 
+sudo echo ""
+
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # install dotfiles if not found
