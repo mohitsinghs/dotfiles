@@ -17,9 +17,7 @@ lg = log --graph --all
 sl = shortlog --summary --all --email
 d = diff
 ds = diff --staged
-r = restore
-rs = restore --staged
-c = commit -m
+c = commit
 cp = commit --patch
 ca = commit --amend --all
 cu = commit --amend --all --no-edit
@@ -27,6 +25,14 @@ u = pull
 p = push
 pf = push --force
 co = checkout
+m = merge
+ms = merge --squash
+mc = merge --continue
+ma = merge --abort
+r = rebase
+rs = rebase --skip
+rc = rebase --continue
+ra = rebase --abort
 
 [push]
 default = current
