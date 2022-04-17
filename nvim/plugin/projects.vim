@@ -9,7 +9,7 @@ if !executable('rg')
 endif
 
 " Set ripgrep as fzf command
-let $FZF_DEFAULT_COMMAND='rg --files'
+let $FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!**/.git/**"'
 
 " Set color scheme to one dark
 let $FZF_DEFAULT_OPTS='
