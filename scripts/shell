@@ -20,14 +20,6 @@ FUNPATH="$HOME/.zsh"
 # No help from next launch
 touch $HOME/.hushlogin
 
-# Install custom completions
-doing "Installing completions..."
-if [[ -x $FUNPATH/_repo ]]; then
-  rm -f $FUNPATH/_repo
-fi
-ln -s "$DOTLOC/completions/_repo" $FUNPATH/_repo
-success
-
 # link required files
 doing "Linking zsh + git + tmux configs..."
 for file in $DOTLOC/{zsh,git,tmux}/*; do
