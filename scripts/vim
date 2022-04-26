@@ -23,6 +23,3 @@ fi
 # link nvim config
 ln -sf "$DOTLOC/nvim" "$NVIM_CONF/nvim"
 success
-
-nvim +PlugInstall +qa
-nvim +LSPInstall --sync +qa
