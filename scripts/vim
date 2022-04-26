@@ -10,16 +10,19 @@ source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 # install dotfiles if not found
 DOTLOC="$HOME/Projects/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
-  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
+	source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
 
 # setup nvim config
+NVIM_CONF="$HOME/.config"
 doing "Linking nvim config..."
-mkdir -p "$HOME/.config/nvim"
-for file in $DOTLOC/nvim/*; do
-  target="$HOME/.config/nvim/$(basename $file)"
-  [[ -e $target ]] && rm $target &>/dev/null
-  ln -s $file $target
-done
+if [[ ! -d "$NVIM_CONF" ]]; then
+	mkdir -p "$NVIM_CONF"
+fi
+
+# link nvim config
+ln -sf "$DOTLOC/nvim" "$NVIM_CONF/nvim"
 success
 
+nvim +PlugInstall +qa
+nvim +LSPInstall --sync +qa
