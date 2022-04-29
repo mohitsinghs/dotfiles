@@ -40,7 +40,7 @@ require("packer").startup(function(use)
 	use("kyazdani42/nvim-web-devicons")
 	use("tanvirtin/vgit.nvim")
 	use("nvim-lualine/lualine.nvim")
-	use("arkav/lualine-lsp-progress")
+	use("j-hui/fidget.nvim")
 	use("stevearc/dressing.nvim")
 	if packer_bootstrap then
 		require("packer").sync()

@@ -2,6 +2,7 @@ local telescope = require("telescope")
 
 telescope.load_extension("fzf")
 require("vgit").setup()
+require("fidget").setup()
 require("lualine").setup({
 	options = {
 		theme = "tokyonight",
@@ -11,11 +12,6 @@ require("lualine").setup({
 	},
 	extensions = { "fugitive" },
 	sections = {
-		lualine_a = { "mode" },
 		lualine_b = { { "FugitiveHead", icon = "" }, "diff", "diagnostics" },
-		lualine_c = {
-			"filename",
-			{ "lsp_progress", spinner_symbols = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" } },
-		},
 	},
 })
