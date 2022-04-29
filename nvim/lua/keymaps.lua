@@ -17,6 +17,11 @@ map_normal("<leader>gp", "Git push")
 map_normal("<leader>gf", "Git push --force")
 map_normal("<leader>gu", "Git pull")
 
+--- Git Hunk
+map_normal("<leader>hu", "VGit buffer_hunk_reset")
+map_normal("<leader>hi", "VGit buffer_hunk_preview")
+map_normal("<leader>hs", "VGit buffer_hunk_stage")
+
 -- Telescope lists
 map_normal("<space>r", "<C-u>lua require('repo').list()")
 map_normal("<space>p", "<C-u>Telescope find_files")
