@@ -8,23 +8,6 @@ local on_attach = function(client, bufnr)
 	client.resolved_capabilities.document_formatting = false
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<leader>qf", vim.lsp.buf.code_action, opts)
-	if client.resolved_capabilities.document_highlight then
-		local lsp_hl_group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-		vim.api.nvim_clear_autocmds({
-			pattern = "<buffer>",
-			group = lsp_hl_group,
-		})
-		vim.api.nvim_create_autocmd("CursorHold", {
-			pattern = "<buffer>",
-			callback = vim.lsp.buf.document_highlight,
-			group = lsp_hl_group,
-		})
-		vim.api.nvim_create_autocmd("CursorMoved", {
-			pattern = "<buffer>",
-			callback = vim.lsp.buf.clear_references,
-			group = lsp_hl_group,
-		})
-	end
 end
 
 local servers = {
