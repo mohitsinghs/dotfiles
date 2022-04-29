@@ -24,7 +24,6 @@ require("packer").startup(function(use)
 	-- Telescope
 	use("nvim-lua/plenary.nvim")
 	use("nvim-telescope/telescope.nvim")
-	use("mohitsinghs/telescope-repo.nvim")
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	-- LSP
 	use("neovim/nvim-lspconfig")

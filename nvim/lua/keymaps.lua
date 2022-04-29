@@ -18,7 +18,7 @@ map_normal("<leader>gf", "Git push --force")
 map_normal("<leader>gu", "Git pull")
 
 -- Telescope lists
-map_normal("<space>r", "<C-u>Telescope repo")
+map_normal("<space>r", "<C-u>lua require('repo').list()")
 map_normal("<space>p", "<C-u>Telescope find_files")
 map_normal("<space>f", "<C-u>Telescope live_grep")
 map_normal("<space>g", "<C-u>Telescope git_commits")

@@ -1,12 +1,13 @@
 local telescope = require("telescope")
 
 telescope.load_extension("fzf")
-telescope.load_extension("repo")
 require("vgit").setup()
 require("lualine").setup({
 	options = {
 		theme = "tokyonight",
 		globalstatus = true,
+		section_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
 	},
 	extensions = { "fugitive" },
 	sections = {
