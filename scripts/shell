@@ -25,6 +25,15 @@ for file in "$DOTLOC"/{zsh,git,tmux}/*; do
 	ln -s "$file" "$HOME/.$filename"
 done
 
+# setup nvim config
+NVIM_CONF="$HOME/.config"
+doing "Linking nvim config..."
+if [[ ! -d "$NVIM_CONF" ]]; then
+	mkdir -p "$NVIM_CONF"
+fi
+ln -sf "$DOTLOC/nvim" "$NVIM_CONF/nvim"
+success
+
 # link other config
 doing "Linking other configs..."
 for file in "$DOTLOC"/config/*; do
