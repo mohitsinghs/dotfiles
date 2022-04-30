@@ -9,26 +9,41 @@
 
 To install most of the things
 
-```sh
+```bash
 curl -fsSL sh.mohitsingh.in | bash
 ```
 
 ### Basic utilities
 
 ```bash
+# bare minimums
 curl -fsSL sh.mohitsingh.in/essential | bash
-```
-
-### Shell related configs
-
-```bash
+# various dot configs
 curl -fsSL sh.mohitsingh.in/shell | bash
+# some extra tools that are nice to have
+curl -fsSL sh.mohitsingh.in/extra | bash
 ```
 
-### Neovim configs
+### Languages and Environments
 
 ```bash
-curl -fsSL sh.mohitsingh.in/vim | bash
+# node 16.x with yarn
+curl -fsSL sh.mohitsingh.in/node | bash
+# golang
+curl -fsSL sh.mohitsingh.in/go | bash
+# python
+curl -fsSL sh.mohitsingh.in/python | bash
+```
+
+### Cloud Tools
+
+```bash
+# docker
+curl -fsSL sh.mohitsingh.in/docker | bash
+# k3d, kubectl and helm
+curl -fsSL sh.mohitsingh.in/kube | bash
+# sever config for high load
+curl -fsSL sh.mohitsingh.in/highload | bash
 ```
 
 ### VSCodium
@@ -37,57 +52,12 @@ curl -fsSL sh.mohitsingh.in/vim | bash
 curl -fsSL sh.mohitsingh.in/code | bash
 ```
 
-### Languages
-
-For installing node 16.x
-
-```bash
-curl -fsSL sh.mohitsingh.in/node | bash
-```
-
-To install or upgrade golang
-
-```bash
-curl -fsSL sh.mohitsingh.in/go | bash
-```
-
-### Cloud
-
-Docker can installed using
-
-```bash
-curl -fsSL sh.mohitsingh.in/docker | bash
-```
-
-For k3d, kubectl and helm
-
-```bash
-curl -fsSL sh.mohitsingh.in/kube | bash
-```
-
-For modifying system limits of remote machines
-
-```bash
-curl -fsSL sh.mohitsingh.in/highload | bash
-```
-
-### Others
-
-Some useful utilities
-
-```bash
-curl -fsSL sh.mohitsingh.in/extra | bash
-```
-
-### Scripts
-
-All the scripts can be found in [/scripts](/scripts) directory.
-
 ## Commands
 
 These are some useful commands/functions
 
-- **`repo`** - switch between my local repositories.
+- **`z`** - switch between my local repositories.
 - **`upblock`** - update host files to block crap
 - **`upall`** - for usual updates
 - **`dclean`** - cleanup docker images
+- **`muslbuild`** - build current project with musl-libc.
