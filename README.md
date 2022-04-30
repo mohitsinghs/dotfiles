@@ -61,14 +61,8 @@ curl -fsSL sh.mohitsingh.in/docker | bash
 
 For k3d, kubectl and helm
 
-```
-curl -fsSL sh.mohitsingh.in/kube | bash
-```
-
-For setting up a ubuntu server with docker and other essentials.
-
 ```bash
-curl -fsSL sh.mohitsingh.in/server | bash
+curl -fsSL sh.mohitsingh.in/kube | bash
 ```
 
 For modifying system limits of remote machines
