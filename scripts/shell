@@ -11,27 +11,25 @@ source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 # Install dotfiles if not found
 DOTLOC="$HOME/Projects/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
-  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
+	source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
 
-# define variables
-FUNPATH="$HOME/.zsh"
-
 # No help from next launch
-touch $HOME/.hushlogin
+touch "$HOME/.hushlogin"
 
 # link required files
 doing "Linking zsh + git + tmux configs..."
-for file in $DOTLOC/{zsh,git,tmux}/*; do
-  [[ -e "$HOME/.$(basename $file)" ]] && rm "$HOME/.$(basename $file)" &>/dev/null
-  ln -s $file "$HOME/.$(basename $file)"
+for file in "$DOTLOC"/{zsh,git,tmux}/*; do
+	filename=$(basename "$file")
+	[[ -e "$HOME/.$filename" ]] && rm "$HOME/.$filename" &>/dev/null
+	ln -s "$file" "$HOME/.$filename"
 done
 
 # link other config
 doing "Linking other configs..."
-for file in $DOTLOC/config/*; do
-  [[ -e "$HOME/.config/$file" ]] && rm -rf "$HOME/.config/$file" &>/dev/null
-  ln -s "$DOTLOC/$file" "$HOME/.config/$file"
+for file in "$DOTLOC"/config/*; do
+	[[ -e "$HOME/.config/$file" ]] && rm -rf "$HOME/.config/$file" &>/dev/null
+	ln -s "$DOTLOC/$file" "$HOME/.config/$file"
 done
 
 success
