@@ -10,13 +10,17 @@ null_ls.setup({
 	sources = {
 		-- formatters
 		formatting.stylua,
-		formatting.prettier,
+		formatting.prettierd.with({
+			env = {
+				PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/configs/prettierrc.json"),
+			},
+		}),
 		formatting.black,
 		formatting.gofmt,
 		formatting.rustfmt,
 		formatting.shfmt,
 		-- completions
-		diagnostics.eslint,
+		diagnostics.eslint_d,
 		diagnostics.shellcheck,
 		diagnostics.hadolint,
 		diagnostics.golangci_lint,
