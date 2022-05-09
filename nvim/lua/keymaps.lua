@@ -29,10 +29,9 @@ map_normal("<space>f", "<C-u>Telescope live_grep")
 map_normal("<space>g", "<C-u>Telescope git_commits")
 map_normal("<space>h", "<C-u>Telescope highlights")
 
--- Some lsp specfic keymaps
+-- Some lsp specific keymaps
 map_normal("<leader>gr", "Telescope lsp_references")
 map_normal("<leader>gd", "Telescope lsp_definitions")
 map_normal("<leader>gy", "Telescope lsp_type_definitions")
 map_normal("<leader>gi", "Telescope lsp_implementations")
-map_normal("<leader>ca", "Telescope lsp_code_actions")
 map_normal("<leader>so", "lua require('symbols').list()")
