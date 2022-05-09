@@ -3,6 +3,7 @@ local telescope = require("telescope")
 telescope.load_extension("fzf")
 require("vgit").setup()
 require("fidget").setup()
+require("colorizer").setup()
 require("lualine").setup({
 	options = {
 		theme = "tokyonight",

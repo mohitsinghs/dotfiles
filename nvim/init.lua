@@ -43,6 +43,7 @@ require("packer").startup(function(use)
 	use("nvim-lualine/lualine.nvim")
 	use("j-hui/fidget.nvim")
 	use("stevearc/dressing.nvim")
+	use("norcalli/nvim-colorizer.lua")
 	if packer_bootstrap then
 		require("packer").sync()
 	end
