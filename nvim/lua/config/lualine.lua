@@ -34,37 +34,31 @@ local conditions = {
 	end,
 }
 
-local function get_head()
-	return " " .. vim.fn.FugitiveHead()
+local function wrap_start(cb, color)
+	return {
+		{
+			function()
+				return "▊"
+			end,
+			color = { fg = colors.blue, bg = colors.bg_dark },
+			padding = { left = 0, right = 0 },
+		},
+		{ cb, color = { fg = color, bg = colors.bg_dark } },
+		{
+			function()
+				return ""
+			end,
+			color = { fg = colors.bg_dark, bg = colors.bg_light },
+			padding = 0,
+		},
+	}
 end
-
-local function get_cwd()
-	return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
-end
-
-local start_left = {
-	function()
-		return "▊"
-	end,
-	color = { fg = colors.blue, bg = colors.bg_dark },
-	padding = { left = 0, right = 0 },
-}
-
-local end_left = {
-	function()
-		return ""
-	end,
-	color = { fg = colors.bg_dark, bg = colors.bg_light },
-	padding = 0,
-}
 
 local ext_fugitive = {
 	sections = {
-		lualine_c = {
-			start_left,
-			{ get_head, color = { fg = colors.magenta, bg = colors.bg_dark } },
-			end_left,
-		},
+		lualine_c = wrap_start(function()
+			return " " .. vim.fn.FugitiveHead()
+		end, colors.magenta),
 		lualine_x = { { "location", icon = "" } },
 	},
 	filetypes = { "fugitive" },
@@ -72,13 +66,20 @@ local ext_fugitive = {
 
 local ext_nvimtree = {
 	sections = {
-		lualine_c = {
-			start_left,
-			{ get_cwd, color = { fg = colors.cyan, bg = colors.bg_dark } },
-			end_left,
-		},
+		lualine_c = wrap_start(function()
+			return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+		end, colors.cyan),
 	},
 	filetypes = { "NvimTree" },
+}
+
+local ext_telescope = {
+	sections = {
+		lualine_c = wrap_start(function()
+			return "  Telescope"
+		end, colors.cyan),
+	},
+	filetypes = { "TelescopePrompt" },
 }
 
 local config = {
@@ -110,6 +111,7 @@ local config = {
 	extensions = {
 		ext_fugitive,
 		ext_nvimtree,
+		ext_telescope,
 	},
 }
 
@@ -121,31 +123,9 @@ local function ins_right(component)
 	table.insert(config.sections.lualine_x, component)
 end
 
-ins_left({
-	function()
-		return "▊"
-	end,
-	color = { fg = colors.blue },
-	padding = { left = 0, right = 0 },
-})
-
-ins_left({
-	function()
-		return require("lualine.utils.mode").get_mode()
-	end,
-	color = function()
-		return { fg = mode_color[vim.fn.mode()], bg = colors.bg_dark }
-	end,
-	padding = { left = 1, right = 1 },
-})
-
-ins_left({
-	function()
-		return ""
-	end,
-	color = { fg = colors.bg_dark },
-	padding = 0,
-})
+config.sections.lualine_c = wrap_start(function()
+	return require("lualine.utils.mode").get_mode()
+end, mode_color[vim.fn.mode()])
 
 ins_left({
 	"filetype",
@@ -193,11 +173,11 @@ ins_right({
 		if next(clients) == nil then
 			return msg
 		end
-		local names = " "
+		local names = ""
 		for _, client in ipairs(clients) do
 			local filetypes = client.config.filetypes
 			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "null-ls" then
-				if #names > 1 then
+				if #names > 0 then
 					names = names .. ", "
 				end
 				names = names .. client.name
@@ -205,7 +185,7 @@ ins_right({
 		end
 		return names
 	end,
-	icon = "",
+	icon = " ",
 })
 
 ins_right({
