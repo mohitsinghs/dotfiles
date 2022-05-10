@@ -1,0 +1,45 @@
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+return {
+	jsonls = {
+		schemas = require("schemastore").json.schemas(),
+	},
+	gopls = {
+		gopls = {
+			experimentalworkspacemodule = true,
+		},
+	},
+	rust_analyzer = {
+		["rust-analyzer"] = {
+			cargo = {
+				allfeatures = true,
+				loadoutdirsfromcheck = true,
+			},
+			procmacro = {
+				enable = true,
+			},
+			checkonsave = {
+				command = "clippy",
+			},
+		},
+	},
+	sumneko_lua = {
+		Lua = {
+			runtime = {
+				version = "luajit",
+				path = runtime_path,
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+}
