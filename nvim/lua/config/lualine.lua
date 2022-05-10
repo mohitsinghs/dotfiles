@@ -34,7 +34,16 @@ local conditions = {
 	end,
 }
 
+local function lookup_color(map, func)
+	return function()
+		return { fg = map[func()], bg = colors.bg_dark }
+	end
+end
+
 local function wrap_start(cb, color)
+	if type(color) == "string" then
+		color = { fg = color, bg = colors.bg_dark }
+	end
 	return {
 		{
 			function()
@@ -43,7 +52,7 @@ local function wrap_start(cb, color)
 			color = { fg = colors.blue, bg = colors.bg_dark },
 			padding = { left = 0, right = 0 },
 		},
-		{ cb, color = { fg = color, bg = colors.bg_dark } },
+		{ cb, color = color },
 		{
 			function()
 				return ""
@@ -125,7 +134,7 @@ end
 
 config.sections.lualine_c = wrap_start(function()
 	return require("lualine.utils.mode").get_mode()
-end, mode_color[vim.fn.mode()])
+end, lookup_color(mode_color, vim.fn.mode))
 
 ins_left({
 	"filetype",
@@ -146,7 +155,7 @@ ins_left({
 
 ins_left({ "location", icon = "" })
 
-ins_left({ "progress", color = { gui = "bold" }, padding = 0 })
+ins_left({ "progress", color = { gui = "bold" } })
 
 ins_left({
 	"diagnostics",
@@ -173,17 +182,16 @@ ins_right({
 		if next(clients) == nil then
 			return msg
 		end
-		local names = ""
-		for _, client in ipairs(clients) do
-			local filetypes = client.config.filetypes
-			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "null-ls" then
-				if #names > 0 then
-					names = names .. ", "
-				end
-				names = names .. client.name
-			end
-		end
-		return names
+		local valid_servers = vim.tbl_filter(function(client)
+			return client.config.filetypes
+				and vim.tbl_contains(client.config.filetypes, buf_ft)
+				and client.name ~= "null-ls"
+		end, clients)
+		local server_names = vim.tbl_map(function(client)
+			return client.name
+		end, valid_servers)
+		local sep = ", "
+		return table.concat(server_names, sep)
 	end,
 	icon = " ",
 })
