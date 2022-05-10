@@ -91,6 +91,15 @@ local ext_telescope = {
 	filetypes = { "TelescopePrompt" },
 }
 
+local empty_sections = {
+	lualine_a = {},
+	lualine_b = {},
+	lualine_y = {},
+	lualine_z = {},
+	lualine_c = {},
+	lualine_x = {},
+}
+
 local config = {
 	options = {
 		globalstatus = true,
@@ -101,22 +110,8 @@ local config = {
 			inactive = { c = { fg = colors.dark5, bg = colors.bg_dark } },
 		},
 	},
-	sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_y = {},
-		lualine_z = {},
-		lualine_c = {},
-		lualine_x = {},
-	},
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_y = {},
-		lualine_z = {},
-		lualine_c = {},
-		lualine_x = {},
-	},
+	sections = empty_sections,
+	inactive_sections = empty_sections,
 	extensions = {
 		ext_fugitive,
 		ext_nvimtree,
@@ -137,12 +132,6 @@ config.sections.lualine_c = wrap_start(function()
 end, lookup_color(mode_color, vim.fn.mode))
 
 ins_left({
-	"filetype",
-	fmt = string.upper,
-	icons_enabled = true,
-})
-
-ins_left({
 	"filename",
 	cond = conditions.buffer_not_empty,
 })
@@ -156,16 +145,9 @@ ins_left({
 ins_left({ "location", icon = "" })
 
 ins_left({ "progress", color = { gui = "bold" } })
-
 ins_left({
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
-	symbols = { error = "  ", warn = " ", info = " " },
-	diagnostics_color = {
-		color_error = { fg = colors.red },
-		color_warn = { fg = colors.yellow },
-		color_info = { fg = colors.cyan },
-	},
 })
 
 ins_left({
@@ -228,7 +210,7 @@ ins_right({
 
 ins_right({
 	"diff",
-	symbols = { added = "  ", modified = "  ", removed = "  " },
+	symbols = { added = " ", modified = " ", removed = " " },
 	diff_color = {
 		added = { fg = colors.green },
 		modified = { fg = colors.orange },
