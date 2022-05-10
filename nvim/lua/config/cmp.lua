@@ -1,5 +1,5 @@
 local cmp = require("cmp")
-local icons = require("icons")
+local icons = require("config.icons")
 
 cmp.setup({
 	snippet = {

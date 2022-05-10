@@ -44,6 +44,8 @@ require("packer").startup(function(use)
 	use("j-hui/fidget.nvim")
 	use("stevearc/dressing.nvim")
 	use("norcalli/nvim-colorizer.lua")
+	use("akinsho/bufferline.nvim")
+	use("kyazdani42/nvim-tree.lua")
 	if packer_bootstrap then
 		require("packer").sync()
 	end
@@ -51,6 +53,4 @@ end)
 
 require("config")
 require("keymaps")
-require("plugins")
-require("treesitter")
 require("lsp")

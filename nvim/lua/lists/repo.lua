@@ -101,7 +101,7 @@ M.list = function(opts)
 		},
 		layout_strategy = "center",
 		attach_mappings = function(prompt_bufnr)
-			actions_set.select:replace(function(_, type)
+			actions_set.select:replace(function(_, _)
 				local entry = actions_state.get_selected_entry()
 				local dir = from_entry.path(entry)
 				actions.close(prompt_bufnr)

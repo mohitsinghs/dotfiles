@@ -1,0 +1,15 @@
+return {
+	bg_dark = "#1f2335",
+	bg_light = "#292e42",
+	fg = "#c0caf5",
+	yellow = "#e0af68",
+	cyan = "#7dcfff",
+	green = "#9ece6a",
+	orange = "#ff9e64",
+	purple = "#9d7cd8",
+	magenta = "#bb9af7",
+	blue = "#7aa2f7",
+	red = "#f7768e",
+	dark3 = "#545c7e",
+	dark5 = "#737aa2",
+}

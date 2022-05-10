@@ -7,7 +7,7 @@ local on_attach = function(client, bufnr)
 	local opts = { buffer = bufnr }
 	client.resolved_capabilities.document_formatting = false
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-	vim.keymap.set("n", "<leader>qf", vim.lsp.buf.code_action, opts)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end
 
 local servers = {
