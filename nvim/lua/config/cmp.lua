@@ -1,6 +1,10 @@
 local cmp = require("cmp")
 local icons = require("config.icons")
 
+local function feed(key)
+	vim.fn.feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "")
+end
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -18,6 +22,8 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
+			elseif vim.call("vsnip#available", 1) ~= 0 then
+				feed("<Plug>(vsnip-jump-next)")
 			else
 				fallback()
 			end
@@ -25,6 +31,8 @@ cmp.setup({
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
+			elseif vim.call("vsnip#available", -1) ~= 0 then
+				feed("<Plug>(vsnip-jump-prev)")
 			else
 				fallback()
 			end
@@ -38,9 +46,9 @@ cmp.setup({
 		end,
 	},
 	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "vsnip" },
-		{ name = "path" },
+		{ name = "nvim_lsp", max_item_count = 10 },
+		{ name = "vsnip", max_item_count = 5 },
+		{ name = "path", max_item_count = 5 },
 		{ name = "nvim_lsp_signature_help" },
 	},
 })
