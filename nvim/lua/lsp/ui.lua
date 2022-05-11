@@ -11,4 +11,8 @@ vim.diagnostic.config({
 	},
 })
 
-require("dressing").setup()
+require("dressing").setup({
+	select = {
+		telescope = require("telescope.themes").get_cursor({}),
+	},
+})
