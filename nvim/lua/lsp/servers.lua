@@ -1,6 +1,6 @@
 local lsp_installer = require("nvim-lsp-installer")
 local lspconfig = require("lspconfig")
-local server_opts = require("lsp.opts")
+local lsp_opts = require("lsp.opts")
 
 local on_attach = function(client, bufnr)
 	local opts = { buffer = bufnr }
@@ -36,8 +36,11 @@ for _, lsp in pairs(servers) do
 		on_attach = on_attach,
 		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 	}
-	if server_opts[lsp] ~= nil then
-		opts.settings = server_opts[lsp]
+	if lsp_opts.settings[lsp] ~= nil then
+		opts.settings = lsp_opts.settings[lsp]
+	end
+	if lsp_opts.init[lsp] ~= nil then
+		opts.init_options = lsp_opts.init[lsp]
 	end
 	lspconfig[lsp].setup(opts)
 end

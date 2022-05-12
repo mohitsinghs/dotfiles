@@ -2,7 +2,9 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-return {
+M = {}
+
+M.settings = {
 	jsonls = {
 		schemas = require("schemastore").json.schemas(),
 	},
@@ -43,3 +45,14 @@ return {
 		},
 	},
 }
+
+M.init = {
+	tsserver = {
+		hostInfo = "neovim",
+		preferences = {
+			importModuleSpecifierPreference = "project-relative",
+		},
+	},
+}
+
+return M
