@@ -27,7 +27,7 @@ if [[ "$VSC_LATEST" == "$VSC_LOCAL" ]]; then
 else
   doing "Installing VSCodium v$VSC_LATEST"
   VSC_URL=$(curl -sL $VSC_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("amd64.deb"))')
-  curl -sL $VSC_URL -o vscodium.deb
+  curl -sL "$VSC_URL" -o vscodium.deb
   sudo dpkg -i vscodium.deb
   rm vscodium.deb
   success
@@ -44,8 +44,6 @@ success
 
 # VSCodium extensions
 extensions=(
-  \  42Crunch.vscode-openapi
-  \  alefragnani.project-manager
   \  be5invis.vscode-custom-css
   \  bradlc.vscode-tailwindcss
   \  bradymholt.pgformatter
@@ -61,6 +59,7 @@ extensions=(
   \  firefox-devtools.vscode-firefox-debug
   \  firsttris.vscode-jest-runner
   \  foxundermoon.shell-format
+  \  GitHub.github-vscode-theme
   \  golang.go
   \  GraphQL.vscode-graphql
   \  heybourn.headwind
@@ -68,6 +67,7 @@ extensions=(
   \  IronGeek.vscode-env
   \  matklad.rust-analyzer
   \  mikestead.dotenv
+  \  mohitsingh.repo
   \  ms-azuretools.vscode-docker
   \  ms-kubernetes-tools.vscode-kubernetes-tools
   \  ms-python.python
@@ -85,7 +85,6 @@ extensions=(
   \  redhat.vscode-xml
   \  redhat.vscode-yaml
   \  silvenon.mdx
-  \  SonarSource.sonarlint-vscode
   \  streetsidesoftware.code-spell-checker
   \  sumneko.lua
   \  tamasfe.even-better-toml
