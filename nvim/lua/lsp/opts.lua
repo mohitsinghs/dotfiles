@@ -44,6 +44,13 @@ M.settings = {
 			},
 		},
 	},
+	yamlls = {
+		redhat = {
+			telemetry = {
+				enabled = false,
+			},
+		},
+	},
 }
 
 M.init = {

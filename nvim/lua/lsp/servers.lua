@@ -20,6 +20,9 @@ local servers = {
 	"gopls",
 	"rust_analyzer",
 	"sumneko_lua",
+	"yamlls",
+	"bashls",
+	"graphql",
 }
 
 lsp_installer.setup({
@@ -35,6 +38,7 @@ for _, lsp in pairs(servers) do
 	local opts = {
 		on_attach = on_attach,
 		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+		single_file_support = true,
 	}
 	if lsp_opts.settings[lsp] ~= nil then
 		opts.settings = lsp_opts.settings[lsp]
