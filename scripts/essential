@@ -7,200 +7,201 @@ source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Set timezone to +5:30
 if [[ /etc/localtime -ef /usr/share/zoneinfo/Asia/Kolkata && $(cat /etc/timezone) == "Asia/Kolkata" ]]; then
-  success_msg "Timezone is already set to Asia/Kotkata"
+	success_msg "Timezone is already set to Asia/Kotkata"
 else
-  sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
-  success_msg "Setting timezone to Asia/Kotkata"
+	sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
+	success_msg "Setting timezone to Asia/Kotkata"
 fi
 sudo apt-get update
 sudo apt-get upgrade -y
 
 sudo apt-get install -y \
-  aria2 \
-  curl \
-  jq \
-  htop \
-  p7zip-full \
-  p7zip-rar \
-  zip \
-  unzip \
-  tar \
-  python3 \
-  python3-pip \
-  python3-venv \
-  tmux \
-  zsh \
-  zsh-syntax-highlighting \
-  zstd \
-  apt-transport-https \
-  software-properties-common
+	aria2 \
+	curl \
+	jq \
+	htop \
+	p7zip-full \
+	p7zip-rar \
+	zip \
+	unzip \
+	tar \
+	python3 \
+	python3-pip \
+	python3-venv \
+	tmux \
+	zsh \
+	zsh-syntax-highlighting \
+	zstd \
+	apt-transport-https \
+	software-properties-common
 
 # focal only packages
-if [[ $(lsb_release -cs) == 'focal' ]]; then
-  sudo apt-get install zsh-autosuggestions
+release="$(lsb_release -cs)"
+if [[ "$release" == 'focal' || "$release" = "jammy" ]]; then
+	sudo apt-get install zsh-autosuggestions
 fi
 
 function install_git {
-  doing "Verifying git version..."
-  GIT_LOCAL=$(git --version | cut -d " " -f 3-)
-  GIT_LATEST=$(curl -sL https://git-scm.com | rg --pcre2 -U '(?<=version">\n)(\s+)' | tr -d " ")
-  success
-  if [[ "$GIT_LATEST" == "$GIT_LOCAL" ]]; then
-    success_msg "Latest git is installed ( v$GIT_LATEST )"
-  else
-    repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
-    sudo apt-get remove -y git
-    sudo apt-get install git
-  fi
+	doing "Verifying git version..."
+	GIT_LOCAL=$(git --version | cut -d " " -f 3-)
+	GIT_LATEST=$(curl -sL https://git-scm.com | rg --pcre2 -U '(?<=version">\n)(\s+)' | tr -d " ")
+	success
+	if [[ "$GIT_LATEST" == "$GIT_LOCAL" ]]; then
+		success_msg "Latest git is installed ( v$GIT_LATEST )"
+	else
+		repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
+		sudo apt-get remove -y git
+		sudo apt-get install git
+	fi
 }
 
 function _extract_version {
-  echo "$1" | rg '\d{1,3}\.\d{1,3}(\.\d{1,3})?' -o 2>/dev/null | head -n 1
+	echo "$1" | rg '\d{1,3}\.\d{1,3}(\.\d{1,3})?' -o 2>/dev/null | head -n 1
 }
 
 function _get_release {
-  echo "https://api.github.com/repos/$1/releases/latest"
+	echo "https://api.github.com/repos/$1/releases/latest"
 }
 
 function install_neovim {
-  doing "Verifying neovim version..."
-  NVIM_ENDPOINT=$(_get_release "neovim/neovim")
-  NVIM_LOCAL=$(_extract_version "$(nvim -v 2>/dev/null)")
-  NVIM_LATEST=$(_extract_version "$(curl -sL $NVIM_ENDPOINT | jq -r '.name')")
+	doing "Verifying neovim version..."
+	NVIM_ENDPOINT=$(_get_release "neovim/neovim")
+	NVIM_LOCAL=$(_extract_version "$(nvim -v 2>/dev/null)")
+	NVIM_LATEST=$(_extract_version "$(curl -sL "$NVIM_ENDPOINT" | jq -r '.name')")
 
-  success
-  if [[ "$NVIM_LATEST" == "$NVIM_LOCAL" ]]; then
-    success_msg "Latest neovim is installed ( v$NVIM_LATEST )"
-  else
-    doing "Installing neovim v$NVIM_LATEST..."
-    NVIM_URL=$(curl -sL $NVIM_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("appimage"))')
-    curl -sL $NVIM_URL -o nvim.appimage
-    chmod u+x nvim.appimage
-    sudo install nvim.appimage /usr/local/bin/nvim
-    rm nvim.appimage
-    success
-  fi
+	success
+	if [[ "$NVIM_LATEST" == "$NVIM_LOCAL" ]]; then
+		success_msg "Latest neovim is installed ( v$NVIM_LATEST )"
+	else
+		doing "Installing neovim v$NVIM_LATEST..."
+		NVIM_URL=$(curl -sL "$NVIM_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("appimage"))')
+		curl -sL "$NVIM_URL" -o nvim.appimage
+		chmod u+x nvim.appimage
+		sudo install nvim.appimage /usr/local/bin/nvim
+		rm nvim.appimage
+		success
+	fi
 }
 
 function install_ripgrep {
-  doing "Verifying ripgrep version..."
-  RG_ENDPOINT=$(_get_release "BurntSushi/ripgrep")
-  RG_LOCAL=$(_extract_version "$(rg -V 2>/dev/null)")
-  RG_LATEST=$(curl -sL $RG_ENDPOINT | jq -r '.name')
-  success
-  if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
-    success_msg "Latest ripgrep is installed ( v$RG_LATEST )"
-  else
-    doing "Installing ripgrep v$RG_LATEST..."
-    RG_URL=$(curl -sL $RG_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("deb"))')
-    curl -sL $RG_URL -o ripgrep.deb >/dev/null
-    sudo dpkg -i ripgrep.deb
-    rm ripgrep.deb
-    success
-  fi
+	doing "Verifying ripgrep version..."
+	RG_ENDPOINT=$(_get_release "BurntSushi/ripgrep")
+	RG_LOCAL=$(_extract_version "$(rg -V 2>/dev/null)")
+	RG_LATEST=$(curl -sL "$RG_ENDPOINT" | jq -r '.name')
+	success
+	if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
+		success_msg "Latest ripgrep is installed ( v$RG_LATEST )"
+	else
+		doing "Installing ripgrep v$RG_LATEST..."
+		RG_URL=$(curl -sL "$RG_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("deb"))')
+		curl -sL "$RG_URL" -o ripgrep.deb >/dev/null
+		sudo dpkg -i ripgrep.deb
+		rm ripgrep.deb
+		success
+	fi
 }
 
 function install_bat {
-  doing "Verifying bat version..."
-  BAT_ENDPOINT=$(_get_release "sharkdp/bat")
-  BAT_LOCAL=$(_extract_version "$(bat -V 2>/dev/null)")
-  BAT_LATEST=$(_extract_version "$(curl -sL $BAT_ENDPOINT | jq -r '.name')")
-  success
-  if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
-    success_msg "Latest bat is installed ( v$BAT_LATEST )"
-  else
-    doing "Installing bat v$BAT_LATEST..."
-    BAT_URL=$(curl -sL $BAT_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
-    curl -sL $BAT_URL -o bat.deb
-    sudo dpkg -i bat.deb >/dev/null
-    rm bat.deb
-    success
-  fi
+	doing "Verifying bat version..."
+	BAT_ENDPOINT=$(_get_release "sharkdp/bat")
+	BAT_LOCAL=$(_extract_version "$(bat -V 2>/dev/null)")
+	BAT_LATEST=$(_extract_version "$(curl -sL "$BAT_ENDPOINT" | jq -r '.name')")
+	success
+	if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
+		success_msg "Latest bat is installed ( v$BAT_LATEST )"
+	else
+		doing "Installing bat v$BAT_LATEST..."
+		BAT_URL=$(curl -sL "$BAT_ENDPOINT" | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
+		curl -sL "$BAT_URL" -o bat.deb
+		sudo dpkg -i bat.deb >/dev/null
+		rm bat.deb
+		success
+	fi
 }
 
 function install_exa {
-  doing "Verifying exa version..."
-  EXA_ENDPOINT=$(_get_release "ogham/exa")
-  EXA_LOCAL=$(_extract_version "$(exa -v 2>/dev/null)")
-  EXA_LATEST=$(_extract_version "$(curl -sL $EXA_ENDPOINT | jq -r '.tag_name')")
-  success
-  if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
-    success_msg "Latest exa is installed ( v$EXA_LATEST )"
-  else
-    doing "Installing exa v$EXA_LATEST..."
-    EXA_URL=$(curl -sL $EXA_ENDPOINT | jq -r '.assets[].browser_download_url | select((contains("exa-linux-x86_64")) and (contains("musl") | not))')
-    curl -sL $EXA_URL -o exa.zip
-    unzip -qq exa.zip -d exa
-    (
-      cd exa
-      sudo install bin/exa /usr/local/bin/exa
-      manloc="$(manpath | cut -d ":" -f1)/man1"
-      cp man/* "$manloc"
-      cp completions/exa.zsh "$HOME/.zsh"
-    )
-    rm -rf exa exa.zip
-    success
-  fi
+	doing "Verifying exa version..."
+	EXA_ENDPOINT=$(_get_release "ogham/exa")
+	EXA_LOCAL=$(_extract_version "$(exa -v 2>/dev/null)")
+	EXA_LATEST=$(_extract_version "$(curl -sL "$EXA_ENDPOINT" | jq -r '.tag_name')")
+	success
+	if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
+		success_msg "Latest exa is installed ( v$EXA_LATEST )"
+	else
+		doing "Installing exa v$EXA_LATEST..."
+		EXA_URL=$(curl -sL "$EXA_ENDPOINT" | jq -r '.assets[].browser_download_url | select((contains("exa-linux-x86_64")) and (contains("musl") | not))')
+		curl -sL "$EXA_URL" -o exa.zip
+		unzip -qq exa.zip -d exa
+		(
+			cd exa || exit
+			sudo install bin/exa /usr/local/bin/exa
+			manloc="$(manpath | cut -d ":" -f1)/man1"
+			cp man/* "$manloc"
+			cp completions/exa.zsh "$HOME/.zsh"
+		)
+		rm -rf exa exa.zip
+		success
+	fi
 }
 
 function install_delta {
-  doing "Verifying delta version..."
-  DELTA_ENDPOINT=$(_get_release "dandavison/delta")
-  DELTA_LOCAL=$(_extract_version "$(delta -V 2>/dev/null)")
-  DELTA_LATEST=$(curl -sL $DELTA_ENDPOINT | jq -r '.tag_name')
-  success
-  if [[ "$DELTA_LATEST" == "$DELTA_LOCAL" ]]; then
-    success_msg "Latest delta is installed ( v$DELTA_LATEST )"
-  else
-    doing "Installing delta v$DELTA_LATEST..."
-    DELTA_URL=$(curl -sL $DELTA_ENDPOINT | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
-    curl -sL $DELTA_URL -o delta.deb
-    sudo dpkg -i delta.deb >/dev/null
-    rm delta.deb
-    success
-  fi
+	doing "Verifying delta version..."
+	DELTA_ENDPOINT=$(_get_release "dandavison/delta")
+	DELTA_LOCAL=$(_extract_version "$(delta -V 2>/dev/null)")
+	DELTA_LATEST=$(curl -sL "$DELTA_ENDPOINT" | jq -r '.tag_name')
+	success
+	if [[ "$DELTA_LATEST" == "$DELTA_LOCAL" ]]; then
+		success_msg "Latest delta is installed ( v$DELTA_LATEST )"
+	else
+		doing "Installing delta v$DELTA_LATEST..."
+		DELTA_URL=$(curl -sL "$DELTA_ENDPOINT" | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
+		curl -sL "$DELTA_URL" -o delta.deb
+		sudo dpkg -i delta.deb >/dev/null
+		rm delta.deb
+		success
+	fi
 }
 
 function install_kitty {
-  doing "Verifying kitty version..."
-  KITTY_ENDPOINT=$(_get_release "kovidgoyal/kitty")
-  KITTY_LOCAL=$(_extract_version "$(kitty -v 2>/dev/null)")
-  KITTY_LATEST=$(_extract_version "$(curl -sL $KITTY_ENDPOINT | jq -r '.tag_name')")
-  success
-  if [[ "$KITTY_LATEST" == "$KITTY_LOCAL" ]]; then
-    success_msg "Latest kitty is installed ( v$KITTY_LATEST )"
-  else
-    doing "Installing kitty v$KITTY_LATEST..."
-    KITTY_URL=$(curl -sL $KITTY_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("x86_64.txz"))')
-    KITTY_LOC="$HOME/.local/kitty.app"
-    KITTY_TARGET="$HOME/.local/bin/kitty"
-    curl -sL $KITTY_URL -o kitty.txz
-    mkdir -p "$KITTY_LOC"
-    tar xf kitty.txz -C $KITTY_LOC >/dev/null
-    [[ -e "$KITTY_TARGET" ]] && rm "$KITTY_TARGET" &>/dev/null
-    ln -s "$KITTY_LOC/bin/kitty" "$KITTY_TARGET"
-    rm kitty.txz
-    success
-  fi
+	doing "Verifying kitty version..."
+	KITTY_ENDPOINT=$(_get_release "kovidgoyal/kitty")
+	KITTY_LOCAL=$(_extract_version "$(kitty -v 2>/dev/null)")
+	KITTY_LATEST=$(_extract_version "$(curl -sL "$KITTY_ENDPOINT" | jq -r '.tag_name')")
+	success
+	if [[ "$KITTY_LATEST" == "$KITTY_LOCAL" ]]; then
+		success_msg "Latest kitty is installed ( v$KITTY_LATEST )"
+	else
+		doing "Installing kitty v$KITTY_LATEST..."
+		KITTY_URL=$(curl -sL "$KITTY_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("x86_64.txz"))')
+		KITTY_LOC="$HOME/.local/kitty.app"
+		KITTY_TARGET="$HOME/.local/bin/kitty"
+		curl -sL "$KITTY_URL" -o kitty.txz
+		mkdir -p "$KITTY_LOC"
+		tar xf kitty.txz -C "$KITTY_LOC" >/dev/null
+		[[ -e "$KITTY_TARGET" ]] && rm "$KITTY_TARGET" &>/dev/null
+		ln -s "$KITTY_LOC/bin/kitty" "$KITTY_TARGET"
+		rm kitty.txz
+		success
+	fi
 }
 
 function install_starship {
-  doing "Verifying starship version..."
-  STARSHIP_ENDPOINT=$(_get_release "starship/starship")
-  STARSHIP_LOCAL=$(_extract_version "$(starship -V 2>/dev/null)")
-  STARSHIP_LATEST=$(_extract_version "$(curl -sL $STARSHIP_ENDPOINT | jq -r '.tag_name')")
-  success
-  if [[ "$STARSHIP_LATEST" == "$STARSHIP_LOCAL" ]]; then
-    success_msg "Latest starship is installed ( v$STARSHIP_LATEST )"
-  else
-    doing "Installing starship v$STARSHIP_LATEST..."
-    STARSHIP_URL=$(curl -sL $STARSHIP_ENDPOINT | jq -r '.assets[].browser_download_url | select(contains("starship-x86_64") and endswith("gnu.tar.gz"))')
-    curl -sL $STARSHIP_URL -o starship.tgz
-    tar xf starship.tgz >/dev/null
-    sudo install starship /usr/local/bin/starship
-    rm starship starship.tgz
-    success
-  fi
+	doing "Verifying starship version..."
+	STARSHIP_ENDPOINT=$(_get_release "starship/starship")
+	STARSHIP_LOCAL=$(_extract_version "$(starship -V 2>/dev/null)")
+	STARSHIP_LATEST=$(_extract_version "$(curl -sL "$STARSHIP_ENDPOINT" | jq -r '.tag_name')")
+	success
+	if [[ "$STARSHIP_LATEST" == "$STARSHIP_LOCAL" ]]; then
+		success_msg "Latest starship is installed ( v$STARSHIP_LATEST )"
+	else
+		doing "Installing starship v$STARSHIP_LATEST..."
+		STARSHIP_URL=$(curl -sL "$STARSHIP_ENDPOINT" | jq -r '.assets[].browser_download_url | select(contains("starship-x86_64") and endswith("gnu.tar.gz"))')
+		curl -sL "$STARSHIP_URL" -o starship.tgz
+		tar xf starship.tgz >/dev/null
+		sudo install starship /usr/local/bin/starship
+		rm starship starship.tgz
+		success
+	fi
 }
 
 install_git
