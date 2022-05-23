@@ -7,7 +7,7 @@
 
 ## Install
 
-To install most of the things
+To install most of these
 
 ```bash
 curl -fsSL sh.mohitsingh.in | bash
@@ -18,7 +18,7 @@ curl -fsSL sh.mohitsingh.in | bash
 ```bash
 # bare minimums
 curl -fsSL sh.mohitsingh.in/essential | bash
-# various dot configs
+# dot configs
 curl -fsSL sh.mohitsingh.in/shell | bash
 # some extra tools that are nice to have
 curl -fsSL sh.mohitsingh.in/extra | bash
