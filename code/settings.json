@@ -77,10 +77,6 @@
   "prettier.jsxSingleQuote": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "projectManager.git.baseFolders": [
-    "~/Projects",
-    "~/Work"
-  ],
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.linting.flake8Enabled": true,
@@ -116,10 +112,11 @@
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "file-icons",
+  "workbench.layoutControl.enabled": false,
   "workbench.settings.editor": "json",
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.startupEditor": "none",
   "workbench.statusBar.visible": true,
   "workbench.tips.enabled": false,
-  "workbench.tree.renderIndentGuides": "none"
+  "repositories.treeAsDefault": true
 }
