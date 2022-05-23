@@ -93,6 +93,7 @@
   "terminal.integrated.fontFamily": "Operator Mono,monospace",
   "terminal.integrated.fontSize": 13,
   "terminal.integrated.fontWeightBold": "normal",
+  "terminal.integrated.gpuAcceleration": "canvas",
   "typescript.format.enable": false,
   "typescript.surveys.enabled": false,
   "update.mode": "none",
