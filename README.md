@@ -7,12 +7,6 @@
 
 ## Install
 
-To install most of these
-
-```bash
-curl -fsSL sh.mohitsingh.in | bash
-```
-
 ### Basic utilities
 
 ```bash
