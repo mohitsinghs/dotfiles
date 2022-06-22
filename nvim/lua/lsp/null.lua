@@ -8,6 +8,7 @@ local function format()
 end
 
 null_ls.setup({
+	root_dir = require("lspconfig").util.find_git_ancestor,
 	sources = {
 		-- formatters
 		formatting.stylua,

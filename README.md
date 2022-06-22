@@ -21,7 +21,7 @@ curl -fsSL sh.mohitsingh.in/extra | bash
 ### Languages and Environments
 
 ```bash
-# node 16.x with yarn
+# node 18.x with yarn
 curl -fsSL sh.mohitsingh.in/node | bash
 # golang
 curl -fsSL sh.mohitsingh.in/go | bash
@@ -45,13 +45,3 @@ curl -fsSL sh.mohitsingh.in/highload | bash
 ```bash
 curl -fsSL sh.mohitsingh.in/code | bash
 ```
-
-## Commands
-
-These are some useful commands/functions
-
-- **`z`** - switch between my local repositories.
-- **`upblock`** - update host files to block crap
-- **`upall`** - for usual updates
-- **`dclean`** - cleanup docker images
-- **`muslbuild`** - build current project with musl-libc.

@@ -8,9 +8,6 @@ alias -- -="cd -"
 alias ~="cd ~"
 alias p="cd ~/Projects"
 
-# A less noisy tree list
-alias t="tree -I 'node_modules|.git|test|venv|env|target|build|out|.next' --noreport -C -a --dirsfirst"
-
 # Use clipboard for xclip
 alias xclip="xclip -selection clipboard"
 
@@ -20,15 +17,15 @@ alias a2c="aria2c -x16 -s16"
 # make nested directories
 alias mkdir="mkdir -p"
 
-# common shortcuts
+# alias for tools
 alias g="git"
 alias vi="nvim"
 alias vim="nvim"
 alias py="python"
-
-# shortcut for yt-dlp
-alias ytd="yt-dlp --external-downloader aria2c"
-alias ytdm="yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o '%(title)s.%(ext)s' --ppa \"EmbedThumbnail+ffmpeg_o:-c:v mjpeg -vf crop=\\\"'if(gt(ih,iw),iw,ih)':'if(gt(iw,ih),ih,iw)'\\\"\""
+alias a="apt-fast"
+alias c="cargo"
+alias d="docker"
+alias k="kubectl"
 
 # better ls output using exa
 alias la="exa -la --group-directories-first"
@@ -39,72 +36,24 @@ alias ls="exa"
 alias yi="yarn"
 alias ya="yarn add"
 alias yd="yarn add --dev"
+alias yr="yarn remove"
 alias yu="yarn upgrade-interactive --latest"
 
 # npm global alias
 alias npmg="sudo npm -g"
 
-# use apt-fast for apt
-alias aptf="apt-fast"
-
-# aliases for cloud tools
-alias d="docker"
-alias k="kubectl"
-
-# muslup/muslbuild for rust-musl-cross
-alias muslup='docker run --rm \
-  -v "$(pwd)":/home/rust/src \
-  -v "$HOME/.musl-cache":/root/.cargo/registry \
-  -v "$(pwd)/target":/home/rust/src/target \
-  messense/rust-musl-cross:x86_64-musl'
-
 # docker and swarm aliases
 alias dbuild="docker buildx b"
-alias dslogs="d service logs -f"
-alias dsrm="d service rm"
-alias dsps="d service ps"
-alias dsls="d service ls"
-alias dsll="d stack ps"
-alias dsup="d stack deploy -c"
-alias dsdown="d stack rm"
+alias dslogs="docker service logs -f"
+alias dsrm="docker service rm"
+alias dsps="docker service ps"
+alias dsls="docker service ls"
+alias dsll="docker stack ps"
+alias dsup="docker stack deploy -c"
+alias dsdown="docker stack rm"
 
 # sudoed aliases, shell reloading and pretty paths
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
 alias path="echo -e ${PATH//:/\\\n}"
 
-function muslbuild {
-  binary_name="$(basename $(pwd))"
-  muslup cargo build --release
-  muslup cp \
-    /home/rust/src/target/x86_64-unknown-linux-musl/release/$binary_name \
-    /home/rust/src
-  sudo chown $(whoami):$(whoami) "$(pwd)/$binary_name"
-}
-
-# Update blocklist
-function upblock {
-  echo -n "Updating host files..."
-  curl -fsSL "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts" | sudo tee /etc/hosts >/dev/null
-  echo "Done."
-}
-
-# Update everything
-function upall {
-  sudo apt-get update
-  sudo apt-get upgrade
-  nvim +PlugUpdate +qa
-  sudo npm up -g
-}
-#
-# cleanup local docker mess
-function dclean {
-  # remove all stopped containers
-  docker rm $(docker ps -qa) 2>/dev/null
-  # remove all dangling images
-  docker rmi $(docker images -qa --filter="dangling=true") 2>/dev/null
-  # remove unused volumes
-  docker volume prune -f
-  # remove unused networks
-  docker network prune -f
-}

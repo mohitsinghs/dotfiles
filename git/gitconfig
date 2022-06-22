@@ -18,6 +18,7 @@ sl = shortlog --summary --all --email
 d = diff
 ds = diff --staged
 c = commit
+cm = commit --message
 cp = commit --patch
 ca = commit --amend --all
 cu = commit --amend --all --no-edit
@@ -33,6 +34,10 @@ r = rebase
 rs = rebase --skip
 rc = rebase --continue
 ra = rebase --abort
+# delete a commit using rebase --onto
+rd = "!f() { git rebase -r --onto \"$1~\" \"$1\"; }; f" # delete commit
+# delete a tag from local and remote
+td = "!f() { git tag --delete \"$1\"; git push origin :\"$1\"; }; f"
 
 [push]
 default = current
