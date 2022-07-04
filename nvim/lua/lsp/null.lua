@@ -17,7 +17,9 @@ null_ls.setup({
 				PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/configs/prettierrc.json"),
 			},
 		}),
-		formatting.black,
+		formatting.black.with({
+			timeout = 5000,
+		}),
 		formatting.gofmt,
 		formatting.rustfmt,
 		formatting.shfmt,
