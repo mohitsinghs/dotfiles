@@ -29,14 +29,9 @@ null_ls.setup({
 		diagnostics.hadolint,
 		diagnostics.golangci_lint,
 		diagnostics.flake8,
-		diagnostics.proselint,
-		diagnostics.write_good,
-		diagnostics.alex,
-		diagnostics.codespell,
 		-- code_actions
 		code_actions.eslint_d,
 		code_actions.shellcheck,
-		code_actions.proselint,
 	},
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
