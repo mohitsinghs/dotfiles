@@ -65,8 +65,8 @@ extensions=(
   \  heybourn.headwind
   \  inercia.vscode-k3d
   \  IronGeek.vscode-env
-  \  matklad.rust-analyzer
   \  mikestead.dotenv
+  \  mohitsingh.markdoc
   \  mohitsingh.repo
   \  ms-azuretools.vscode-docker
   \  ms-kubernetes-tools.vscode-kubernetes-tools
@@ -84,6 +84,7 @@ extensions=(
   \  pflannery.vscode-versionlens
   \  redhat.vscode-xml
   \  redhat.vscode-yaml
+  \  rust-lang.rust-analyzer
   \  silvenon.mdx
   \  streetsidesoftware.code-spell-checker
   \  sumneko.lua
