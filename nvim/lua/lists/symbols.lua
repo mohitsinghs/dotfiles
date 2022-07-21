@@ -1,4 +1,4 @@
-local t_lsp = require("telescope.builtin.lsp")
+local t_lsp = require("telescope.builtin.__lsp")
 local entry_display = require("telescope.pickers.entry_display")
 local icons = require("config.icons")
 
