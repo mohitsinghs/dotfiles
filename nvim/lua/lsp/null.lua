@@ -8,7 +8,6 @@ local function format()
 end
 
 null_ls.setup({
-	root_dir = require("lspconfig").util.find_git_ancestor,
 	sources = {
 		-- formatters
 		formatting.stylua,
@@ -17,9 +16,7 @@ null_ls.setup({
 				PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/configs/prettierrc.json"),
 			},
 		}),
-		formatting.black.with({
-			timeout = 5000,
-		}),
+		formatting.black,
 		formatting.gofmt,
 		formatting.rustfmt,
 		formatting.shfmt,
