@@ -36,8 +36,6 @@ curl -fsSL sh.mohitsingh.in/python | bash
 curl -fsSL sh.mohitsingh.in/docker | bash
 # k3d, kubectl and helm
 curl -fsSL sh.mohitsingh.in/kube | bash
-# sever config for high load
-curl -fsSL sh.mohitsingh.in/highload | bash
 ```
 
 ### VSCodium
