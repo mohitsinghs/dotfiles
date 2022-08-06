@@ -14,6 +14,7 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/.go"
 export CARGOPATH="$HOME/.cargo"
+export RUSTC_WRAPPER=sccache
 
 # create required directories for go
 test -d "${GOPATH}" || mkdir "${GOPATH}" &>/dev/null
