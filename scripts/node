@@ -16,7 +16,5 @@ sudo npm i -g \
 	@rushstack/eslint-patch \
 	@fsouza/prettierd \
 	eslint_d \
-	alex \
-	write-good \
 	neovim \
 	typescript
