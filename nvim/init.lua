@@ -38,6 +38,7 @@ require("packer").startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("b0o/schemastore.nvim")
+	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim")
 	-- Lua
 	use("kyazdani42/nvim-web-devicons")
 	use("tanvirtin/vgit.nvim")

@@ -5,10 +5,8 @@ for type, icon in pairs(signs) do
 end
 
 vim.diagnostic.config({
-	virtual_text = {
-		prefix = "●",
-		source = "always",
-	},
+	virtual_text = false,
+	virtual_lines = true
 })
 
 require("dressing").setup({
@@ -16,3 +14,5 @@ require("dressing").setup({
 		telescope = require("telescope.themes").get_cursor({}),
 	},
 })
+
+require("lsp_lines").setup()
