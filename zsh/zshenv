@@ -27,6 +27,8 @@ alias af="apt-fast"
 alias c="cargo"
 alias d="docker"
 alias k="kubectl"
+alias hf="hyperfine"
+alias rs="rustc -C opt-level=z -C strip=symbols"
 
 # better ls output using exa
 alias la="exa -la --group-directories-first"
