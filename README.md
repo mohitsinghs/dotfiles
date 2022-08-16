@@ -34,7 +34,7 @@ curl -fsSL sh.mohitsingh.in/python | bash
 ```bash
 # docker
 curl -fsSL sh.mohitsingh.in/docker | bash
-# k3d, kubectl and helm
+# kubectl and helm
 curl -fsSL sh.mohitsingh.in/kube | bash
 ```
 
