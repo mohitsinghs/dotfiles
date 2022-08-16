@@ -62,33 +62,28 @@ extensions=(
   \  GitHub.github-vscode-theme
   \  golang.go
   \  GraphQL.vscode-graphql
+  \  GraphQL.vscode-graphql-syntax
   \  heybourn.headwind
-  \  inercia.vscode-k3d
   \  IronGeek.vscode-env
   \  mikestead.dotenv
   \  mohitsingh.markdoc
   \  mohitsingh.repo
-  \  ms-azuretools.vscode-docker
-  \  ms-kubernetes-tools.vscode-kubernetes-tools
   \  ms-python.python
   \  ms-python.vscode-pylance
   \  ms-toolsai.jupyter
   \  ms-toolsai.jupyter-keymap
   \  ms-toolsai.jupyter-renderers
   \  ms-vscode.hexeditor
-  \  mtxr.sqltools
-  \  mtxr.sqltools-driver-pg
-  \  mtxr.sqltools-driver-sqlite
   \  naumovs.color-highlight
   \  Orta.vscode-jest
   \  pflannery.vscode-versionlens
   \  redhat.vscode-xml
   \  redhat.vscode-yaml
   \  rust-lang.rust-analyzer
-  \  silvenon.mdx
   \  streetsidesoftware.code-spell-checker
   \  sumneko.lua
   \  tamasfe.even-better-toml
+  \  unifiedjs.vscode-mdx
   \  usernamehw.errorlens
   \  vadimcn.vscode-lldb
   \  wix.vscode-import-cost
