@@ -51,7 +51,7 @@ function install_git {
 	else
 		repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
 		sudo apt-get remove -y git
-		sudo apt-get install -y git tldr
+		sudo apt-get install -y git gh tldr
 	fi
 }
 
