@@ -1,4 +1,5 @@
-local lsp_installer = require("nvim-lsp-installer")
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 local lsp_opts = require("lsp.opts")
 
@@ -25,7 +26,8 @@ local servers = {
 	"graphql",
 }
 
-lsp_installer.setup({
+mason.setup()
+mason_lspconfig.setup({
 	ensure_installed = servers,
 	automatic_installation = true,
 })
