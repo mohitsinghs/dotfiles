@@ -42,6 +42,13 @@ if [[ "$release" == 'focal' || "$release" = "jammy" ]]; then
 fi
 
 function install_git {
+	if ! command -v git &>/dev/null; then
+		doing "Installing git..."
+		sudo apt-get install -y git
+		success
+	fi
+
+	sudo apt-get install -y git
 	doing "Verifying git version..."
 	GIT_LOCAL=$(git --version | cut -d " " -f 3-)
 	GIT_LATEST=$(curl -sL https://git-scm.com | rg --pcre2 -U '(?<=version">\n)(\s+)' | tr -d " ")
@@ -204,9 +211,9 @@ function install_starship {
 	fi
 }
 
+install_ripgrep
 install_git
 install_neovim
-install_ripgrep
 install_bat
 install_exa
 install_delta
