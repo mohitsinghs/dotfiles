@@ -10,7 +10,7 @@ M.settings = {
 	},
 	gopls = {
 		gopls = {
-			experimentalworkspacemodule = true,
+			experimentalWorkspaceModule = true,
 		},
 	},
 	rust_analyzer = {
