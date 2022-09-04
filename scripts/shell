@@ -37,8 +37,9 @@ success
 # link other config
 doing "Linking other configs..."
 for file in "$DOTLOC"/config/*; do
+	file=$(basename "$file")
 	[[ -e "$HOME/.config/$file" ]] && rm -rf "$HOME/.config/$file" &>/dev/null
-	ln -s "$DOTLOC/$file" "$HOME/.config/$file"
+	ln -s "$DOTLOC/config/$file" "$HOME/.config/$file"
 done
 
 success
