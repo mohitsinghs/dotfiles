@@ -14,10 +14,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
-	use("folke/tokyonight.nvim")
+	-- Editor
 	use("tpope/vim-surround")
+	use("numToStr/Comment.nvim")
+	use("norcalli/nvim-colorizer.lua")
+	-- Git
 	use("tpope/vim-fugitive")
-	use("tpope/vim-commentary")
+	use("tanvirtin/vgit.nvim")
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-refactor")
@@ -26,27 +29,29 @@ require("packer").startup(function(use)
 	use("nvim-telescope/telescope.nvim")
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
-	-- LSP
+	-- Tools
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
+	-- LSP
 	use("neovim/nvim-lspconfig")
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-nvim-lsp-signature-help")
+	use("b0o/schemastore.nvim")
+	-- Snippets
 	use("hrsh7th/cmp-vsnip")
 	use("hrsh7th/vim-vsnip")
 	use("rafamadriz/friendly-snippets")
-	use("hrsh7th/cmp-nvim-lsp-signature-help")
+	-- Diagnostics
 	use("jose-elias-alvarez/null-ls.nvim")
-	use("b0o/schemastore.nvim")
-	use("https://git.sr.ht/~whynothugo/lsp_lines.nvim")
-	-- Lua
-	use("kyazdani42/nvim-web-devicons")
-	use("tanvirtin/vgit.nvim")
-	use("nvim-lualine/lualine.nvim")
+	-- UI
+	use("folke/tokyonight.nvim")
 	use("j-hui/fidget.nvim")
 	use("stevearc/dressing.nvim")
-	use("norcalli/nvim-colorizer.lua")
+	use("kyazdani42/nvim-web-devicons")
+	use("nvim-lualine/lualine.nvim")
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end
