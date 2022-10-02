@@ -5,6 +5,7 @@ local config = {
 	relativenumber = true,
 	shortmess = { a = true, I = true, F = true, W = true, c = true },
 	termguicolors = true,
+	cmdheight = 0,
 	tabstop = 2,
 	shiftwidth = 2,
 	softtabstop = 2,
