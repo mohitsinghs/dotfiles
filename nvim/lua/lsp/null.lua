@@ -3,9 +3,16 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 
-local function format()
-	vim.lsp.buf.formatting_sync({}, 1000)
+local lsp_format = function(bufnr)
+	vim.lsp.buf.format({
+		filter = function(client)
+			return client.name == "null-ls"
+		end,
+		bufnr = bufnr,
+	})
 end
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
 	sources = {
@@ -30,12 +37,15 @@ null_ls.setup({
 		code_actions.eslint_d,
 		code_actions.shellcheck,
 	},
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
+	on_attach = function(client, bufnr)
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 			vim.api.nvim_create_autocmd("BufWritePre", {
-				desc = "LspFormatting",
-				pattern = "<buffer>",
-				callback = format,
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					lsp_format(bufnr)
+				end,
 			})
 		end
 	end,

@@ -5,7 +5,6 @@ local lsp_opts = require("lsp.opts")
 
 local on_attach = function(client, bufnr)
 	local opts = { buffer = bufnr }
-	client.resolved_capabilities.document_formatting = false
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end
@@ -32,15 +31,13 @@ mason_lspconfig.setup({
 	automatic_installation = true,
 })
 
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 for _, lsp in pairs(servers) do
 	local opts = {
 		on_attach = on_attach,
-		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-		root_dir = lspconfig.util.find_git_ancestor,
+		capabilities = capabilities,
 		single_file_support = true,
 	}
 	if lsp_opts.settings[lsp] ~= nil then
