@@ -35,9 +35,11 @@ rs = rebase --skip
 rc = rebase --continue
 ra = rebase --abort
 # delete a commit using rebase --onto
-rd = "!f() { git rebase -r --onto \"$1~\" \"$1\"; }; f" # delete commit
+rd = "!f() { git rebase -r --onto \"$1~\" \"$1\"; }; f"
 # delete a tag from local and remote
 td = "!f() { git tag --delete \"$1\"; git push origin :\"$1\"; }; f"
+# fixup a commit of provided hash
+fx = "!f() { git commit --fixup=\"$1\"; git rebase -i --autosquash \"$1~\"; }; f"
 
 [push]
 default = current
