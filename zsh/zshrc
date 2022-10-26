@@ -42,3 +42,11 @@ z() {
 
 compctl -U -K repo_completion z
 
+export HISTFILE=~/.hist
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY_TIME 
+setopt EXTENDED_HISTORY
