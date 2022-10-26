@@ -15,7 +15,7 @@ local config = {
 	signcolumn = "yes",
 	wildignore = "*/.git,*/node_modules,*/venv,*/tmp,*.so,*.swp,*.zip,*.pyc",
 	list = true,
-	listchars = { tab = "··", trail = "·" },
+	listchars = { tab = "→ ", space = "·", trail = "·" },
 	guifont = "Operator Mono Book:h10",
 }
 
