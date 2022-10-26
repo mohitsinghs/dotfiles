@@ -26,7 +26,11 @@ null_ls.setup({
 		formatting.black,
 		formatting.gofmt,
 		formatting.rustfmt,
-		formatting.shfmt,
+		formatting.shfmt.with({
+			extra_args = function(params)
+				return { "-i", vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth") }
+			end,
+		}),
 		-- diagnostics
 		diagnostics.eslint_d,
 		diagnostics.shellcheck,
