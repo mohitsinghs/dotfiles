@@ -57,14 +57,11 @@ extensions=(
   \  esbenp.prettier-vscode
   \  file-icons.file-icons
   \  firefox-devtools.vscode-firefox-debug
-  \  firsttris.vscode-jest-runner
   \  foxundermoon.shell-format
   \  GitHub.github-vscode-theme
   \  golang.go
   \  GraphQL.vscode-graphql
   \  GraphQL.vscode-graphql-syntax
-  \  heybourn.headwind
-  \  IronGeek.vscode-env
   \  mikestead.dotenv
   \  mohitsingh.markdoc
   \  mohitsingh.repo
@@ -80,10 +77,8 @@ extensions=(
   \  streetsidesoftware.code-spell-checker
   \  sumneko.lua
   \  tamasfe.even-better-toml
-  \  unifiedjs.vscode-mdx
   \  usernamehw.errorlens
   \  vadimcn.vscode-lldb
-  \  wix.vscode-import-cost
   \  XadillaX.viml
   \  zxh404.vscode-proto3
   \ )
