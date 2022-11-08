@@ -16,12 +16,10 @@ local lsp_type_highlight = {
 }
 
 local function gen_from_lsp_symbols()
-	local bufnr = vim.api.nvim_get_current_buf()
 	local display_items = {
 		{ width = 3 }, -- symbol icon
 		{ width = 25 }, -- symbol name
 		{ width = 8 }, -- symbol type
-		{ remaining = true }, -- content preview
 	}
 
 	local hl_border = "TelescopeBorder"
@@ -34,14 +32,12 @@ local function gen_from_lsp_symbols()
 	})
 
 	local make_display = function(entry)
-		local msg = vim.trim(vim.api.nvim_buf_get_lines(bufnr, entry.lnum - 1, entry.lnum, false)[1] or "")
 		local type_highlight = lsp_type_highlight
 		local icon = icons.icon_for(entry.symbol_type)
 		local display_columns = {
 			{ icon, type_highlight[entry.symbol_type], type_highlight[entry.symbol_type] },
 			entry.symbol_name,
 			{ entry.symbol_type:lower(), hl_dim, hl_dim },
-			msg,
 		}
 
 		return displayer(display_columns)
