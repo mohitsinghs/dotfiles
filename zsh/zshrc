@@ -28,19 +28,7 @@ export LC_CTYPE=en_US.UTF-8
 
 zstyle ':completion:*' menu select
 
-repo_completion() {
-    reply=(`repo cmp $@`)
-}
-
-z() {
-    local p="$(repo cd $@)"
-    test -d "$p" && cd "$p"
-    if [ -n "$TMUX" ]; then
-      tmux renamew $(basename $p)
-    fi
-}
-
-compctl -U -K repo_completion z
+eval "$(repo sh)"
 
 export HISTFILE=~/.hist
 export HISTSIZE=10000
