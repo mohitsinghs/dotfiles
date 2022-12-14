@@ -7,11 +7,7 @@ M = {}
 M.settings = {
 	jsonls = {
 		schemas = require("schemastore").json.schemas(),
-	},
-	gopls = {
-		gopls = {
-			experimentalWorkspaceModule = true,
-		},
+		validate = { enable = true },
 	},
 	rust_analyzer = {
 		["rust-analyzer"] = {
