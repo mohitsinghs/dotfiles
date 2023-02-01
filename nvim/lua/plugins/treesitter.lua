@@ -52,4 +52,17 @@ local config = {
 	},
 }
 
-require("nvim-treesitter.configs").setup(config)
+return {
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-refactor",
+			"nvim-treesitter/nvim-treesitter-context",
+		},
+		config = function()
+			require("nvim-treesitter.configs").setup(config)
+			require("treesitter-context").setup()
+		end,
+	},
+}

@@ -1,0 +1,15 @@
+return {
+  "pyright",
+  "tsserver",
+  "cssls",
+  "html",
+  "dockerls",
+  "tailwindcss",
+  "jsonls",
+  "gopls",
+  "rust_analyzer",
+  "sumneko_lua",
+  "yamlls",
+  "bashls",
+  "graphql",
+}

@@ -1,4 +1,4 @@
-local colors = require("config.colors")
+local colors = require("core.colors")
 
 local mode_color = {
 	n = colors.cyan,
@@ -166,8 +166,8 @@ ins_right({
 		end
 		local valid_servers = vim.tbl_filter(function(client)
 			return client.config.filetypes
-				and vim.tbl_contains(client.config.filetypes, buf_ft)
-				and client.name ~= "null-ls"
+					and vim.tbl_contains(client.config.filetypes, buf_ft)
+					and client.name ~= "null-ls"
 		end, clients)
 		local server_names = vim.tbl_map(function(client)
 			return client.name
@@ -227,4 +227,9 @@ ins_right({
 	padding = 0,
 })
 
-require("lualine").setup(config)
+return {
+	{
+		"nvim-lualine/lualine.nvim",
+		opts = config
+	},
+}
