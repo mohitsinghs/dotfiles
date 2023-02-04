@@ -11,6 +11,7 @@ return {
   {
     "tanvirtin/vgit.nvim",
     config = function()
+      require("vgit").setup()
       require("core.keymaps").vgit()
     end,
   },
