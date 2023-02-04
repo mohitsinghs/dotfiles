@@ -38,6 +38,9 @@ M.settings = {
       telemetry = {
         enable = false,
       },
+      format = {
+        enable = false,
+      },
     },
   },
   yamlls = {

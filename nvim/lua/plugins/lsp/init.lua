@@ -62,15 +62,20 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
-    options = function()
+    opts = function()
       local null_ls = require("null-ls")
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
       local code_actions = null_ls.builtins.code_actions
       return {
+        on_attach = function(client, bufnr)
+          require("plugins.lsp.format").on_attach(client, bufnr)
+        end,
         sources = {
           -- formatters
-          formatting.stylua,
+          formatting.stylua.with({
+            extra_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+          }),
           formatting.prettierd.with({
             env = {
               PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/configs/prettierrc.json"),
@@ -78,11 +83,8 @@ return {
           }),
           formatting.black,
           formatting.gofmt,
-          formatting.rustfmt,
           formatting.shfmt.with({
-            extra_args = function(params)
-              return { "-i", vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth") }
-            end,
+            extra_args = { "-i", "2" },
           }),
           -- diagnostics
           diagnostics.eslint_d,
@@ -95,6 +97,6 @@ return {
           code_actions.shellcheck,
         },
       }
-    end
-  }
+    end,
+  },
 }
