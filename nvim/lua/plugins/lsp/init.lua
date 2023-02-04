@@ -1,5 +1,5 @@
 local on_attach = function(client, bufnr)
-  require('plugins.lsp.format').on_attach(client, bufnr)
+  require("plugins.lsp.format").on_attach(client, bufnr)
   local opts = { buffer = bufnr }
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -31,8 +31,8 @@ return {
       local mason = require("mason")
       local mason_lspconfig = require("mason-lspconfig")
       local lspconfig = require("lspconfig")
-      local lsp_opts = require('plugins.lsp.options')
-      local servers = require('plugins.lsp.servers')
+      local lsp_opts = require("plugins.lsp.options")
+      local servers = require("plugins.lsp.servers")
 
       mason.setup()
       mason_lspconfig.setup({

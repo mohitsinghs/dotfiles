@@ -27,7 +27,6 @@ end
 
 vim.opt.clipboard:append({ "unnamedplus" })
 
-require('core.keymaps').core()
-
+require("core.keymaps").core()
 
 return config
