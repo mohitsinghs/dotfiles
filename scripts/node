@@ -10,11 +10,11 @@ sudo apt-get update
 sudo apt-get install -y nodejs
 
 sudo npm i -g \
-	@mohitsingh/eslint-config \
-	@rushstack/eslint-patch \
-	eslint \
-	neovim \
-	typescript \
-	serve \
-	surge \
-	vsce
+  @mohitsingh/eslint-config \
+  @rushstack/eslint-patch \
+  eslint \
+  neovim \
+  typescript \
+  serve \
+  surge \
+  vsce

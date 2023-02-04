@@ -11,7 +11,7 @@ source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 # Install dotfiles if not found
 DOTLOC="$HOME/Projects/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
-	source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
+  source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
 
 # No help from next launch
@@ -20,16 +20,16 @@ touch "$HOME/.hushlogin"
 # link required files
 doing "Linking zsh + git + tmux configs..."
 for file in "$DOTLOC"/{zsh,git,tmux}/*; do
-	filename=$(basename "$file")
-	[[ -e "$HOME/.$filename" ]] && rm "$HOME/.$filename" &>/dev/null
-	ln -s "$file" "$HOME/.$filename"
+  filename=$(basename "$file")
+  [[ -e "$HOME/.$filename" ]] && rm "$HOME/.$filename" &>/dev/null
+  ln -s "$file" "$HOME/.$filename"
 done
 
 # setup nvim config
 NVIM_CONF="$HOME/.config"
 doing "Linking nvim config..."
 if [[ ! -d "$NVIM_CONF" ]]; then
-	mkdir -p "$NVIM_CONF"
+  mkdir -p "$NVIM_CONF"
 fi
 ln -sf "$DOTLOC/nvim" "$NVIM_CONF/nvim"
 success
@@ -37,9 +37,9 @@ success
 # link other config
 doing "Linking other configs..."
 for file in "$DOTLOC"/config/*; do
-	file=$(basename "$file")
-	[[ -e "$HOME/.config/$file" ]] && rm -rf "$HOME/.config/$file" &>/dev/null
-	ln -s "$DOTLOC/config/$file" "$HOME/.config/$file"
+  file=$(basename "$file")
+  [[ -e "$HOME/.config/$file" ]] && rm -rf "$HOME/.config/$file" &>/dev/null
+  ln -s "$DOTLOC/config/$file" "$HOME/.config/$file"
 done
 
 success
