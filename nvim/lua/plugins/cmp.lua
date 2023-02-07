@@ -21,7 +21,7 @@ return {
     "rafamadriz/friendly-snippets",
   },
   opts = function()
-    local cmp = require('cmp')
+    local cmp = require("cmp")
     return {
       snippet = {
         expand = function(args)
@@ -58,7 +58,20 @@ return {
       }),
       formatting = {
         fields = { "kind", "abbr" },
-        format = function(_, vim_item)
+        format = function(entry, vim_item)
+          if vim_item.kind == "Color" and entry.completion_item.documentation then
+            local _, _, r, g, b = string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)")
+            if r then
+              local color = string.format("%02x%02x%02x", r, g, b)
+              local group = "Tw_" .. color
+              if vim.fn.hlID(group) < 1 then
+                vim.api.nvim_set_hl(0, group, { fg = "#" .. color })
+              end
+              vim_item.kind = "■"
+              vim_item.kind_hl_group = group
+              return vim_item
+            end
+          end
           vim_item.kind = icons.icon_for(vim_item.kind)
           return vim_item
         end,
@@ -72,5 +85,5 @@ return {
         name = "buffer",
       }),
     }
-  end
+  end,
 }
