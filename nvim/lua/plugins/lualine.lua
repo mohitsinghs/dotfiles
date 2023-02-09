@@ -73,15 +73,6 @@ local ext_fugitive = {
   filetypes = { "fugitive" },
 }
 
-local ext_nvimtree = {
-  sections = {
-    lualine_c = wrap_start(function()
-      return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
-    end, colors.cyan),
-  },
-  filetypes = { "NvimTree" },
-}
-
 local ext_telescope = {
   sections = {
     lualine_c = wrap_start(function()
@@ -114,7 +105,6 @@ local config = {
   inactive_sections = empty_sections,
   extensions = {
     ext_fugitive,
-    ext_nvimtree,
     ext_telescope,
   },
 }
@@ -165,9 +155,7 @@ ins_right({
       return msg
     end
     local valid_servers = vim.tbl_filter(function(client)
-      return client.config.filetypes
-          and vim.tbl_contains(client.config.filetypes, buf_ft)
-          and client.name ~= "null-ls"
+      return client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft) and client.name ~= "null-ls"
     end, clients)
     local server_names = vim.tbl_map(function(client)
       return client.name
@@ -231,6 +219,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    opts = config
+    opts = config,
   },
 }
