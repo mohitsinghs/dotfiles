@@ -1,10 +1,11 @@
 return {
-  { "folke/tokyonight.nvim",
+  {
+    "folke/tokyonight.nvim",
     config = function()
       vim.cmd("color tokyonight")
-    end
+    end,
   },
-  { "j-hui/fidget.nvim", config = true },
+  { "j-hui/fidget.nvim", opts = { text = { spinner = "dots" } }, config = true },
   {
     "stevearc/dressing.nvim",
     lazy = true,
@@ -19,7 +20,7 @@ return {
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.input(...)
       end
-    end
+    end,
   },
-  { "kyazdani42/nvim-web-devicons", lazy = true },
+  { "nvim-tree/nvim-web-devicons", lazy = true },
 }
