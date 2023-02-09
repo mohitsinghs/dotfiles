@@ -17,6 +17,7 @@ local langs = {
   "lua",
   "make",
   "markdown",
+  "markdown_inline",
   "python",
   "regex",
   "rust",
