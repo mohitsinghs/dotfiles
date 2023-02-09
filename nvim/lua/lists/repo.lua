@@ -91,28 +91,30 @@ M.list = function(opts)
   opts.entry_maker = t_utils.get_lazy_default(opts.entry_maker, normalize_path, opts)
   local repo_command = find_repos(opts)
   local prompt_title = "Git repositories"
-  pickers.new(opts, {
-    prompt_title = prompt_title,
-    finder = finders.new_oneshot_job(repo_command, opts),
-    previewer = false,
-    sorter = conf.file_sorter(opts),
-    layout_config = {
-      width = 60,
-    },
-    layout_strategy = "center",
-    attach_mappings = function(prompt_bufnr)
-      actions_set.select:replace(function(_, _)
-        local entry = actions_state.get_selected_entry()
-        local dir = from_entry.path(entry)
-        actions.close(prompt_bufnr)
-        vim.schedule(function()
-          vim.cmd("cd" .. dir)
-          require("telescope.builtin").find_files({ cwd = dir })
+  pickers
+    .new(opts, {
+      prompt_title = prompt_title,
+      finder = finders.new_oneshot_job(repo_command, opts),
+      previewer = false,
+      sorter = conf.file_sorter(opts),
+      layout_config = {
+        width = 60,
+      },
+      layout_strategy = "center",
+      attach_mappings = function(prompt_bufnr)
+        actions_set.select:replace(function(_, _)
+          local entry = actions_state.get_selected_entry()
+          local dir = from_entry.path(entry)
+          actions.close(prompt_bufnr)
+          vim.schedule(function()
+            vim.cmd("cd" .. dir)
+            require("telescope.builtin").find_files({ cwd = dir })
+          end)
         end)
-      end)
-      return true
-    end,
-  }):find()
+        return true
+      end,
+    })
+    :find()
 end
 
 return M
