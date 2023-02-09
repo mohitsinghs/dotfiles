@@ -73,9 +73,7 @@ return {
         end,
         sources = {
           -- formatters
-          formatting.stylua.with({
-            extra_args = { "--indent-type", "Spaces", "--indent-width", "2" },
-          }),
+          formatting.stylua,
           formatting.prettierd.with({
             env = {
               PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/configs/prettierrc.json"),
