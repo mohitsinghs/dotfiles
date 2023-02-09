@@ -2,63 +2,79 @@ local M = {}
 
 vim.g.mapleader = ","
 
-local function map_normal(key, cmd)
+local function nmap(key, cmd)
   vim.api.nvim_set_keymap("n", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
+end
+
+local function imap(key, cmd)
+  vim.api.nvim_set_keymap("i", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
+end
+
+local function vmap(key, cmd)
+  vim.api.nvim_set_keymap("v", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
 end
 
 M.core = function()
   -- Write and quit
-  map_normal("<leader>q", "q")
-  map_normal("<leader>w", "w")
-  map_normal("<leader>ws", "noa w")
-  map_normal("<leader>wa", "wa")
-  map_normal("<leader>wtf", "w !sudo tee >/dev/null %")
+  nmap("<leader>q", "q")
+  nmap("<leader>w", "w")
+  nmap("<leader>ws", "noa w")
+  nmap("<leader>wa", "wa")
+  nmap("<leader>wtf", "w !sudo tee >/dev/null %")
 
   -- Buffer navigation
-  map_normal("<F1>", "bd")
-  map_normal("<F2>", "bp")
-  map_normal("<F3>", "bn")
+  nmap("<F1>", "bd")
+  nmap("<F2>", "bp")
+  nmap("<F3>", "bn")
+
+  -- Move lines
+  nmap("<A-j>", "m .+1<cr>==")
+  nmap("<A-k>", "m .-2<cr>==")
+  imap("<A-j>", "m .+1<cr>==gi")
+  imap("<A-k>", "m .-2<cr>==gi")
+  vmap("<A-j>", "m '>+1<cr>gv=gv")
+  vmap("<A-k>", "m '<-2<cr>gv=gv")
 end
 
 M.fugitive = function()
   -- Git
-  map_normal("<leader>gs", "Git")
-  map_normal("<leader>gp", "Git push")
-  map_normal("<leader>gf", "Git push --force")
-  map_normal("<leader>gu", "Git pull")
+  nmap("<leader>gs", "Git")
+  nmap("<leader>gp", "Git push")
+  nmap("<leader>gf", "Git push --force")
+  nmap("<leader>pl", "Git pull")
 end
 
 M.vgit = function()
   --- Git Hunk
-  map_normal("<leader>hi", "VGit buffer_hunk_preview")
-  map_normal("<leader>hs", "VGit buffer_hunk_stage")
-  map_normal("<leader>hu", "VGit buffer_hunk_reset")
-
+  nmap("<leader>hi", "VGit buffer_hunk_preview")
+  nmap("<leader>hs", "VGit buffer_hunk_stage")
+  nmap("<leader>hu", "VGit buffer_hunk_reset")
+  nmap("<leader>bh", "VGit buffer_history_preview")
+  nmap("<leader>bd", "VGit buffer_diff_preview")
 end
 
 M.telescope = function()
   -- Telescope lists
-  map_normal("<space>a", "Telescope autocommands")
-  map_normal("<space>b", "Telescope buffers")
-  map_normal("<space>c", "Telescope commands")
-  map_normal("<space>d", "Telescope diagnostics")
-  map_normal("<space>f", "Telescope live_grep")
-  map_normal("<space>g", "Telescope git_commits")
-  map_normal("<space>h", "Telescope highlights")
-  map_normal("<space>k", "Telescope keymaps")
-  map_normal("<space>l", "Telescope file_browser")
-  map_normal("<space>p", "Telescope find_files")
-  map_normal("<space>r", "lua require('lists.repo').list()")
-  map_normal("<space>t", "Telescope help_tags")
-  map_normal("<space>v", "Telescope vim_options")
+  nmap("<space>a", "Telescope autocommands")
+  nmap("<space>b", "Telescope buffers")
+  nmap("<space>c", "Telescope commands")
+  nmap("<space>d", "Telescope diagnostics")
+  nmap("<space>f", "Telescope live_grep")
+  nmap("<space>g", "Telescope git_commits")
+  nmap("<space>h", "Telescope highlights")
+  nmap("<space>k", "Telescope keymaps")
+  nmap("<space>p", "Telescope find_files")
+  nmap("<space>r", "lua require('lists.repo').list()")
+  nmap("<space>t", "Telescope help_tags")
+  nmap("<space>v", "Telescope vim_options")
 
   -- Some lsp specific keymaps
-  map_normal("<leader>ld", "Telescope lsp_definitions")
-  map_normal("<leader>li", "Telescope lsp_implementations")
-  map_normal("<leader>lr", "Telescope lsp_references")
-  map_normal("<leader>ls", "lua require('lists.symbols').list()")
-  map_normal("<leader>lh", "lua vim.lsp.buf.signature_help()")
-  map_normal("<leader>lt", "Telescope lsp_type_definitions")
+  nmap("<leader>ld", "Telescope lsp_definitions")
+  nmap("<leader>li", "Telescope lsp_implementations")
+  nmap("<leader>lr", "Telescope lsp_references")
+  nmap("<leader>ls", "lua require('lists.symbols').list()")
+  nmap("<leader>lh", "lua vim.lsp.buf.signature_help()")
+  nmap("<leader>lt", "Telescope lsp_type_definitions")
 end
 
 return M
