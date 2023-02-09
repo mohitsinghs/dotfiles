@@ -13,6 +13,7 @@ local config = {
   fileencoding = "utf-8",
   updatetime = 250,
   signcolumn = "yes",
+  incsearch = false,
   wildignore = "*/.git,*/node_modules,*/venv,*/tmp,*.so,*.swp,*.zip,*.pyc",
   list = true,
   listchars = { tab = "→ ", space = "·", trail = "·" },
