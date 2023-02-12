@@ -23,7 +23,7 @@ M.settings = {
       },
     },
   },
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       runtime = {
         version = "luajit",

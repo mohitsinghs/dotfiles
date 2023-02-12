@@ -8,7 +8,7 @@ return {
   "jsonls",
   "gopls",
   "rust_analyzer",
-  "sumneko_lua",
+  "lua_ls",
   "yamlls",
   "bashls",
   "graphql",
