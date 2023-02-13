@@ -17,7 +17,6 @@ end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
 M.on_attach = function(client, bufnr)
-  print("Onattach called with ", client.name)
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
