@@ -17,7 +17,6 @@ local config = {
   wildignore = "*/.git,*/node_modules,*/venv,*/tmp,*.so,*.swp,*.zip,*.pyc",
   list = true,
   listchars = { tab = "→ ", space = "·", trail = "·" },
-  guifont = "Operator Mono Book:h10",
   splitright = true,
   splitbelow = true,
 }
