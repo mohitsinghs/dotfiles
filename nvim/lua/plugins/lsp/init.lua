@@ -26,6 +26,7 @@ return {
       "jose-elias-alvarez/null-ls.nvim",
       "b0o/schemastore.nvim",
       "hrsh7th/cmp-nvim-lsp",
+      "folke/neodev.nvim",
     },
     config = function()
       local mason = require("mason")
@@ -33,12 +34,14 @@ return {
       local lspconfig = require("lspconfig")
       local lsp_opts = require("plugins.lsp.options")
       local servers = require("plugins.lsp.servers")
+      local neodev = require("neodev")
 
       mason.setup()
       mason_lspconfig.setup({
         ensure_installed = servers,
         automatic_installation = true,
       })
+      neodev.setup()
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
