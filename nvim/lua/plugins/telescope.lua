@@ -19,11 +19,15 @@ return {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
+    cmd = "Telescope",
+    init = function()
+      require("core.keymaps").telescope()
+    end,
     config = function()
       local telescope = require("telescope")
       telescope.setup(options)
       telescope.load_extension("fzf")
-      require("core.keymaps").telescope()
     end,
+    lazy = true,
   },
 }
