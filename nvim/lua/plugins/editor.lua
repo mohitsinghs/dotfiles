@@ -1,18 +1,10 @@
 return {
-  "tpope/vim-surround",
-  { "numToStr/Comment.nvim", config = true },
-  { "norcalli/nvim-colorizer.lua", config = true },
+  { "kylechui/nvim-surround", event = "BufReadPost", config = true },
+  { "numToStr/Comment.nvim", event = "BufReadPost", config = true },
   {
-    "tpope/vim-fugitive",
-    config = function()
-      require("core.keymaps").fugitive()
-    end,
-  },
-  {
-    "tanvirtin/vgit.nvim",
-    config = function()
-      require("vgit").setup()
-      require("core.keymaps").vgit()
-    end,
+    "norcalli/nvim-colorizer.lua",
+    opts = { "*" },
+    event = "BufReadPost",
+    config = true,
   },
 }
