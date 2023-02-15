@@ -2,10 +2,20 @@ return {
   {
     "folke/tokyonight.nvim",
     config = function()
+      require("tokyonight").setup({
+        on_highlights = require("core.highlights").on_highlights,
+      })
       vim.cmd("color tokyonight")
     end,
+    lazy = true,
   },
-  { "j-hui/fidget.nvim", opts = { text = { spinner = "dots" } }, config = true },
+  {
+    "j-hui/fidget.nvim",
+    event = "BufReadPost",
+    opts = {
+      text = { spinner = "dots" },
+    },
+  },
   {
     "stevearc/dressing.nvim",
     lazy = true,
@@ -22,5 +32,9 @@ return {
       end
     end,
   },
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "nvim-tree/nvim-web-devicons",
+    opts = { deafult = true, strict = true },
+    lazy = true,
+  },
 }
