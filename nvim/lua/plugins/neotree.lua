@@ -1,13 +1,3 @@
-local colors = require("core.colors")
-
-local function set_link(source, target)
-  vim.api.nvim_set_hl(0, source, { link = target })
-end
-
-local function set_hl(source, fg, bg)
-  vim.api.nvim_set_hl(0, source, { bg = bg, fg = fg })
-end
-
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v2.x",
@@ -15,6 +5,9 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
+  },
+  keys = {
+    { "\\", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
   },
   config = function()
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
@@ -30,29 +23,36 @@ return {
         separator = { left = "", right = "" },
       },
       close_if_last_window = true,
+      add_blank_line_at_top = true,
       enable_diagnostics = false,
-      enable_modified_markers = false,
       default_component_configs = {
         indent = {
-          padding = 0,
+          padding = 1,
         },
         icon = {
           folder_closed = "",
           folder_open = "",
           folder_empty = "",
+          default = "",
+        },
+        modified = {
+          symbol = "",
         },
         git_status = {
           symbols = {
-            added = "",
-            deleted = "",
-            modified = "",
-            renamed = "",
-            untracked = "",
+            added = "A",
+            deleted = "D",
+            modified = "M",
+            renamed = "R",
+            untracked = "U",
             ignored = "",
             unstaged = "",
-            staged = "",
-            conflict = "",
+            staged = "S",
+            conflict = "C",
           },
+        },
+        name = {
+          use_git_status_colors = false,
         },
       },
       window = {
@@ -80,20 +80,5 @@ return {
         use_libuv_file_watcher = true,
       },
     })
-
-    vim.cmd([[nnoremap \ :Neotree toggle<cr>]])
-    set_hl("NeoTreeTabActive", colors.fg, colors.bg_dark)
-    set_hl("NeoTreeTabInactive", colors.dark5, colors.bg_light)
-    set_link("NeoTreeDirectoryIcon", "NvimTreeFolderIcon")
-    set_link("NeoTreeDirectoryName", "NvimTreeFolderName")
-    set_link("NeoTreeSymbolicLinkTarget", "NvimTreeSymlink")
-    set_link("NeoTreeRootName", "NvimTreeRootFolder")
-    set_link("NeoTreeDirectoryName", "NvimTreeOpenedFolderName")
-    set_link("NeoTreeFileNameOpened", "NvimTreeOpenedFile")
-    set_link("NeoTreeIndentMarker", "NvimTreeIndentMarker")
-    for _, type in ipairs({ "Untracked", "Unstaged", "Modified", "Conflict" }) do
-      set_link("NeoTreeGit" .. type, "NvimTreeGitDirty")
-    end
-    set_link("NeoTreeGitDeleted", "NvimTreeGitDeleted")
   end,
 }
