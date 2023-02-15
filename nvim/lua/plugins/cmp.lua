@@ -15,7 +15,6 @@ return {
   event = "InsertEnter",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-vsnip",
@@ -25,9 +24,6 @@ return {
   opts = function()
     local cmp = require("cmp")
     return {
-      completion = {
-        completeopt = "menu,menuone,noselect",
-      },
       snippet = {
         expand = function(args)
           vim.fn["vsnip#anonymous"](args.body)
@@ -89,8 +85,6 @@ return {
         { name = "vsnip", max_item_count = 5 },
         { name = "path", max_item_count = 5 },
         { name = "nvim_lsp_signature_help" },
-      }, {
-        name = "buffer",
       }),
     }
   end,
