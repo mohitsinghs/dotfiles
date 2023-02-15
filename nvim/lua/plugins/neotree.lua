@@ -23,7 +23,7 @@ return {
         separator = { left = "", right = "" },
       },
       close_if_last_window = true,
-      add_blank_line_at_top = true,
+      hide_root_node = true,
       enable_diagnostics = false,
       default_component_configs = {
         indent = {

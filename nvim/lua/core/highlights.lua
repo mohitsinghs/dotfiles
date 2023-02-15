@@ -1,7 +1,6 @@
 local M = {}
 
 M.on_highlights = function(hl, c)
-  -- neotree symbols on_highlights
   hl.NeoTreeGitAdded = { fg = c.green }
   hl.NeoTreeGitConflict = { fg = c.red }
   hl.NeoTreeGitDeleted = { fg = c.red }
@@ -16,14 +15,14 @@ M.on_highlights = function(hl, c)
   hl.NeoTreeTabActive = { fg = c.fg, bg = c.bg_dark }
   hl.NeoTreeTabInactive = { fg = c.dark5, bg = c.bg_highlight }
   hl.NeoTreeIndentMarker = { fg = c.fg_gutter }
-  hl.NeoTreeDirectoryIcon = { fg = c.blue }
-  hl.NeoTreeDirectoryName = { fg = c.blue }
+  hl.NeoTreeDirectoryIcon = { fg = c.fg }
+  hl.NeoTreeDirectoryName = { fg = c.fg_dark }
   hl.NeoTreeSymbolicLinkTarget = { fg = c.purple }
   hl.NeoTreeRootName = { fg = c.blue }
   hl.NeoTreeFileNameOpened = { fg = c.purple }
 
-  hl.GitHeader = { bg = c.bg_dark }
-  hl.GitFooter = { bg = c.bg_dark }
+  hl.GitHeader = { bg = c.black }
+  hl.GitFooter = { bg = c.black }
 end
 
 return M
