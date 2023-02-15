@@ -14,6 +14,7 @@ local function vmap(key, cmd)
   vim.api.nvim_set_keymap("v", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
 end
 
+
 M.core = function()
   -- Write and quit
   nmap("<leader>q", "q")
@@ -26,6 +27,10 @@ M.core = function()
   nmap("<F1>", "bd")
   nmap("<F2>", "bp")
   nmap("<F3>", "bn")
+
+  -- Switch bg and themes
+  nmap("<leader>t", "lua require('core.switcher').switch_bg()")
+  nmap("<leader>c", "lua require('core.switcher').cycle_theme()")
 
   -- Move lines
   nmap("<A-j>", "m .+1<cr>==")
@@ -63,10 +68,10 @@ M.telescope = function()
   nmap("<space>g", "Telescope git_commits")
   nmap("<space>h", "Telescope highlights")
   nmap("<space>k", "Telescope keymaps")
+  nmap("<space>o", "Telescope vim_options")
   nmap("<space>p", "Telescope find_files")
   nmap("<space>r", "lua require('lists.repo').list()")
   nmap("<space>t", "Telescope help_tags")
-  nmap("<space>v", "Telescope vim_options")
 
   -- Some lsp specific keymaps
   nmap("<leader>ld", "Telescope lsp_definitions")

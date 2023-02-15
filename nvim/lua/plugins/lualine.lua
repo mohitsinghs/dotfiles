@@ -234,9 +234,9 @@ return {
       return configFrom(colors)
     end,
     init = function()
-      local colors = require("tokyonight.colors").setup()
       local lualine = require("lualine")
       local function refresh()
+        local colors = require("tokyonight.colors").setup({ transform = true })
         local config = configFrom(colors)
         lualine.setup(config)
       end
