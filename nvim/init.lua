@@ -12,4 +12,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("core.config")
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  change_detection = {
+    notify = false,
+  },
+})
