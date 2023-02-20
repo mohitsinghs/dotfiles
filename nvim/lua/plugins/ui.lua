@@ -2,10 +2,7 @@ return {
   {
     "folke/tokyonight.nvim",
     config = function()
-      require("tokyonight").setup({
-        on_highlights = require("core.highlights").on_highlights,
-      })
-      vim.cmd("color tokyonight")
+      require("core.themer").set_theme("storm")
     end,
     lazy = true,
   },

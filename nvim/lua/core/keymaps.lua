@@ -29,8 +29,8 @@ M.core = function()
   nmap("<F3>", "bn")
 
   -- Switch bg and themes
-  nmap("<leader>t", "lua require('core.switcher').switch_bg()")
-  nmap("<leader>c", "lua require('core.switcher').cycle_theme()")
+  nmap("<leader>t", "lua require('core.themer').switch_bg()")
+  nmap("<leader>c", "lua require('core.themer').cycle_theme()")
 
   -- Move lines
   nmap("<A-j>", "m .+1<cr>==")
