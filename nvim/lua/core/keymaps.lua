@@ -70,7 +70,7 @@ M.telescope = function()
   nmap("<space>k", "Telescope keymaps")
   nmap("<space>o", "Telescope vim_options")
   nmap("<space>p", "Telescope find_files")
-  nmap("<space>r", "lua require('lists.repo').list()")
+  nmap("<space>r", "Telescope repo")
   nmap("<space>t", "Telescope help_tags")
 
   -- Some lsp specific keymaps

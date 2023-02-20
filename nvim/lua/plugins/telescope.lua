@@ -1,6 +1,5 @@
 local options = {
   defaults = {
-    prompt_prefix = "   ",
     layout_config = {
       prompt_position = "top",
     },
@@ -17,6 +16,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "mohitsinghs/repo.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     cmd = "Telescope",
@@ -27,6 +27,7 @@ return {
       local telescope = require("telescope")
       telescope.setup(options)
       telescope.load_extension("fzf")
+      telescope.load_extension("repo")
     end,
     lazy = true,
   },
