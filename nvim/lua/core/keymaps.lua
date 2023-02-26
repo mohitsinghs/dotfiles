@@ -14,7 +14,6 @@ local function vmap(key, cmd)
   vim.api.nvim_set_keymap("v", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
 end
 
-
 M.core = function()
   -- Write and quit
   nmap("<leader>q", "q")
@@ -22,6 +21,7 @@ M.core = function()
   nmap("<leader>ws", "noa w")
   nmap("<leader>wa", "wa")
   nmap("<leader>wtf", "w !sudo tee >/dev/null %")
+  nmap("<leader>i", "Inspect")
 
   -- Buffer navigation
   nmap("<F1>", "bd")
