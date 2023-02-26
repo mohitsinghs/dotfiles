@@ -3,6 +3,9 @@ local on_attach = function(client, bufnr)
   local opts = { buffer = bufnr }
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+  vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, opts)
+  vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, opts)
 end
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -13,7 +16,6 @@ end
 
 vim.diagnostic.config({
   virtual_text = true,
-  virtual_lines = true,
 })
 
 return {
