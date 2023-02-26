@@ -24,6 +24,7 @@
   "nvim-treesitter-refactor": { "branch": "master", "commit": "75f5895cc662d61eb919da8050b7a0124400d589" },
   "nvim-web-devicons": { "branch": "master", "commit": "4709a504d2cd2680fb511675e64ef2790d491d36" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
+  "repo.nvim": { "branch": "main", "commit": "6d8ed953ea0f21ecd6cd7b98e0015f1890866e2f" },
   "schemastore.nvim": { "branch": "main", "commit": "6f2ffb8420422db9a6c43dbce7227f0fdb9fcf75" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "580b6c48651cabb63455e97d7e131ed557b8c7e2" },
   "telescope.nvim": { "branch": "master", "commit": "a486ac3e8fb2198f3636da1927ed57a28836fbd8" },
