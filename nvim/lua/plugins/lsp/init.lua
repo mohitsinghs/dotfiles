@@ -89,6 +89,9 @@ return {
           formatting.shfmt.with({
             extra_args = { "-i", "2" },
           }),
+          formatting.pg_format.with({
+            extra_args = { "-s", "2" },
+          }),
           -- diagnostics
           diagnostics.eslint_d,
           diagnostics.shellcheck,
