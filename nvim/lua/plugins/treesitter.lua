@@ -4,6 +4,7 @@ local langs = {
   "dockerfile",
   "go",
   "gomod",
+  "gosum",
   "gowork",
   "graphql",
   "help",
