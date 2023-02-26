@@ -1,3 +1,12 @@
+local function attached_servers()
+  local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+  local clients = vim.lsp.get_active_clients()
+  local servers = vim.tbl_filter(function(client)
+    return client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft) and client.name ~= "null-ls"
+  end, clients)
+  return servers
+end
+
 local function configFrom(colors)
   local mode_color = {
     n = colors.cyan,
@@ -30,6 +39,10 @@ local function configFrom(colors)
       local filepath = vim.fn.expand("%:p:h")
       local gitdir = vim.fn.finddir(".git", filepath .. ";")
       return gitdir and #gitdir > 0 and #gitdir < #filepath
+    end,
+    has_servers = function()
+      local servers = attached_servers()
+      return #servers > 0
     end,
   }
 
@@ -65,7 +78,7 @@ local function configFrom(colors)
   local ext_fugitive = {
     sections = {
       lualine_c = wrap_start(function()
-        return " " .. vim.fn.FugitiveHead()
+        return " " .. vim.fn.FugitiveHead()
       end, colors.magenta),
       lualine_x = { { "location", icon = "" } },
     },
@@ -153,23 +166,14 @@ local function configFrom(colors)
 
   ins_right({
     function()
-      local msg = "No Active Lsp"
-      local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-      local clients = vim.lsp.get_active_clients()
-      if next(clients) == nil then
-        return msg
-      end
-      local valid_servers = vim.tbl_filter(function(client)
-        return client.config.filetypes
-          and vim.tbl_contains(client.config.filetypes, buf_ft)
-          and client.name ~= "null-ls"
-      end, clients)
+      local servers = attached_servers()
       local server_names = vim.tbl_map(function(client)
         return client.name
-      end, valid_servers)
+      end, servers)
       local sep = ", "
       return table.concat(server_names, sep)
     end,
+    cond = conditions.has_servers,
     icon = " ",
   })
 
@@ -199,7 +203,7 @@ local function configFrom(colors)
 
   ins_right({
     "branch",
-    icon = "",
+    icon = "",
     color = { fg = colors.purple, gui = "bold", bg = colors.bg_dark },
   })
 
