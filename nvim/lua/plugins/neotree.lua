@@ -5,6 +5,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
+    "mohitsinghs/repo.nvim",
   },
   keys = {
     { "\\", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
@@ -12,12 +13,19 @@ return {
   config = function()
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
     require("neo-tree").setup({
+      sources = {
+        "filesystem",
+        "buffers",
+        "git_status",
+        "repo",
+      },
       source_selector = {
         winbar = true,
         tab_labels = {
-          filesystem = " File",
-          buffers = "  Buffers ",
-          git_status = " Git",
+          filesystem = " File",
+          buffers = " Buf",
+          git_status = " Git",
+          repo = " Repo",
         },
         content_layout = "center",
         separator = { left = "", right = "" },
@@ -30,8 +38,8 @@ return {
           padding = 1,
         },
         icon = {
-          folder_closed = "",
-          folder_open = "",
+          folder_closed = "",
+          folder_open = "",
           folder_empty = "",
           default = "",
         },
@@ -59,13 +67,16 @@ return {
         width = 40,
         mappings = {
           ["e"] = function()
-            vim.api.nvim_exec("Neotree focus filesystem left", true)
+            vim.api.nvim_exec("Neotree focus filesystem", true)
           end,
           ["b"] = function()
-            vim.api.nvim_exec("Neotree focus buffers left", true)
+            vim.api.nvim_exec("Neotree focus buffers", true)
           end,
           ["g"] = function()
-            vim.api.nvim_exec("Neotree focus git_status left", true)
+            vim.api.nvim_exec("Neotree focus git_status", true)
+          end,
+          ["R"] = function()
+            vim.api.nvim_exec("Neotree focus repo", true)
           end,
         },
       },
