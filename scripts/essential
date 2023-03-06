@@ -68,12 +68,16 @@ function _extract_version {
 }
 
 function _get_release {
-  echo "https://api.github.com/repos/$1/releases/latest"
+  local tag="latest"
+  if [[ -n $2 ]]; then
+    tag="tags/$2"
+  fi
+  echo "https://api.github.com/repos/$1/releases/$tag"
 }
 
 function install_neovim {
   doing "Verifying neovim version..."
-  NVIM_ENDPOINT=$(_get_release "neovim/neovim")
+  NVIM_ENDPOINT=$(_get_release "neovim/neovim" "nightly")
   NVIM_LOCAL=$(_extract_version "$(nvim -v 2>/dev/null)")
   NVIM_LATEST=$(_extract_version "$(curl -sL "$NVIM_ENDPOINT" | jq '.body' | rg --pcre2 -o --color=never '(?<=NVIM v)[\d\.]+')")
 
