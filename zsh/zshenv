@@ -35,15 +35,11 @@ alias la="exa -la --group-directories-first"
 alias ll="exa -l --group-directories-first"
 alias ls="exa"
 
-# yarn shortcuts
-alias yi="yarn"
-alias ya="yarn add"
-alias yd="yarn add --dev"
-alias yr="yarn remove"
-alias yu="yarn upgrade-interactive --latest"
-
-# npm global alias
-alias npmg="sudo npm -g"
+# npm alias
+alias n="npm"
+alias nr="npm run"
+alias y="yarn"
+alias ng="sudo npm -g"
 
 # docker and swarm aliases
 alias dbuild="docker buildx b"
