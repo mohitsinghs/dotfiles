@@ -13,12 +13,8 @@ sudo apt-get install -y \
   python3-venv
 
 python3 -m pip install --user \
-  flake8 \
-  black \
-  pylint \
   pynvim \
   pipdeptree \
   pip-autoremove \
   httpie \
-  yt-dlp \
-  proselint
+  yt-dlp
