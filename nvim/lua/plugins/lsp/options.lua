@@ -31,6 +31,7 @@ M.settings = {
   },
   yamlls = {
     redhat = {
+      schemas = require("schemastore").yaml.schemas(),
       telemetry = {
         enabled = false,
       },
