@@ -26,6 +26,7 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "jose-elias-alvarez/null-ls.nvim",
+      "jose-elias-alvarez/typescript.nvim",
       "b0o/schemastore.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "folke/neodev.nvim",
@@ -43,11 +44,11 @@ return {
         ensure_installed = servers,
         automatic_installation = true,
       })
-      neodev.setup()
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+      neodev.setup()
       for _, lsp in pairs(servers) do
         local opts = {
           on_attach = on_attach,
@@ -101,6 +102,7 @@ return {
           -- code_actions
           code_actions.eslint_d,
           code_actions.shellcheck,
+          require("typescript.extensions.null-ls.code-actions"),
         },
       }
     end,
