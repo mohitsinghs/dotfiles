@@ -44,11 +44,11 @@ return {
         ensure_installed = servers,
         automatic_installation = true,
       })
+      neodev.setup()
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-      neodev.setup()
       for _, lsp in pairs(servers) do
         local opts = {
           on_attach = on_attach,
@@ -99,6 +99,7 @@ return {
           diagnostics.hadolint,
           diagnostics.golangci_lint,
           diagnostics.flake8,
+          diagnostics.commitlint,
           -- code_actions
           code_actions.eslint_d,
           code_actions.shellcheck,
