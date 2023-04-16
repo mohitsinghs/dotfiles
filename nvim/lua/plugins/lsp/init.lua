@@ -91,7 +91,12 @@ return {
             extra_args = { "-i", "2" },
           }),
           formatting.pg_format.with({
-            extra_args = { "-s", "2" },
+            extra_args = {
+              "--spaces 2",
+              "--comma-end",
+              "--no-space-function",
+              "--format-type",
+            },
           }),
           -- diagnostics
           diagnostics.eslint_d,
