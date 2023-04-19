@@ -27,6 +27,9 @@ M.settings = {
       format = {
         enable = false,
       },
+      workspace = {
+        checkThirdParty = false,
+      },
     },
   },
   yamlls = {
