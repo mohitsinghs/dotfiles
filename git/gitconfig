@@ -59,16 +59,23 @@ diffFilter = delta --color-only
 
 [delta]
 features = line-numbers
-syntax-theme=OneHalfDark
 commit-decoration-style = yellow box ul
 file-style = yellow ul
 file-decoration-style = none
-line-numbers-minus-style = red
-line-numbers-plus-style = green
-line-numbers-zero-style = brightblack
+minus-style                   = syntax "#3f2d3d"
+minus-non-emph-style          = syntax "#3f2d3d"
+minus-emph-style              = syntax "#763842"
+minus-empty-line-marker-style = syntax "#3f2d3d"
+line-numbers-minus-style      = "#c25d64"
+plus-style                    = syntax "#283b4d"
+plus-non-emph-style           = syntax "#283b4d"
+plus-emph-style               = syntax "#316172"
+plus-empty-line-marker-style  = syntax "#283b4d"
+line-numbers-plus-style       = "#399a96"
+line-numbers-zero-style       = "#3b4261"
 
 [format]
-pretty = "%C(yellow)%h%Creset %C(auto)%d%Creset %s %C(green)%ar%Creset %C(cyan)%aN%Creset"
+pretty = "%C(yellow)%h%Creset %C(auto)%d%Creset %s %C(green)%ah %Creset %C(cyan)%aN%Creset"
 
 [log]
 abbrevCommit = true
