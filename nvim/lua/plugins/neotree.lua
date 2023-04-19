@@ -70,9 +70,6 @@ return {
           ["b"] = function()
             vim.api.nvim_exec2("Neotree focus buffers", { output = true })
           end,
-          ["g"] = function()
-            vim.api.nvim_exec2("Neotree focus git_status", { output = true })
-          end,
           ["R"] = function()
             vim.api.nvim_exec2("Neotree focus repo", { output = true })
           end,
