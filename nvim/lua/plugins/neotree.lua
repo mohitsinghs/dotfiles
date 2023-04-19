@@ -15,17 +15,15 @@ return {
     require("neo-tree").setup({
       sources = {
         "filesystem",
-        "buffers",
-        "git_status",
         "repo",
+        "buffers",
       },
       source_selector = {
         winbar = true,
-        tab_labels = {
-          filesystem = " File",
-          buffers = " Buf",
-          git_status = " Git",
-          repo = " Repo",
+        sources = {
+          { source = "filesystem", display_name = "  Files" },
+          { source = "repo", display_name = "  Repos" },
+          { source = "buffers", display_name = "  Buffers" },
         },
         content_layout = "center",
         separator = { left = "", right = "" },
@@ -67,16 +65,16 @@ return {
         width = 40,
         mappings = {
           ["e"] = function()
-            vim.api.nvim_exec("Neotree focus filesystem", true)
+            vim.api.nvim_exec2("Neotree focus filesystem", { output = true })
           end,
           ["b"] = function()
-            vim.api.nvim_exec("Neotree focus buffers", true)
+            vim.api.nvim_exec2("Neotree focus buffers", { output = true })
           end,
           ["g"] = function()
-            vim.api.nvim_exec("Neotree focus git_status", true)
+            vim.api.nvim_exec2("Neotree focus git_status", { output = true })
           end,
           ["R"] = function()
-            vim.api.nvim_exec("Neotree focus repo", true)
+            vim.api.nvim_exec2("Neotree focus repo", { output = true })
           end,
         },
       },
