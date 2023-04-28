@@ -193,6 +193,17 @@ local function configFrom(colors)
   })
 
   ins_right({
+    "diff",
+    symbols = { added = " ", modified = " ", removed = " " },
+    diff_color = {
+      added = { fg = colors.green },
+      modified = { fg = colors.yellow },
+      removed = { fg = colors.red },
+    },
+    cond = conditions.hide_in_width,
+  })
+
+  ins_right({
     function()
       return ""
     end,
@@ -204,18 +215,8 @@ local function configFrom(colors)
   ins_right({
     "branch",
     icon = "",
+    cond = conditions.check_git_workspace,
     color = { fg = colors.purple, gui = "bold", bg = colors.bg_dark },
-  })
-
-  ins_right({
-    "diff",
-    symbols = { added = " ", modified = " ", removed = " " },
-    diff_color = {
-      added = { fg = colors.green },
-      modified = { fg = colors.yellow },
-      removed = { fg = colors.red },
-    },
-    cond = conditions.hide_in_width,
   })
 
   ins_right({
