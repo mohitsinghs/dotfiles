@@ -1,14 +1,14 @@
 #!/bin/bash
 # Ensure that dotfiles exists
 
-DOTLOC="$HOME/Projects/dotfiles"
+DOTLOC="$HOME/Projects/configs/dotfiles"
 
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 doing "Ensuring dotfiles..."
 if [[ ! -d $DOTLOC ]]; then
   # create dotfiles directory and clone
-  [[ ! -d "$HOME/Projects" ]] && mkdir -p "$HOME/Projects"
+  [[ ! -d "$HOME/Projects/configs" ]] && mkdir -p "$HOME/Projects/configs"
   if [[ ! -x "$(command -v git)" ]]; then
     sudo apt-get install -y git
   fi

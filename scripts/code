@@ -8,7 +8,7 @@ sudo echo ""
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # install dotfiles if not found
-DOTLOC="$HOME/Projects/dotfiles"
+DOTLOC="$HOME/Projects/configs/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
   source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
@@ -80,8 +80,8 @@ function link_config {
   # Link config
   doing "Linking VSCodium config..."
   mkdir -p "$USER_PATH"
-  [[ -e "$USER_PATH/settings.json" ]] && rm "$USER_PATH/settings.json"
-  [[ -e "$CONFIG_PATH/product.json" ]] && rm "$CONFIG_PATH/product.json"
+  [[ -L "$USER_PATH/settings.json" ]] && unlink "$USER_PATH/settings.json"
+  [[ -L "$CONFIG_PATH/product.json" ]] && unlink "$CONFIG_PATH/product.json"
   ln -s "$DOTLOC/code/settings.json" "$USER_PATH/settings.json"
   ln -s "$DOTLOC/code/product.json" "$CONFIG_PATH/product.json"
   success
