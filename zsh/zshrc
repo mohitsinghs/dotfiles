@@ -29,6 +29,8 @@ export LC_CTYPE=en_US.UTF-8
 zstyle ':completion:*' menu select
 
 eval "$(repo sh)"
+export DIRENV_LOG_FORMAT=
+eval "$(direnv hook zsh)"
 
 export HISTFILE=~/.hist
 export HISTSIZE=10000
