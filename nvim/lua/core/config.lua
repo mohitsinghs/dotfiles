@@ -3,7 +3,7 @@ local config = {
   swapfile = false,
   number = true,
   relativenumber = true,
-  shortmess = { a = true, I = true, F = true, W = true, c = true },
+  shortmess = "IFcWas",
   termguicolors = true,
   cmdheight = 0,
   tabstop = 2,
