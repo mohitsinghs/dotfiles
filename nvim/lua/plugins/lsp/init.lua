@@ -104,7 +104,6 @@ return {
           diagnostics.hadolint,
           diagnostics.golangci_lint,
           diagnostics.flake8,
-          diagnostics.commitlint,
           -- code_actions
           code_actions.eslint_d,
           code_actions.shellcheck,
