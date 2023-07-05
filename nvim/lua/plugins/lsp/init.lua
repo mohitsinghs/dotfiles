@@ -25,8 +25,6 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
-      "jose-elias-alvarez/typescript.nvim",
       "b0o/schemastore.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "folke/neodev.nvim",
@@ -68,6 +66,9 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
+    dependencies = {
+      "jose-elias-alvarez/typescript.nvim",
+    },
     opts = function()
       local null_ls = require("null-ls")
       local formatting = null_ls.builtins.formatting
