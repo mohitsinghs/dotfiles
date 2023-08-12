@@ -8,7 +8,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    event = "BufReadPost",
+    event = "LspAttach",
     tag = "legacy",
     opts = {
       text = { spinner = "dots" },
