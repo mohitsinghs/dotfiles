@@ -5,42 +5,48 @@
 
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
-# Set timezone to +5:30
-if [[ /etc/localtime -ef /usr/share/zoneinfo/Asia/Kolkata && $(cat /etc/timezone) == "Asia/Kolkata" ]]; then
-  success_msg "Timezone is already set to Asia/Kotkata"
-else
-  sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
-  success_msg "Setting timezone to Asia/Kotkata"
-fi
-sudo apt-get update
-sudo apt-get upgrade -y
+function setup_timezone {
+  # Set timezone to +5:30
+  if [[ /etc/localtime -ef /usr/share/zoneinfo/Asia/Kolkata && $(cat /etc/timezone) == "Asia/Kolkata" ]]; then
+    success_msg "Timezone is already set to Asia/Kotkata"
+  else
+    sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
+    success_msg "Setting timezone to Asia/Kotkata"
+  fi
+}
 
-sudo apt-get install -y \
-  aria2 \
-  curl \
-  jq \
-  htop \
-  p7zip-full \
-  p7zip-rar \
-  zip \
-  unzip \
-  tar \
-  python3 \
-  python3-pip \
-  python3-venv \
-  tmux \
-  zsh \
-  zsh-syntax-highlighting \
-  zstd \
-  apt-transport-https \
-  software-properties-common \
-  fuse3
+function upgrade_packages {
 
-# focal only packages
-release="$(lsb_release -cs)"
-if [[ "$release" == 'focal' || "$release" = "jammy" ]]; then
-  sudo apt-get install zsh-autosuggestions
-fi
+  sudo apt-get update
+  sudo apt-get upgrade -y
+
+  sudo apt-get install -y \
+    aria2 \
+    curl \
+    jq \
+    htop \
+    p7zip-full \
+    p7zip-rar \
+    zip \
+    unzip \
+    tar \
+    python3 \
+    python3-pip \
+    python3-venv \
+    tmux \
+    zsh \
+    zsh-syntax-highlighting \
+    zstd \
+    apt-transport-https \
+    software-properties-common \
+    fuse3
+
+  # focal only packages
+  release="$(lsb_release -cs)"
+  if [[ "$release" == 'focal' || "$release" = "jammy" ]]; then
+    sudo apt-get install zsh-autosuggestions
+  fi
+}
 
 function install_git {
   if ! command -v git &>/dev/null; then
@@ -216,6 +222,8 @@ function install_starship {
   fi
 }
 
+setup_timezone
+upgrade_packages
 install_ripgrep
 install_git
 install_neovim
