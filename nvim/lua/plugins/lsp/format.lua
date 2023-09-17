@@ -1,19 +1,5 @@
 local M = {}
 
-M.format = function(bufnr)
-  local ft = vim.bo[bufnr].filetype
-  local supports_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
-  vim.lsp.buf.format({
-    filter = function(client)
-      if supports_nls then
-        return client.name == "null-ls"
-      end
-      return client.name ~= "null-ls"
-    end,
-    bufnr = bufnr,
-  })
-end
-
 local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
 M.on_attach = function(client, bufnr)
@@ -23,7 +9,7 @@ M.on_attach = function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = function()
-        M.format(bufnr)
+        vim.lsp.buf.format({ bufnr = bufnr })
       end,
     })
   end
