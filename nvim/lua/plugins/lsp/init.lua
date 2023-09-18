@@ -1,5 +1,4 @@
-local on_attach = function(client, bufnr)
-  require("plugins.lsp.format").on_attach(client, bufnr)
+local on_attach = function(_, bufnr)
   local opts = { buffer = bufnr }
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
