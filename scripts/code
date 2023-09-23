@@ -29,15 +29,27 @@ extensions=(
   \  file-icons.file-icons
   \  firefox-devtools.vscode-firefox-debug
   \  foxundermoon.shell-format
+  \  GitHub.github-vscode-theme
+  \  github.vscode-github-actions
+  \  GitHub.vscode-pull-request-github
   \  golang.go
   \  GraphQL.vscode-graphql
   \  GraphQL.vscode-graphql-syntax
+  \  JohnnyMorganz.stylua
   \  mikestead.dotenv
-  \  mohitsingh.markdoc
   \  mohitsingh.repo
+  \  ms-azuretools.vscode-docker
+  \  ms-python.black-formatter
+  \  ms-python.flake8
   \  ms-python.isort
+  \  ms-python.pylint
   \  ms-python.python
   \  ms-python.vscode-pylance
+  \  ms-toolsai.jupyter
+  \  ms-toolsai.jupyter-keymap
+  \  ms-toolsai.jupyter-renderers
+  \  ms-toolsai.vscode-jupyter-cell-tags
+  \  ms-toolsai.vscode-jupyter-slideshow
   \  naumovs.color-highlight
   \  Orta.vscode-jest
   \  pflannery.vscode-versionlens
@@ -46,8 +58,8 @@ extensions=(
   \  rust-lang.rust-analyzer
   \  SirTobi.pegjs-language
   \  streetsidesoftware.code-spell-checker
-  \  sumneko.lua
   \  tamasfe.even-better-toml
+  \  timonwong.shellcheck
   \  usernamehw.errorlens
   \  vadimcn.vscode-lldb
   \  XadillaX.viml
@@ -61,8 +73,8 @@ function install_code {
 
   doing "Verifying VSCodium version..."
   VSC_ENDPOINT="https://api.github.com/repos/VSCodium/vscodium/releases/latest"
-  VSC_LOCAL=$(codium --version 2>/dev/null | head -n 1)
-  VSC_LATEST=$(curl -sL $VSC_ENDPOINT | jq -r '.tag_name')
+  VSC_LOCAL=$(codium --version 2>/dev/null | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+  VSC_LATEST=$(curl -sL $VSC_ENDPOINT | jq -r '.tag_name' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
   success
   if [[ "$VSC_LATEST" == "$VSC_LOCAL" ]]; then
     success_msg "Latest VSCodium is installed ( v$VSC_LATEST )"
@@ -97,7 +109,7 @@ function install_extensions {
     printf "\\r\\033[K"
   done
   # move cursor to end of previous line
-  printf "\\033[1A\\033[35C"
+  printf "\\033[1A\\033[37C"
   success
 }
 
