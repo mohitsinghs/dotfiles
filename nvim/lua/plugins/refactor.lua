@@ -50,8 +50,7 @@ return {
     config = function()
       require("conform.formatters.shfmt").args = { "-i", "2" }
       require("conform.formatters.pg_format").args = {
-        "--spaces 2",
-        "--comma-end",
+        "--spaces2",
         "--no-space-function",
         "--format-type",
       }
