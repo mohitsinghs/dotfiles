@@ -7,7 +7,7 @@ local on_attach = function(_, bufnr)
   vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, opts)
 end
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = "󰋽 " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -31,9 +31,11 @@ return {
     config = function()
       local mason = require("mason")
       local mason_lspconfig = require("mason-lspconfig")
+      local registry = require("mason-registry")
       local lspconfig = require("lspconfig")
       local lsp_opts = require("plugins.lsp.options")
       local servers = require("plugins.lsp.servers")
+      local tools = require("plugins.lsp.tools")
       local neodev = require("neodev")
 
       mason.setup()
@@ -41,6 +43,16 @@ return {
         ensure_installed = servers,
         automatic_installation = true,
       })
+
+      registry.refresh(function()
+        for _, pkg_name in ipairs(tools) do
+          local pkg = registry.get_package(pkg_name)
+          if not pkg:is_installed() then
+            pkg:install()
+          end
+        end
+      end)
+
       neodev.setup()
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
