@@ -48,24 +48,24 @@ return {
     "stevearc/conform.nvim",
     event = "BufReadPre",
     config = function()
-      require("conform.formatters.shfmt").args = { "-i", "2" }
-      require("conform.formatters.pg_format").args = {
-        "--spaces2",
-        "--no-space-function",
-        "--format-type",
+      local formatters = require("conform").formatters
+      formatters.shfmt = {
+        prepend_args = { "-i", "2" },
       }
-      require("conform.formatters.prettierd").args = {
-        "--jsx-single-quote",
-        "--single-quote",
-        "--no-semi",
-        "$FILENAME",
+      formatters.pg_format = {
+        prepend_args = { "--spaces2", "--no-space-function", "--format-type" },
       }
+      formatters.prettierd = {
+        env = {
+          PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/configs/prettierrc.json"),
+        },
+      }
+
       local opts = {
         formatters_by_ft = {
           lua = { "stylua" },
-          python = { "black" },
+          python = { "isort", "black" },
           sql = { "pg_format" },
-          go = { "gofmt" },
         },
         format_on_save = {
           lsp_fallback = true,
