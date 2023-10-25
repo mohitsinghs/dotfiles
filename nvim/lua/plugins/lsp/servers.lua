@@ -12,4 +12,5 @@ return {
   "yamlls",
   "bashls",
   "graphql",
+  "taplo",
 }
