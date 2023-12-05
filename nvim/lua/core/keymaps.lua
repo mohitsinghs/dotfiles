@@ -32,13 +32,9 @@ M.core = function()
   nmap("<leader>t", "lua require('core.themer').switch_bg()")
   nmap("<leader>c", "lua require('core.themer').cycle_theme()")
 
-  -- Move lines
-  nmap("<A-j>", "m .+1<cr>==")
-  nmap("<A-k>", "m .-2<cr>==")
-  imap("<A-j>", "m .+1<cr>==gi")
-  imap("<A-k>", "m .-2<cr>==gi")
-  vmap("<A-j>", "m '>+1<cr>gv=gv")
-  vmap("<A-k>", "m '<-2<cr>gv=gv")
+  -- Tasklist
+  nmap("<leader>mm", "lua require('core.tasklist').toggle_task()")
+  nmap("<leader>mn", "lua require('core.tasklist').new_task()")
 end
 
 M.fugitive = function()
