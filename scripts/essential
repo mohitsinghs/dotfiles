@@ -137,27 +137,23 @@ function install_bat {
   fi
 }
 
-function install_exa {
-  doing "Verifying exa version..."
-  EXA_ENDPOINT=$(_get_release "ogham/exa")
-  EXA_LOCAL=$(_extract_version "$(exa -v 2>/dev/null)")
-  EXA_LATEST=$(_extract_version "$(curl -sL "$EXA_ENDPOINT" | jq -r '.tag_name')")
+function install_eza {
+  doing "Verifying eza version..."
+  EZA_ENDPOINT=$(_get_release "eza-community/eza")
+  EZA_LOCAL=$(_extract_version "$(eza -v 2>/dev/null)")
+  EZA_LATEST=$(_extract_version "$(curl -sL "$EZA_ENDPOINT" | jq -r '.tag_name')")
   success
-  if [[ "$EXA_LATEST" == "$EXA_LOCAL" ]]; then
-    success_msg "Latest exa is installed ( v$EXA_LATEST )"
+  if [[ "$EZA_LATEST" == "$EZA_LOCAL" ]]; then
+    success_msg "Latest eza is installed ( v$EZA_LATEST )"
   else
-    doing "Installing exa v$EXA_LATEST..."
-    EXA_URL=$(curl -sL "$EXA_ENDPOINT" | jq -r '.assets[].browser_download_url | select((contains("exa-linux-x86_64")) and (contains("musl") | not))')
-    curl -sL "$EXA_URL" -o exa.zip
-    unzip -qq exa.zip -d exa
+    doing "Installing eza $EZA_LATEST..."
+    EZA_URL=$(curl -sl "$EZA_ENDPOINT" | jq -r '.assets[].browser_download_url | select((contains("eza_x86_64")) and endswith("gnu.zip"))')
+    curl -sL "$EZA_URL" -o eza.zip
+    unzip -qq eza.zip
     (
-      cd exa || exit
-      sudo install bin/exa /usr/local/bin/exa
-      manloc="$(manpath | cut -d ":" -f1)/man1"
-      cp man/* "$manloc"
-      cp completions/exa.zsh "$HOME/.zsh"
+    sudo install eza /usr/local/bin/eza
     )
-    rm -rf exa exa.zip
+    rm eza eza.zip
     success
   fi
 }
@@ -180,25 +176,20 @@ function install_delta {
   fi
 }
 
-function install_kitty {
-  doing "Verifying kitty version..."
-  KITTY_ENDPOINT=$(_get_release "kovidgoyal/kitty")
-  KITTY_LOCAL=$(_extract_version "$(kitty -v 2>/dev/null)")
-  KITTY_LATEST=$(_extract_version "$(curl -sL "$KITTY_ENDPOINT" | jq -r '.tag_name')")
+function install_wezterm {
+  doing "Verifying wezterm version..."
+  WEZTERM_ENDPOINT=$(_get_release "wez/wezterm")
+  WEZTERM_LOCAL="$(wezterm --version 2>/dev/null | cut -d' ' -f2 | cut -d'-' -f1)"
+  WEZTERM_LATEST=$(curl -sL "$WEZTERM_ENDPOINT" | jq -r '.tag_name' | cut -d' ' -f2 | cut -d'-' -f1)
   success
-  if [[ "$KITTY_LATEST" == "$KITTY_LOCAL" ]]; then
-    success_msg "Latest kitty is installed ( v$KITTY_LATEST )"
+  if [[ "$WEZTERM_LATEST" == "$WEZTERM_LOCAL" ]]; then
+    success_msg "Latest wezterm is installed ( v$WEZTERM_LATEST )"
   else
-    doing "Installing kitty v$KITTY_LATEST..."
-    KITTY_URL=$(curl -sL "$KITTY_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("x86_64.txz"))')
-    KITTY_LOC="$HOME/.local/kitty.app"
-    KITTY_TARGET="$HOME/.local/bin/kitty"
-    curl -sL "$KITTY_URL" -o kitty.txz
-    mkdir -p "$KITTY_LOC"
-    tar xf kitty.txz -C "$KITTY_LOC" >/dev/null
-    [[ -e "$KITTY_TARGET" ]] && rm "$KITTY_TARGET" &>/dev/null
-    ln -s "$KITTY_LOC/bin/kitty" "$KITTY_TARGET"
-    rm kitty.txz
+    doing "Installing kitty v$WEZTERM_LATEST..."
+    WEZTERM_URL=$(curl -sL "$WEZTERM_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("Ubuntu22.04.deb "))')
+    curl -sL "$WEZTERM_URL" -o wezterm.deb
+    sudo dpkg -i wezterm.deb >/dev/null
+    rm wezterm.deb
     success
   fi
 }
@@ -228,7 +219,7 @@ install_ripgrep
 install_git
 install_neovim
 install_bat
-install_exa
+install_eza
 install_delta
-install_kitty
+install_wezterm
 install_starship
