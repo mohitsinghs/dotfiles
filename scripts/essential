@@ -83,7 +83,7 @@ function _get_release {
 
 function install_neovim {
   doing "Verifying neovim version..."
-  NVIM_ENDPOINT=$(_get_release "neovim/neovim" "nightly")
+  NVIM_ENDPOINT=$(_get_release "neovim/neovim" "stable")
   NVIM_LOCAL=$(_extract_version "$(nvim -v 2>/dev/null)")
   NVIM_LATEST=$(_extract_version "$(curl -sL "$NVIM_ENDPOINT" | jq '.body' | rg --pcre2 -o --color=never '(?<=NVIM v)[\d\.]+')")
 
