@@ -3,7 +3,7 @@ success_symbol = "[▲](bold purple)"
 error_symbol = "[▲](bold red)"
 
 [directory]
-read_only = " "
+read_only = " 󰌾"
 
 [docker_context]
 symbol = " "
@@ -15,7 +15,7 @@ symbol = " "
 symbol = " "
 
 [package]
-symbol = " "
+symbol = "󰏗 "
 
 [perl]
 symbol = " "
@@ -28,4 +28,3 @@ symbol = " "
 
 [rust]
 symbol = " "
-

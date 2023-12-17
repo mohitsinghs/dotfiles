@@ -139,24 +139,11 @@ local function configFrom(colors)
     return require("lualine.utils.mode").get_mode()
   end, lookup_color(mode_color, vim.fn.mode))
 
-  ins_left({
-    "filename",
-    cond = conditions.buffer_not_empty,
-  })
+  ins_left({ "filename", cond = conditions.buffer_not_empty })
+  ins_left({ icon = "󰈚", "filesize", cond = conditions.buffer_not_empty })
+  ins_left({ "location", icon = "", cond = conditions.buffer_not_empty })
 
-  ins_left({
-    icon = "",
-    "filesize",
-    cond = conditions.buffer_not_empty,
-  })
-
-  ins_left({ "location", icon = "" })
-
-  ins_left({ "progress", color = { gui = "bold" } })
-  ins_left({
-    "diagnostics",
-    sources = { "nvim_diagnostic" },
-  })
+  ins_left({ "diagnostics", sources = { "nvim_diagnostic" } })
 
   ins_left({
     function()
