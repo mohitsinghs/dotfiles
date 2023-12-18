@@ -6,14 +6,6 @@ local function nmap(key, cmd)
   vim.api.nvim_set_keymap("n", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
 end
 
-local function imap(key, cmd)
-  vim.api.nvim_set_keymap("i", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
-end
-
-local function vmap(key, cmd)
-  vim.api.nvim_set_keymap("v", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
-end
-
 M.core = function()
   -- Write and quit
   nmap("<leader>q", "q")
