@@ -81,7 +81,6 @@ return {
           hide_dotfiles = false,
           hide_gitignored = true,
         },
-        follow_current_file = true,
         group_empty_dirs = false,
         use_libuv_file_watcher = true,
       },
