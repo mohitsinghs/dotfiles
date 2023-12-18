@@ -114,6 +114,7 @@ end)
 
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
+  { key = "b", mods = "LEADER|CTRL", action = act.SendKey({ key = "b", mods = "CTRL" }) },
   { key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
   { key = "LeftArrow", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
   { key = "LeftArrow", mods = "META", action = act.ActivatePaneDirection("Left") },

@@ -33,7 +33,6 @@ function upgrade_packages {
     python3 \
     python3-pip \
     python3-venv \
-    tmux \
     zsh \
     zsh-syntax-highlighting \
     zstd \
