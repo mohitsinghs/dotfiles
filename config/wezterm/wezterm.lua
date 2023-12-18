@@ -107,7 +107,7 @@ wezterm.on("update-status", function(window)
 
   table.insert(right, { Foreground = { Color = colors.blue } })
   table.insert(right, { Background = { Color = colors.bg_dark } })
-  table.insert(right, { Text = " " .. wezterm.strftime("%a %b %-d %H:%M %p") .. " ▊" })
+  table.insert(right, { Text = " " .. wezterm.strftime("%a %b %-d %-l:%M %p") .. " ▊" })
 
   window:set_right_status(wezterm.format(right))
 end)
