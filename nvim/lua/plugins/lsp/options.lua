@@ -1,4 +1,5 @@
 local M = {}
+local lspconfig = require("lspconfig")
 
 M.settings = {
   jsonls = {
@@ -49,6 +50,13 @@ M.init = {
       importModuleSpecifierPreference = "project-relative",
     },
   },
+}
+
+M.roots = {
+  tailwindcss = function(fname)
+    local root_pattern = lspconfig.util.root_pattern("tailwind.config.js")
+    return root_pattern(fname)
+  end,
 }
 
 return M
