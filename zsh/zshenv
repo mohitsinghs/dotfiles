@@ -30,10 +30,10 @@ alias k="kubectl"
 alias hf="hyperfine"
 alias rs="rustc -C opt-level=z -C strip=symbols"
 
-# better ls output using exa
-alias la="exa -la --group-directories-first"
-alias ll="exa -l --group-directories-first"
-alias ls="exa"
+# better ls output using eza
+alias la="eza -la --group-directories-first"
+alias ll="eza -l --group-directories-first"
+alias ls="eza"
 
 # npm alias
 alias n="npm"
