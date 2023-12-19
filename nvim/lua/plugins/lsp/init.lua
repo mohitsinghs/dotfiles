@@ -70,6 +70,10 @@ return {
         if lsp_opts.init[lsp] ~= nil then
           opts.init_options = lsp_opts.init[lsp]
         end
+        if lsp_opts.roots[lsp] ~= nil then
+          opts.root_dir = lsp_opts.roots[lsp]
+          opts.single_file_support = false
+        end
         lspconfig[lsp].setup(opts)
       end
     end,
