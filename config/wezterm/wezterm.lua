@@ -10,7 +10,7 @@ config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 24
-config.term = "wezterm"
+config.default_workspace = "home"
 
 local function get_font(name)
   return wezterm.font_with_fallback({
@@ -39,13 +39,6 @@ config.font_rules = {
   },
 }
 
-config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
-  bottom = 0,
-}
-
 local colors = {
   bg_dark = "#1f2335",
   bg_light = "#292e42",
@@ -60,6 +53,12 @@ config.colors = {
     background = colors.bg_light,
   },
 }
+
+config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+config.window_frame = { font = get_font("OperatorMono-Book") }
+config.command_palette_bg_color = colors.bg_light
+config.command_palette_fg_color = colors.fg
+config.command_palette_font_size = 12
 
 local function tab_title(tab_info)
   local title = tab_info.tab_title
@@ -88,10 +87,9 @@ end)
 wezterm.on("update-status", function(window)
   local left = {}
 
-  local workspace_name = window:mux_window():get_workspace()
   table.insert(left, { Foreground = { Color = colors.blue } })
   table.insert(left, { Background = { Color = colors.bg_dark } })
-  table.insert(left, { Text = "▊ " .. workspace_name .. " " })
+  table.insert(left, { Text = "▊ " .. window:active_workspace() .. " " })
 
   table.insert(left, { Foreground = { Color = colors.bg_dark } })
   table.insert(left, { Background = { Color = colors.bg_light } })
