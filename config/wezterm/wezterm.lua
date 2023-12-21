@@ -26,9 +26,9 @@ config.font_rules = {
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.window_frame = { font = fonts.Book }
 
-config.colors = { tab_bar = { background = colors.bg_light } }
-config.command_palette_bg_color = colors.bg_light
-config.command_palette_fg_color = colors.fg
+config.colors = { tab_bar = { background = colors.bg } }
+config.command_palette_bg_color = colors.bg
+config.command_palette_fg_color = colors.blue
 config.command_palette_font_size = 12
 
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 5000 }

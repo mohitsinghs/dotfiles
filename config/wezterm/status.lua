@@ -14,7 +14,7 @@ wezterm.on("format-tab-title", function(tab)
   local elements = {}
 
   local fg = colors.dark3
-  local bg = colors.bg_light
+  local bg = colors.bg
   if tab.is_active then
     fg = colors.dark5
     table.insert(elements, { Attribute = { Intensity = "Bold" } })
@@ -33,7 +33,7 @@ wezterm.on("update-status", function(window)
   table.insert(left, { Text = "▊ " .. window:active_workspace() .. " " })
 
   table.insert(left, { Foreground = { Color = colors.bg_dark } })
-  table.insert(left, { Background = { Color = colors.bg_light } })
+  table.insert(left, { Background = { Color = colors.bg } })
   table.insert(left, { Text = " " })
 
   window:set_left_status(wezterm.format(left))
@@ -41,7 +41,7 @@ wezterm.on("update-status", function(window)
   local right = {}
 
   table.insert(right, { Foreground = { Color = colors.bg_dark } })
-  table.insert(right, { Background = { Color = colors.bg_light } })
+  table.insert(right, { Background = { Color = colors.bg } })
   table.insert(right, { Text = "" })
 
   table.insert(right, { Foreground = { Color = colors.blue } })
