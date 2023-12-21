@@ -21,6 +21,8 @@ config.font_rules = {
   { intensity = "Bold", italic = false, font = fonts.Bold },
   { intensity = "Bold", italic = true, font = fonts.BoldI },
   { intensity = "Normal", italic = true, font = fonts.BookI },
+  { intensity = "Half", italic = true, font = fonts.BoldI },
+  { intensity = "Half", italic = false, font = fonts.Bold },
 }
 
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
