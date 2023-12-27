@@ -66,6 +66,7 @@ return {
           lua = { "stylua" },
           python = { "isort", "black" },
           sql = { "pg_format" },
+          sh = { "shfmt" },
         },
         format_on_save = {
           lsp_fallback = true,
