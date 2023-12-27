@@ -67,7 +67,8 @@ function upgrade_packages {
     base-devel \
     lm_sesors \
     tldr \
-    direnv
+    direnv \
+    usb_modeswitch
 
     sudo usermod -aG docker "$(whoami)"
 }
