@@ -1,7 +1,7 @@
 <h1 align="center">dotfiles</h1>
 <p align="center">
   <b>automated configurations</b><br/>
-  <sub>for local and remote machines running ubuntu</sub>
+  <sub>for machines running arch</sub>
 </p>
 <br />
 
