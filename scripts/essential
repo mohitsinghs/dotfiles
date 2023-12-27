@@ -3,75 +3,51 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/essential | bash
 
-source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
+sudo pacman -Syu
+sudo pacman -S \
+  aria2 \
+  jq \
+  ripgrep \
+  bat \
+  eza \
+  git-delta \
+  fd \
+  fzf \
+  htop \
+  btop \
+  p7zip \
+  zip \
+  unzip \
+  tar \
+  zstd \
+  python \
+  python-pip \
+  python-pipx \
+  zsh \
+  zsh-syntax-highlighting \
+  zsh-autosuggestions \
+  git \
+  neovim \
+  firefox \
+  vlc \
+  rhythmbox \
+  gnome-browser-connector \
+  docker \
+  docker-buildx \
+  docker-compose \
+  nodejs-lts-iron \
+  npm \
+  go \
+  rustup \
+  sccache \
+  neofetch \
+  wezterm \
+  starship \
+  smartmontools \
+  base-devel \
+  lm_sesors \
+  tldr \
+  direnv \
+  usb_modeswitch
 
-function setup_timezone {
-  # Set timezone to +5:30
-  if [[ /etc/localtime -ef /usr/share/zoneinfo/Asia/Kolkata && $(cat /etc/timezone) == "Asia/Kolkata" ]]; then
-    success_msg "Timezone is already set to Asia/Kotkata"
-  else
-    sudo ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && echo "Asia/Kolkata" | sudo tee /etc/timezone
-    success_msg "Setting timezone to Asia/Kotkata"
-  fi
-}
-
-function upgrade_packages {
-
-  sudo pacman -Syu
-  sudo pacman -S \
-    xorg \
-    gnome \
-    NetworkManager
-
-  sudo pacman -S \
-    curl \
-    aria2 \
-    jq \
-    ripgrep \
-    bat \
-    eza \
-    git-delta \
-    fd \
-    fzf \
-    htop \
-    btop \
-    p7zip \
-    zip \
-    unzip \
-    tar \
-    zstd \
-    python \
-    python-pip \
-    python-pipx \
-    zsh \
-    zsh-syntax-highlighting \
-    zsh-autosuggestions \
-    git \
-    neovim \
-    firefox \
-    vlc \
-    rhythmbox \
-    gnome-browser-connector \
-    docker \
-    docker-buildx \
-    docker-compose \
-    nodejs-lts-iron \
-    npm \
-    go \
-    rustup \
-    sccache \
-    neofetch \
-    wezterm \
-    starship \
-    smartmontools \
-    base-devel \
-    lm_sesors \
-    tldr \
-    direnv \
-    usb_modeswitch
-
-    sudo usermod -aG docker "$(whoami)"
-}
-
-setup_timezone
-upgrade_packages
+sudo usermod -aG docker "$(whoami)"
