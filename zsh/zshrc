@@ -8,10 +8,10 @@ promptinit
 eval "$(starship init zsh)"
 
 # enable zsh syntax highlighting and autosuggestions
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export GOROOT="/usr/local/go"
+export GOROOT="/usr/lib/go"
 export GOPATH="$HOME/.go"
 export CARGOPATH="$HOME/.cargo"
 export RUSTC_WRAPPER=sccache

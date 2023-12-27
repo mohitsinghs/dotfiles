@@ -9,7 +9,7 @@
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Install dotfiles if not found
-DOTLOC="$HOME/Projects/configs/dotfiles"
+DOTLOC="$HOME/projects/configs/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
   source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
@@ -32,6 +32,7 @@ doing "Linking nvim config..."
 if [[ ! -d "$NVIM_CONF" ]]; then
   mkdir -p "$NVIM_CONF"
 fi
+[[ -L "$NVIM_CONF/nvim" ]] && unlink "$NVIM_CONF/nvim" &>/dev/null
 ln -sf "$DOTLOC/nvim" "$NVIM_CONF/nvim"
 success
 

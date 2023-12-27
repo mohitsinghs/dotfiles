@@ -6,7 +6,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias -- -="cd -"
 alias ~="cd ~"
-alias p="cd ~/Projects"
+alias p="cd ~/projects"
 
 # Use clipboard for xclip
 alias xclip="xclip -selection clipboard"
@@ -22,13 +22,15 @@ alias g="git"
 alias vi="nvim"
 alias vim="nvim"
 alias py="python"
-alias a="apt"
-alias af="apt-fast"
 alias c="cargo"
 alias d="docker"
 alias k="kubectl"
 alias hf="hyperfine"
 alias rs="rustc -C opt-level=z -C strip=symbols"
+
+# aliases for pacman
+alias pi="sudo pacman -S"
+alias pr="sudo pacman -Rs"
 
 # better ls output using eza
 alias la="eza -la --group-directories-first"

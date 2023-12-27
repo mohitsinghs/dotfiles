@@ -17,208 +17,60 @@ function setup_timezone {
 
 function upgrade_packages {
 
-  sudo apt-get update
-  sudo apt-get upgrade -y
+  sudo pacman -Syu
+  sudo pacman -S \
+    xorg \
+    gnome \
+    NetworkManager
 
-  sudo apt-get install -y \
-    aria2 \
+  sudo pacman -S \
     curl \
+    aria2 \
     jq \
+    ripgrep \
+    bat \
+    eza \
+    git-delta \
+    fd \
+    fzf \
     htop \
-    p7zip-full \
-    p7zip-rar \
+    btop \
+    p7zip \
     zip \
     unzip \
     tar \
-    python3 \
-    python3-pip \
-    python3-venv \
+    zstd \
+    python \
+    python-pip \
+    python-pipx \
     zsh \
     zsh-syntax-highlighting \
-    zstd \
-    apt-transport-https \
-    software-properties-common \
-    fuse3
+    zsh-autosuggestions \
+    git \
+    neovim \
+    firefox \
+    vlc \
+    rhythmbox \
+    gnome-browser-connector \
+    docker \
+    docker-buildx \
+    docker-compose \
+    nodejs-lts-iron \
+    npm \
+    go \
+    rustup \
+    sccache \
+    neofetch \
+    wezterm \
+    starship \
+    smartmontools \
+    base-devel \
+    lm_sesors \
+    tldr \
+    direnv
 
-  # focal only packages
-  release="$(lsb_release -cs)"
-  if [[ "$release" == 'focal' || "$release" = "jammy" ]]; then
-    sudo apt-get install zsh-autosuggestions
-  fi
-}
-
-function install_git {
-  if ! command -v git &>/dev/null; then
-    doing "Installing git..."
-    sudo apt-get install -y git
-    success
-  fi
-
-  sudo apt-get install -y git
-  doing "Verifying git version..."
-  GIT_LOCAL=$(git --version | cut -d " " -f 3-)
-  GIT_LATEST=$(curl -sL https://git-scm.com | rg --pcre2 -U '(?<=version">\n)(\s+)' | tr -d " ")
-  success
-  if [[ "$GIT_LATEST" == "$GIT_LOCAL" ]]; then
-    success_msg "Latest git is installed ( v$GIT_LATEST )"
-  else
-    repo_missing "git" && sudo apt-add-repository ppa:git-core/ppa
-    sudo apt-get remove -y git
-    sudo apt-get install -y git gh tldr
-  fi
-}
-
-function _extract_version {
-  echo "$1" | rg '\d{1,3}\.\d{1,3}(\.\d{1,3})?' -o 2>/dev/null | head -n 1
-}
-
-function _get_release {
-  local tag="latest"
-  if [[ -n $2 ]]; then
-    tag="tags/$2"
-  fi
-  echo "https://api.github.com/repos/$1/releases/$tag"
-}
-
-function install_neovim {
-  doing "Verifying neovim version..."
-  NVIM_ENDPOINT=$(_get_release "neovim/neovim" "stable")
-  NVIM_LOCAL=$(_extract_version "$(nvim -v 2>/dev/null)")
-  NVIM_LATEST=$(_extract_version "$(curl -sL "$NVIM_ENDPOINT" | jq '.body' | rg --pcre2 -o --color=never '(?<=NVIM v)[\d\.]+')")
-
-  success
-  if [[ "$NVIM_LATEST" == "$NVIM_LOCAL" ]]; then
-    success_msg "Latest neovim is installed ( v$NVIM_LATEST )"
-  else
-    doing "Installing neovim v$NVIM_LATEST..."
-    NVIM_URL=$(curl -sL "$NVIM_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("appimage"))')
-    curl -sL "$NVIM_URL" -o nvim.appimage
-    chmod u+x nvim.appimage
-    sudo install nvim.appimage /usr/local/bin/nvim
-    rm nvim.appimage
-    success
-  fi
-}
-
-function install_ripgrep {
-  doing "Verifying ripgrep version..."
-  RG_ENDPOINT=$(_get_release "BurntSushi/ripgrep")
-  RG_LOCAL=$(_extract_version "$(rg -V 2>/dev/null)")
-  RG_LATEST=$(curl -sL "$RG_ENDPOINT" | jq -r '.name')
-  success
-  if [[ "$RG_LATEST" == "$RG_LOCAL" ]]; then
-    success_msg "Latest ripgrep is installed ( v$RG_LATEST )"
-  else
-    doing "Installing ripgrep v$RG_LATEST..."
-    RG_URL=$(curl -sL "$RG_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("deb"))')
-    curl -sL "$RG_URL" -o ripgrep.deb >/dev/null
-    sudo dpkg -i ripgrep.deb
-    rm ripgrep.deb
-    success
-  fi
-}
-
-function install_bat {
-  doing "Verifying bat version..."
-  BAT_ENDPOINT=$(_get_release "sharkdp/bat")
-  BAT_LOCAL=$(_extract_version "$(bat -V 2>/dev/null)")
-  BAT_LATEST=$(_extract_version "$(curl -sL "$BAT_ENDPOINT" | jq -r '.name')")
-  success
-  if [[ "$BAT_LATEST" == "$BAT_LOCAL" ]]; then
-    success_msg "Latest bat is installed ( v$BAT_LATEST )"
-  else
-    doing "Installing bat v$BAT_LATEST..."
-    BAT_URL=$(curl -sL "$BAT_ENDPOINT" | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
-    curl -sL "$BAT_URL" -o bat.deb
-    sudo dpkg -i bat.deb >/dev/null
-    rm bat.deb
-    success
-  fi
-}
-
-function install_eza {
-  doing "Verifying eza version..."
-  EZA_ENDPOINT=$(_get_release "eza-community/eza")
-  EZA_LOCAL=$(_extract_version "$(eza -v 2>/dev/null)")
-  EZA_LATEST=$(_extract_version "$(curl -sL "$EZA_ENDPOINT" | jq -r '.tag_name')")
-  success
-  if [[ "$EZA_LATEST" == "$EZA_LOCAL" ]]; then
-    success_msg "Latest eza is installed ( v$EZA_LATEST )"
-  else
-    doing "Installing eza $EZA_LATEST..."
-    EZA_URL=$(curl -sl "$EZA_ENDPOINT" | jq -r '.assets[].browser_download_url | select((contains("eza_x86_64")) and endswith("gnu.zip"))')
-    curl -sL "$EZA_URL" -o eza.zip
-    unzip -qq eza.zip
-    (
-    sudo install eza /usr/local/bin/eza
-    )
-    rm eza eza.zip
-    success
-  fi
-}
-
-function install_delta {
-  doing "Verifying delta version..."
-  DELTA_ENDPOINT=$(_get_release "dandavison/delta")
-  DELTA_LOCAL=$(_extract_version "$(delta -V 2>/dev/null)")
-  DELTA_LATEST=$(curl -sL "$DELTA_ENDPOINT" | jq -r '.tag_name')
-  success
-  if [[ "$DELTA_LATEST" == "$DELTA_LOCAL" ]]; then
-    success_msg "Latest delta is installed ( v$DELTA_LATEST )"
-  else
-    doing "Installing delta v$DELTA_LATEST..."
-    DELTA_URL=$(curl -sL "$DELTA_ENDPOINT" | jq -r '.assets[].browser_download_url | select((endswith("amd64.deb")) and (contains("musl") | not))')
-    curl -sL "$DELTA_URL" -o delta.deb
-    sudo dpkg -i delta.deb >/dev/null
-    rm delta.deb
-    success
-  fi
-}
-
-function install_wezterm {
-  doing "Verifying wezterm version..."
-  WEZTERM_ENDPOINT=$(_get_release "wez/wezterm")
-  WEZTERM_LOCAL="$(wezterm --version 2>/dev/null | cut -d' ' -f2 | cut -d'-' -f1)"
-  WEZTERM_LATEST=$(curl -sL "$WEZTERM_ENDPOINT" | jq -r '.tag_name' | cut -d' ' -f2 | cut -d'-' -f1)
-  success
-  if [[ "$WEZTERM_LATEST" == "$WEZTERM_LOCAL" ]]; then
-    success_msg "Latest wezterm is installed ( v$WEZTERM_LATEST )"
-  else
-    doing "Installing kitty v$WEZTERM_LATEST..."
-    WEZTERM_URL=$(curl -sL "$WEZTERM_ENDPOINT" | jq -r '.assets[].browser_download_url | select(endswith("Ubuntu22.04.deb "))')
-    curl -sL "$WEZTERM_URL" -o wezterm.deb
-    sudo dpkg -i wezterm.deb >/dev/null
-    rm wezterm.deb
-    success
-  fi
-}
-
-function install_starship {
-  doing "Verifying starship version..."
-  STARSHIP_ENDPOINT=$(_get_release "starship/starship")
-  STARSHIP_LOCAL=$(_extract_version "$(starship -V 2>/dev/null)")
-  STARSHIP_LATEST=$(_extract_version "$(curl -sL "$STARSHIP_ENDPOINT" | jq -r '.tag_name')")
-  success
-  if [[ "$STARSHIP_LATEST" == "$STARSHIP_LOCAL" ]]; then
-    success_msg "Latest starship is installed ( v$STARSHIP_LATEST )"
-  else
-    doing "Installing starship v$STARSHIP_LATEST..."
-    STARSHIP_URL=$(curl -sL "$STARSHIP_ENDPOINT" | jq -r '.assets[].browser_download_url | select(contains("starship-x86_64") and endswith("gnu.tar.gz"))')
-    curl -sL "$STARSHIP_URL" -o starship.tgz
-    tar xf starship.tgz >/dev/null
-    sudo install starship /usr/local/bin/starship
-    rm starship starship.tgz
-    success
-  fi
+    sudo usermod -aG docker "$(whoami)"
 }
 
 setup_timezone
 upgrade_packages
-install_ripgrep
-install_git
-install_neovim
-install_bat
-install_eza
-install_delta
-install_wezterm
-install_starship
