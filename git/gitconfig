@@ -79,3 +79,6 @@ pretty = "%C(yellow)%h%Creset %C(auto)%d%Creset %s %C(green)%ah %Creset %C(cyan)
 
 [log]
 abbrevCommit = true
+
+[includeIf "gitdir:~/work/"]
+	path = ~/work/.config/gitconfig
