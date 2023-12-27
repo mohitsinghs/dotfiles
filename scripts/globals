@@ -1,0 +1,15 @@
+#!/bin/bash
+# Install python3 with some tools
+#
+# Usage : curl -fsSL sh.mohitsingh.in/globals | bash
+
+pipx install httpie
+pipx install yt-dlp
+
+sudo npm i -g \
+  @mohitsingh/eslint-config \
+  @rushstack/eslint-patch \
+  eslint \
+  serve \
+  surge \
+  @vscode/vsce
