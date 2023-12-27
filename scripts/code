@@ -8,7 +8,7 @@ sudo echo ""
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # install dotfiles if not found
-DOTLOC="$HOME/Projects/configs/dotfiles"
+DOTLOC="$HOME/projects/configs/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
   source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi
@@ -66,36 +66,15 @@ extensions=(
   \  zxh404.vscode-proto3
   \ )
 
-function install_code {
+function link_config {
   # user location
   CONFIG_PATH="$HOME/.config/VSCodium"
   USER_PATH="$CONFIG_PATH/User"
-
-  doing "Verifying VSCodium version..."
-  VSC_ENDPOINT="https://api.github.com/repos/VSCodium/vscodium/releases/latest"
-  VSC_LOCAL=$(codium --version 2>/dev/null | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
-  VSC_LATEST=$(curl -sL $VSC_ENDPOINT | jq -r '.tag_name' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
-  success
-  if [[ "$VSC_LATEST" == "$VSC_LOCAL" ]]; then
-    success_msg "Latest VSCodium is installed ( v$VSC_LATEST )"
-  else
-    doing "Installing VSCodium v$VSC_LATEST"
-    VSC_URL=$(curl -sL $VSC_ENDPOINT | jq -r '.assets[].browser_download_url | select(endswith("amd64.deb"))')
-    curl -sL "$VSC_URL" -o vscodium.deb
-    sudo dpkg -i vscodium.deb
-    rm vscodium.deb
-    success
-  fi
-}
-
-function link_config {
   # Link config
   doing "Linking VSCodium config..."
   mkdir -p "$USER_PATH"
-  [[ -L "$USER_PATH/settings.json" ]] && unlink "$USER_PATH/settings.json"
-  [[ -L "$CONFIG_PATH/product.json" ]] && unlink "$CONFIG_PATH/product.json"
-  ln -s "$DOTLOC/code/settings.json" "$USER_PATH/settings.json"
-  ln -s "$DOTLOC/code/product.json" "$CONFIG_PATH/product.json"
+  ln -sf "$DOTLOC/code/settings.json" "$USER_PATH/settings.json"
+
   success
 }
 
@@ -113,6 +92,5 @@ function install_extensions {
   success
 }
 
-install_code
 link_config
 install_extensions
