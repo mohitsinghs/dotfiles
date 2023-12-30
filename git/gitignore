@@ -17,3 +17,5 @@
 
 # dev containers
 .devcontainer
+
+# vi: ft=gitignore

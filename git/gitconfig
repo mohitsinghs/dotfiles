@@ -81,4 +81,6 @@ pretty = "%C(yellow)%h%Creset %C(auto)%d%Creset %s %C(green)%ah %Creset %C(cyan)
 abbrevCommit = true
 
 [includeIf "gitdir:~/work/"]
-	path = ~/work/.config/gitconfig
+path = ~/work/.config/gitconfig
+
+# vi: ft=gitconfig
