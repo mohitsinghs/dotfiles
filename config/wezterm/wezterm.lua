@@ -9,6 +9,7 @@ require("status")
 config.color_scheme = "tokyonight-storm"
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
+config.font_size = 11
 config.line_height = 1.25
 config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
