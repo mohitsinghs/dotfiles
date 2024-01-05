@@ -3,8 +3,8 @@ local wezterm = require("wezterm")
 local function get_font(name)
   return wezterm.font_with_fallback({
     name,
-    { family = "SymbolsNFM", scale = 0.8 },
-    "SegoeUIEmoji",
+    { family = "Symbols Nerd Font" },
+    "Segoe UI Emoji",
   })
 end
 
