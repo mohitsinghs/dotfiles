@@ -16,6 +16,7 @@ config.show_tab_index_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 24
 config.default_workspace = "home"
+config.front_end = "WebGpu"
 
 config.font = fonts.Book
 config.font_rules = {
