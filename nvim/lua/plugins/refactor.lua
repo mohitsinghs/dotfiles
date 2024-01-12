@@ -83,6 +83,12 @@ return {
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function(args)
+          if vim.tbl_contains(eslintd_ft, vim.api.nvim_buf_get_option(args.buf, "filetype")) then
+            vim.lsp.buf_request_sync(args.buf, "workspace/executeCommand", {
+              command = "_typescript.organizeImports",
+              arguments = { vim.api.nvim_buf_get_name(args.buf) },
+            }, 500)
+          end
           require("conform").format({ bufnr = args.buf })
         end,
       })
