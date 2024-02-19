@@ -4,6 +4,7 @@ return {
   "cssls",
   "html",
   "dockerls",
+  "docker_compose_language_service",
   "tailwindcss",
   "jsonls",
   "gopls",
