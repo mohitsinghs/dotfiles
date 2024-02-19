@@ -75,6 +75,30 @@ local function configFrom(colors)
     }
   end
 
+  local git_branch = {
+    {
+      function()
+        return ""
+      end,
+      color = { fg = colors.bg_dark },
+      cond = conditions.check_git_workspace,
+      padding = 0,
+    },
+    {
+      "branch",
+      icon = "",
+      cond = conditions.check_git_workspace,
+      color = { fg = colors.purple, gui = "bold", bg = colors.bg_dark },
+    },
+    {
+      function()
+        return "▊"
+      end,
+      color = { fg = colors.blue },
+      padding = 0,
+    },
+  }
+
   local ext_fugitive = {
     sections = {
       lualine_c = wrap_start(function()
@@ -95,7 +119,12 @@ local function configFrom(colors)
   }
 
   local ext_neotree = {
-    sections = {},
+    sections = {
+      lualine_c = wrap_start(function()
+        return "  Neotree"
+      end, colors.cyan),
+      lualine_x = git_branch,
+    },
     filetypes = { "neo-tree" },
   }
 
@@ -190,29 +219,7 @@ local function configFrom(colors)
     cond = conditions.hide_in_width,
   })
 
-  ins_right({
-    function()
-      return ""
-    end,
-    color = { fg = colors.bg_dark },
-    cond = conditions.check_git_workspace,
-    padding = 0,
-  })
-
-  ins_right({
-    "branch",
-    icon = "",
-    cond = conditions.check_git_workspace,
-    color = { fg = colors.purple, gui = "bold", bg = colors.bg_dark },
-  })
-
-  ins_right({
-    function()
-      return "▊"
-    end,
-    color = { fg = colors.blue },
-    padding = 0,
-  })
+  vim.list_extend(config.sections.lualine_x, git_branch)
 
   return config
 end
