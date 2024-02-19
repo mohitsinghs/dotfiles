@@ -4,7 +4,7 @@ local function get_font(name)
   return wezterm.font_with_fallback({
     name,
     { family = "Symbols Nerd Font" },
-    "Segoe UI Emoji",
+    "DejaVu Sans Mono",
   })
 end
 
