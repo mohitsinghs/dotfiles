@@ -7,14 +7,21 @@ promptinit
 
 eval "$(starship init zsh)"
 
-# enable zsh syntax highlighting and autosuggestions
+# enable zsh syntax highlighting, autosuggestions and fzf
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/fzf/key-bindings.zsh
 
 export GOROOT="/usr/lib/go"
 export GOPATH="$HOME/.go"
 export CARGOPATH="$HOME/.cargo"
 export RUSTC_WRAPPER=sccache
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--layout=reverse \
+--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 
 # create required directories for go
 test -d "${GOPATH}" || mkdir "${GOPATH}" &>/dev/null
