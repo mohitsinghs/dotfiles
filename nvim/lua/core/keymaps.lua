@@ -25,8 +25,8 @@ M.core = function()
   nmap("<leader>c", "lua require('core.themer').cycle_theme()")
 
   -- Tasklist
-  nmap("<leader>mm", "lua require('core.tasklist').toggle_task()")
-  nmap("<leader>mn", "lua require('core.tasklist').new_task()")
+  nmap("<leader>tt", "lua require('core.tasklist').toggle_task()")
+  nmap("<leader>tn", "lua require('core.tasklist').new_task()")
 end
 
 M.fugitive = function()
@@ -34,7 +34,7 @@ M.fugitive = function()
   nmap("<leader>gs", "Git")
   nmap("<leader>gp", "Git push")
   nmap("<leader>gf", "Git push --force")
-  nmap("<leader>pl", "Git pull")
+  nmap("<leader>gu", "Git pull")
 end
 
 M.vgit = function()
