@@ -48,6 +48,7 @@ sudo pacman -S \
   lm_sesors \
   tldr \
   direnv \
-  usb_modeswitch
+  usb_modeswitch \
+  pgformatter
 
 sudo usermod -aG docker "$(whoami)"
