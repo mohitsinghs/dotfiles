@@ -1,5 +1,6 @@
 local options = {
   defaults = {
+    prompt_prefix = "   ",
     layout_config = {
       prompt_position = "top",
     },
