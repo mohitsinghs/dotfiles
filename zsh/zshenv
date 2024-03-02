@@ -24,33 +24,16 @@ alias vim="nvim"
 alias py="python"
 alias c="cargo"
 alias d="docker"
-alias k="kubectl"
 alias hf="hyperfine"
 alias rs="rustc -C opt-level=z -C strip=symbols"
-
-# alias for pacman
+alias pn="pnpm"
 alias pm="sudo pacman"
 
 # better ls output using eza
 alias la="eza -la --group-directories-first"
 alias ll="eza -l --group-directories-first"
 alias ls="eza"
-
-# npm alias
-alias np="npm"
-alias nr="npm run"
-alias ng="sudo npm -g"
-
-# docker and swarm aliases
-alias dbuild="docker buildx b"
-alias dslogs="docker service logs -f"
-alias dsrm="docker service rm"
-alias dsps="docker service ps"
-alias dsls="docker service ls"
-alias dsll="docker stack ps"
-alias dsup="docker stack deploy -c"
-alias dsdown="docker stack rm"
-
+#
 # sudoed aliases, shell reloading and pretty paths
 alias sudo="sudo "
 alias reload="exec $SHELL -l"
