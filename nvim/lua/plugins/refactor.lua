@@ -53,7 +53,7 @@ return {
         prepend_args = { "-i", "2" },
       }
       formatters.pg_format = {
-        prepend_args = { "--spaces2", "--no-space-function", "--format-type" },
+        prepend_args = { "--spaces", "2", "--no-space-function", "--format-type" },
       }
       formatters.prettierd = {
         env = {
