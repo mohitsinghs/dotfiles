@@ -18,7 +18,7 @@ fi
 touch "$HOME/.hushlogin"
 
 # link required files
-for file in "$DOTLOC"/{zsh,git}/*; do
+for file in "$DOTLOC"/git/*; do
   filename=$(basename "$file")
   doing "Linking $filename"
   [[ -L "$HOME/.$filename" ]] && unlink "$HOME/.$filename" &>/dev/null
