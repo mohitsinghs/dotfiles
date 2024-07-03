@@ -15,13 +15,7 @@ M.core = function()
   nmap("<leader>wtf", "w !sudo tee >/dev/null %")
   nmap("<leader>i", "Inspect")
 
-  -- Buffer navigation
-  nmap("<F1>", "bd")
-  nmap("<F2>", "bp")
-  nmap("<F3>", "bn")
-
-  -- Switch bg and themes
-  nmap("<leader>t", "lua require('core.themer').switch_bg()")
+  -- Switch themes
   nmap("<leader>c", "lua require('core.themer').cycle_theme()")
 
   -- Tasklist

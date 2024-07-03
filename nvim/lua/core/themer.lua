@@ -3,14 +3,6 @@ local M = {}
 local themes = { "night", "moon", "storm" }
 vim.api.nvim_set_var("current_theme", 3)
 
-M.switch_bg = function()
-  if vim.opt.background:get() == "dark" then
-    vim.opt.background = "light"
-  else
-    vim.opt.background = "dark"
-  end
-end
-
 M.cycle_theme = function()
   local current_index = vim.api.nvim_get_var("current_theme")
   local next_index
@@ -29,7 +21,9 @@ M.set_theme = function(theme)
   require("tokyonight").setup({
     on_highlights = require("core.highlights").on_highlights,
     style = theme,
-    light_style = theme,
+    plugins = {
+      auto = true,
+    },
     styles = {
       sidebars = "normal",
     },
