@@ -8,7 +8,7 @@ source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 doing "Ensuring dotfiles..."
 if [[ ! -d $DOTLOC ]]; then
   # create dotfiles directory and clone
-  [[ ! -d "$HOME/projects/configs" ]] && mkdir -p "$HOME/projects/configs"
+  [[ ! -d "$HOME/Projects/configs" ]] && mkdir -p "$HOME/Projects/configs"
   if [[ ! -x "$(command -v git)" ]]; then
     sudo pacman -S git
   fi

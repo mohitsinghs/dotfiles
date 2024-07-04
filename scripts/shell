@@ -9,7 +9,7 @@
 source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/_utils)"
 
 # Install dotfiles if not found
-DOTLOC="$HOME/projects/configs/dotfiles"
+DOTLOC="$HOME/Projects/configs/dotfiles"
 if [[ ! -d $DOTLOC ]]; then
   source /dev/stdin <<<"$(curl -fsSL sh.mohitsingh.in/repo)"
 fi

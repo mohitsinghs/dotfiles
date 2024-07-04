@@ -33,7 +33,7 @@ if status is-interactive
   alias ..="cd .."
   alias ...="cd ../.."
   alias ....="cd ../../.."
-  alias p="cd ~/projects"
+  alias p="cd ~/Projects"
 
   # Use clipboard for xclip
   alias xclip="xclip -selection clipboard"
