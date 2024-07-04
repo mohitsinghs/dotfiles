@@ -1,6 +1,6 @@
 local function attached_servers()
-  local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-  local clients = vim.lsp.get_active_clients()
+  local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
+  local clients = vim.lsp.get_clients()
   local servers = vim.tbl_filter(function(client)
     return client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft)
   end, clients)
