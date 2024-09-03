@@ -2,6 +2,9 @@
 success_symbol = "[▲](bold purple)"
 error_symbol = "[▲](bold red)"
 
+[git_status]
+deleted = ""
+
 [directory]
 read_only = " 󰌾"
 
