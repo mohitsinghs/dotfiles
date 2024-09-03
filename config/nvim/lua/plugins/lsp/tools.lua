@@ -1,5 +1,4 @@
 return {
-  "eslint_d",
   "flake8",
   "golangci-lint",
   "hadolint",

@@ -14,5 +14,5 @@ return {
   "bashls",
   "graphql",
   "taplo",
-  "eslint",
+  "biome",
 }

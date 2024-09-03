@@ -14,7 +14,7 @@ local prettierd_ft = {
   "graphql",
 }
 
-local eslintd_ft = {
+local biome_ft = {
   "javascript",
   "javascriptreact",
   "typescript",
@@ -33,8 +33,8 @@ return {
         sh = { "shellcheck" },
       }
 
-      for _, ft in ipairs(eslintd_ft) do
-        require("lint").linters_by_ft[ft] = { "eslint_d" }
+      for _, ft in ipairs(biome_ft) do
+        require("lint").linters_by_ft[ft] = { "biomejs" }
       end
 
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -83,7 +83,7 @@ return {
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function(args)
-          if vim.tbl_contains(eslintd_ft, vim.api.nvim_get_option_value("filetype", { buf = args.buf })) then
+          if vim.tbl_contains(biome_ft, vim.api.nvim_get_option_value("filetype", { buf = args.buf })) then
             vim.lsp.buf_request_sync(args.buf, "workspace/executeCommand", {
               command = "_typescript.organizeImports",
               arguments = { vim.api.nvim_buf_get_name(args.buf) },

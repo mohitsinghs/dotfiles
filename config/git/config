@@ -43,7 +43,7 @@ fx = "!f() { git commit --fixup=\"$1\"; git rebase -i --autosquash \"$1~\"; }; f
 
 [push]
 default = current
-followTags = true
+autoSetupRemote = true
 
 [pull]
 ff = only

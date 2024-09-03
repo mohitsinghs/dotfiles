@@ -17,30 +17,15 @@ fi
 # No help from next launch
 touch "$HOME/.hushlogin"
 
-# link required files
-for file in "$DOTLOC"/git/*; do
-  filename=$(basename "$file")
-  doing "Linking $filename"
-  [[ -L "$HOME/.$filename" ]] && unlink "$HOME/.$filename" &>/dev/null
-  ln -s "$file" "$HOME/.$filename"
-  success
-done
-
-# setup nvim config
-NVIM_CONF="$HOME/.config"
-doing "Linking nvim config..."
-if [[ ! -d "$NVIM_CONF" ]]; then
-  mkdir -p "$NVIM_CONF"
+# setup config directories
+XDG_CONF="$HOME/.config"
+if [[ ! -d "$XDG_CONF" ]]; then
+  mkdir -p "$XDG_CONF"
 fi
-[[ -L "$NVIM_CONF/nvim" ]] && unlink "$NVIM_CONF/nvim" &>/dev/null
-ln -sf "$DOTLOC/nvim" "$NVIM_CONF/nvim"
-success
-
-# link other config
 for file in "$DOTLOC"/config/*; do
   file=$(basename "$file")
-  doing "Linking $file"
-  [[ -L "$HOME/.config/$file" ]] && unlink "$HOME/.config/$file" &>/dev/null
-  ln -s "$DOTLOC/config/$file" "$HOME/.config/$file"
+  doing "Linking $file..."
+  [[ -L "$XDG_CONF/$file" ]] && unlink "$XDG_CONF/$file" &>/dev/null
+  ln -s "$DOTLOC/config/$file" "$XDG_CONF/$file"
   success
 done

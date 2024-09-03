@@ -13,7 +13,7 @@
 curl -fsSL sh.mohitsingh.in/essential | bash
 ```
 
-### Wezterm, Startship and Neovim
+### Config for wezterm, neovim, starship, git and fish
 
 ```bash
 curl -fsSL sh.mohitsingh.in/shell | bash
