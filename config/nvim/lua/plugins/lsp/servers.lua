@@ -1,6 +1,6 @@
 return {
   "pyright",
-  "tsserver",
+  "ts_ls",
   "cssls",
   "html",
   "dockerls",

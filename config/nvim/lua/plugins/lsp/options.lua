@@ -44,7 +44,7 @@ M.settings = {
 }
 
 M.init = {
-  tsserver = {
+  ts_ls = {
     hostInfo = "neovim",
     preferences = {
       importModuleSpecifierPreference = "project-relative",
