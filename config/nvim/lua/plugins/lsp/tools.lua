@@ -8,4 +8,5 @@ return {
   "prettierd",
   "shfmt",
   "stylua",
+  "biome",
 }
