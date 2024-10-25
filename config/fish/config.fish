@@ -14,8 +14,7 @@ if status is-interactive
   fzf --fish | source
 
   # starship prompt
-  source (/usr/bin/starship init fish --print-full-init | psub)
-
+  starship init fish | source
   export DIRENV_LOG_FORMAT=
   direnv hook fish | source
 
