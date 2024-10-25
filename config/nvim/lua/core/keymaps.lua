@@ -15,9 +15,6 @@ M.core = function()
   nmap("<leader>wtf", "w !sudo tee >/dev/null %")
   nmap("<leader>i", "Inspect")
 
-  -- Switch themes
-  nmap("<leader>c", "lua require('core.themer').cycle_theme()")
-
   -- Tasklist
   nmap("<leader>tt", "lua require('core.tasklist').toggle_task()")
   nmap("<leader>tn", "lua require('core.tasklist').new_task()")
