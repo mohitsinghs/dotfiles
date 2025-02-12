@@ -41,9 +41,15 @@ function M.new_task()
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
   local current_line = lines[lnum]
   local leads = current_line:match("^%s*")
-  table.insert(lines, lnum + 1, leads .. new_task_str)
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-  vim.api.nvim_win_set_cursor(0, { lnum + 1, #leads + string.len(new_task_str) + 1 })
+  if string.match(current_line, "^%s*$") then
+    lines[lnum] = leads .. new_task_str
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+    vim.api.nvim_win_set_cursor(0, { lnum, #leads + string.len(new_task_str) + 1 })
+  else
+    table.insert(lines, lnum + 1, leads .. new_task_str)
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+    vim.api.nvim_win_set_cursor(0, { lnum + 1, #leads + string.len(new_task_str) + 1 })
+  end
 end
 
 return M
