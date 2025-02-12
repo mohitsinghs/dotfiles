@@ -18,10 +18,10 @@ M.toggle_task = function()
   local bufnr = vim.api.nvim_get_current_buf()
   local line = vim.api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, false)[1]
 
-  if string.match(line, "%[ %]") then
+  if string.match(line, "%- +%[ %]") then
     local new_line = string.gsub(line, "%[ %]", "[x]", 1)
     vim.api.nvim_buf_set_lines(bufnr, lnum - 1, lnum, false, { new_line })
-  elseif string.match(line, "%[x%]") then
+  elseif string.match(line, "%- +%[x%]") then
     local new_line = string.gsub(line, "%[x%]", "[ ]", 1)
     vim.api.nvim_buf_set_lines(bufnr, lnum - 1, lnum, false, { new_line })
   end
