@@ -1,12 +1,3 @@
-local function attached_servers()
-  local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
-  local clients = vim.lsp.get_clients()
-  local servers = vim.tbl_filter(function(client)
-    return client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft)
-  end, clients)
-  return servers
-end
-
 local function configFrom(colors)
   local mode_color = {
     n = colors.cyan,
@@ -39,10 +30,6 @@ local function configFrom(colors)
       local filepath = vim.fn.expand("%:p:h")
       local gitdir = vim.fn.finddir(".git", filepath .. ";")
       return gitdir and #gitdir > 0 and #gitdir < #filepath
-    end,
-    has_servers = function()
-      local servers = attached_servers()
-      return #servers > 0
     end,
   }
 
@@ -170,7 +157,6 @@ local function configFrom(colors)
 
   ins_left({ "filename", cond = conditions.buffer_not_empty })
   ins_left({ icon = "󰈚", "filesize", cond = conditions.buffer_not_empty })
-  ins_left({ "location", icon = "", cond = conditions.buffer_not_empty })
 
   ins_left({ "diagnostics", sources = { "nvim_diagnostic" } })
 
@@ -181,15 +167,7 @@ local function configFrom(colors)
   })
 
   ins_right({
-    function()
-      local servers = attached_servers()
-      local server_names = vim.tbl_map(function(client)
-        return client.name
-      end, servers)
-      local sep = ", "
-      return table.concat(server_names, sep)
-    end,
-    cond = conditions.has_servers,
+    "lsp_status",
     icon = " ",
   })
 
