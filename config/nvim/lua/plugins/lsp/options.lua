@@ -41,6 +41,16 @@ M.settings = {
       },
     },
   },
+  pyright = {
+    pyright = {
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        ignore = { "*" },
+      },
+    },
+  },
 }
 
 M.init = {

@@ -19,6 +19,7 @@ return {
         "buffers",
       },
       source_selector = {
+        truncation_character = "",
         winbar = true,
         sources = {
           { source = "filesystem", display_name = "  Files" },
@@ -36,6 +37,7 @@ return {
           padding = 1,
         },
         icon = {
+          folder_empty_open = "",
           folder_closed = "",
           folder_open = "",
           folder_empty = "",

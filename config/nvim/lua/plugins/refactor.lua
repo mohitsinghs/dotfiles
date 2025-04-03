@@ -29,7 +29,7 @@ return {
       require("lint").linters_by_ft = {
         go = { "golangcilint" },
         dockerfile = { "hadolint" },
-        python = { "flake8" },
+        python = { "ruff" },
         sh = { "shellcheck" },
       }
 
@@ -64,13 +64,13 @@ return {
       local opts = {
         formatters_by_ft = {
           lua = { "stylua" },
-          python = { "isort", "black" },
+          python = { "ruff_organize_imports", "ruff_format" },
           sql = { "pg_format" },
           sh = { "shfmt" },
         },
         format_on_save = {
           lsp_fallback = true,
-          timeout_ms = 500,
+          timeout_ms = 5000,
         },
       }
 

@@ -15,4 +15,5 @@ return {
   "graphql",
   "taplo",
   "biome",
+  "ruff",
 }
