@@ -166,10 +166,7 @@ local function configFrom(colors)
     end,
   })
 
-  ins_right({
-    "lsp_status",
-    icon = " ",
-  })
+  ins_right({ "lsp_status" })
 
   ins_right({
     "o:encoding",
