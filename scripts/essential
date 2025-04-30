@@ -49,6 +49,15 @@ sudo pacman -S \
   tldr \
   direnv \
   usb_modeswitch \
-  pgformatter
+  pgformatter \
+  uv \
+  rofi \
+  i3-wm \
+  i3status \
+  i3lock \
+  dunst \
+  picom \
+  feh \
+  xss-lock
 
 sudo usermod -aG docker "$(whoami)"
