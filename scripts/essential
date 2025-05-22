@@ -3,6 +3,13 @@
 #
 # Usage: curl -fsSL sh.mohitsingh.in/essential | bash
 
+sudo pacman -S \
+  fish \
+  sudo \
+  curl \
+  xorg \
+  networkmanager
+
 sudo pacman -Syu
 sudo pacman -S \
   aria2 \
@@ -22,16 +29,11 @@ sudo pacman -S \
   zstd \
   python \
   python-pip \
-  python-pipx \
-  zsh \
-  zsh-syntax-highlighting \
-  zsh-autosuggestions \
   git \
   neovim \
   firefox \
   vlc \
   rhythmbox \
-  gnome-browser-connector \
   docker \
   docker-buildx \
   docker-compose \
@@ -58,6 +60,8 @@ sudo pacman -S \
   dunst \
   picom \
   feh \
-  xss-lock
+  xss-lock \
+  ranger \
+  openssh
 
 sudo usermod -aG docker "$(whoami)"

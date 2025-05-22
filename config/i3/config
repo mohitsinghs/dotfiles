@@ -16,7 +16,10 @@ font pango:monospace 9
 
 # xss-lock: secure screen locking before suspend.
 # Uses i3lock with a specified background image.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -u -i '$HOME/Pictures/wallpaper.jpg'
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -u -i ~/Pictures/wallpaper.jpg
+
+# load ~/.Xresources
+exec --no-startup-id xrdb -merge ~/.Xresources
 
 # dunst: Notification daemon
 exec --no-startup-id dunst
@@ -25,7 +28,7 @@ exec --no-startup-id dunst
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 
 # feh: Set the background wallpaper
-exec feh --bg-scale '$HOME/Pictures/wallpaper.jpg'
+exec feh --bg-scale ~/Pictures/wallpaper.jpg
 
 #################################
 # Volume Control Bindings (PulseAudio)
@@ -217,4 +220,4 @@ client.unfocused        #24283b #24283b #c0caf5 #24283b #24283b
 gaps inner 8
 
 # Hide gaps when only one window is visible for a cleaner look
-smart_gaps inverse_outer
+smart_gaps on
