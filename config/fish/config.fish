@@ -15,7 +15,6 @@ if status is-interactive
 
   # starship prompt
   starship init fish | source
-  export DIRENV_LOG_FORMAT=
   export NODE_REPL_HISTORY=""
   direnv hook fish | source
 
