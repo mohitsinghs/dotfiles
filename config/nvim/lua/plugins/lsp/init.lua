@@ -8,7 +8,14 @@ end
 vim.diagnostic.config({
   virtual_lines = true,
   virtual_text = false,
-  signs = { Error = " ", Warn = " ", Hint = " ", Info = " " },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+  },
 })
 
 return {
