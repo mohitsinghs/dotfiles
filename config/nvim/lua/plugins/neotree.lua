@@ -42,6 +42,7 @@ return {
           folder_open = "",
           folder_empty = "",
           default = "",
+          use_filtered_colors = false,
         },
         modified = {
           symbol = "",
