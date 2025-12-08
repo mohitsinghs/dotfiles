@@ -16,6 +16,7 @@ config.show_tab_index_in_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_max_width = 24
 config.default_workspace = "home"
+config.enable_wayland = false
 
 config.font = fonts.Book
 config.font_rules = {
@@ -30,9 +31,10 @@ config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.window_frame = { font = fonts.Book }
 
 config.colors = { tab_bar = { background = colors.bg } }
-config.command_palette_bg_color = colors.bg
-config.command_palette_fg_color = colors.blue
+config.command_palette_bg_color = colors.bg_dark
+config.command_palette_fg_color = colors.dark5
 config.command_palette_font_size = 12
+config.command_palette_rows = 16
 
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 5000 }
 config.keys = keys
