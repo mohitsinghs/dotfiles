@@ -3,7 +3,7 @@ local M = {}
 vim.g.mapleader = ","
 
 local function nmap(key, cmd)
-  vim.api.nvim_set_keymap("n", key, ":<C-u>" .. cmd .. "<cr>", { noremap = true, silent = true })
+  vim.keymap.set("n", key, ":" .. cmd .. "<cr>", { noremap = true, silent = true })
 end
 
 M.core = function()
