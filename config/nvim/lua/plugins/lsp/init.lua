@@ -6,7 +6,6 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "b0o/schemastore.nvim",
-      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       local mason = require("mason")
@@ -52,10 +51,6 @@ return {
           vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
         end,
       })
-
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-      vim.lsp.config("*", { capabilities = capabilities })
     end,
   },
 }

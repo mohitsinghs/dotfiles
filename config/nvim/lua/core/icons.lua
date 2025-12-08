@@ -1,4 +1,6 @@
-local icons_map = {
+local M = {}
+
+M.icons = {
   Text = "  ",
   Method = "  ",
   Function = "  ",
@@ -26,11 +28,11 @@ local icons_map = {
   TypeParameter = "  ",
 }
 
-return {
-  icon_for = function(name)
-    if icons_map[name] ~= nil then
-      return icons_map[name]
-    end
-    return icons_map["Class"]
-  end,
-}
+M.icon_for = function(name)
+  if M.icons[name] ~= nil then
+    return M.icons[name]
+  end
+  return M.icons["Class"]
+end
+
+return M

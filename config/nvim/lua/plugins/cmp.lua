@@ -1,14 +1,12 @@
 local icons = require("core.icons")
 
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local iconize = function(_, vim_item)
-  vim_item.kind = icons.icon_for(vim_item.kind)
-  return vim_item
+local function get_icon_and_hl(ctx)
+  if ctx.source_name == "Path" then
+    local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+    return dev_icon or ctx.kind, dev_hl or ctx.kind_hl
+  else
+    return icons.icon_for(ctx.kind), ctx.kind_hl
+  end
 end
 
 return {
@@ -18,54 +16,42 @@ return {
     opts = {},
   },
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    "saghen/blink.cmp",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "folke/lazydev.nvim",
     },
-    opts = function()
-      local cmp = require("cmp")
-      return {
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete({}),
-          ["<CR>"] = cmp.mapping.confirm({
-            select = false,
-          }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        }),
-        formatting = {
-          fields = { "kind", "abbr" },
-          format = iconize,
+    version = "1.*",
+    opts = {
+      keymap = { preset = "super-tab" },
+      appearance = { kind_icons = icons },
+      completion = {
+        documentation = { auto_show = true },
+        trigger = { show_on_keyword = true },
+        menu = {
+          draw = {
+            columns = { { "kind_icon", "label" } },
+            components = {
+              kind_icon = {
+                text = function(ctx)
+                  local icon, _ = get_icon_and_hl(ctx)
+                  return icon .. ctx.icon_gap
+                end,
+                highlight = function(ctx)
+                  local _, hl = get_icon_and_hl(ctx)
+                  return hl
+                end,
+              },
+            },
+          },
         },
-        experimental = {
-          ghost_text = true,
-        },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp", max_item_count = 10 },
-          { name = "path", max_item_count = 5 },
-          { name = "nvim_lsp_signature_help" },
-          { name = "lazydev", group_index = 0 },
-        }),
-      }
-    end,
+      },
+      sources = {
+        default = { "lsp", "path", "buffer" },
+        lua = { inherit_defaults = true, "lazydev" },
+      },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+      signature = { enabled = true },
+    },
+    opts_extend = { "sources.default" },
   },
 }
