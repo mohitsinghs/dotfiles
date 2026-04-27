@@ -1,2 +1,5 @@
-# fish shell variables
+# Ignore universal variables
 fish_variables
+
+# Ignore frozen configurations
+conf.d/fish_frozen_*.fish

@@ -1,5 +1,6 @@
 if status is-interactive
   set -g fish_greeting
+  set -g fish_key_bindings fish_vi_key_bindings
 
   # repo jump
   source (repo sh fish -b z | psub)
