@@ -15,6 +15,7 @@ return {
         dockerfile = { "hadolint" },
         python = { "ruff" },
         sh = { "shellcheck" },
+        sql = { "sqruff" },
       }
 
       for _, ft in ipairs(biome_ft) do
@@ -32,20 +33,18 @@ return {
     "stevearc/conform.nvim",
     event = "BufReadPre",
     config = function()
-      local formatters = require("conform").formatters
-      formatters.shfmt = {
-        prepend_args = { "-i", "2" },
-      }
-      formatters.pg_format = {
-        prepend_args = { "--spaces", "2", "--no-space-function", "--format-type" },
-      }
-
       local opts = {
+        formatters = {
+          shfmt = { prepend_args = { "-i", "2" } },
+          pg_format = { prepend_args = { "--spaces", "2", "--no-space-function", "--format-type" } },
+          caddy = { command = "caddy", args = { "fmt", "-" }, stdin = true },
+        },
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "ruff_organize_imports", "ruff_format" },
-          sql = { "pg_format" },
+          sql = { "sqruff" },
           sh = { "shfmt" },
+          markdown = { "prettierd" },
         },
         format_on_save = {
           lsp_fallback = true,

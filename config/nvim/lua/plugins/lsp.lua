@@ -11,8 +11,7 @@ return {
       local mason = require("mason")
       local mason_lspconfig = require("mason-lspconfig")
       local registry = require("mason-registry")
-      local servers = require("plugins.lsp.servers")
-      local tools = require("plugins.lsp.tools")
+      local lists = require("core.lists")
 
       vim.diagnostic.config({
         virtual_lines = true,
@@ -28,13 +27,10 @@ return {
       })
 
       mason.setup()
-      mason_lspconfig.setup({
-        ensure_installed = servers,
-        automatic_enable = true,
-      })
 
+      -- auto install all tools
       registry.refresh(function()
-        for _, pkg_name in ipairs(tools) do
+        for _, pkg_name in ipairs(lists.tools) do
           local pkg = registry.get_package(pkg_name)
           if not pkg:is_installed() then
             pkg:install()
@@ -51,6 +47,18 @@ return {
           vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
         end,
       })
+
+      mason_lspconfig.setup({
+        ensure_installed = lists.servers,
+        automatic_enable = true,
+      })
+
+      -- vim.iter(lists.servers):each(function(server)
+      --   local has_custom_opts, opts = pcall(require, "lsp." .. server)
+      --   if has_custom_opts then
+      --     vim.lsp.config[server] = opts
+      --   end
+      -- end)
     end,
   },
 }

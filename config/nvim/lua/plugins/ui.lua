@@ -2,7 +2,13 @@ return {
   {
     "folke/tokyonight.nvim",
     config = function()
-      require("core.themer").set_theme("storm")
+      ---@diagnostic disable-next-line: missing-fields
+      require("tokyonight").setup({
+        on_highlights = require("core.highlights").on_highlights,
+        style = "storm",
+        styles = { sidebars = "normal" },
+      })
+      vim.cmd.colorscheme("tokyonight")
     end,
     lazy = true,
   },

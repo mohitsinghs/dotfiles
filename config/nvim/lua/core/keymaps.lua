@@ -55,7 +55,7 @@ M.telescope = function()
   nmap("<leader>ld", "Telescope lsp_definitions")
   nmap("<leader>li", "Telescope lsp_implementations")
   nmap("<leader>lr", "Telescope lsp_references")
-  nmap("<leader>ls", "lua require('lists.symbols').list()")
+  nmap("<leader>ls", "lua require('core.symbols').list()")
   nmap("<leader>lh", "lua vim.lsp.buf.signature_help()")
   nmap("<leader>lt", "Telescope lsp_type_definitions")
 end

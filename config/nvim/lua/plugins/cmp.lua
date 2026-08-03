@@ -22,6 +22,8 @@ return {
       "folke/lazydev.nvim",
     },
     version = "1.*",
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {
       keymap = { preset = "super-tab" },
       appearance = { kind_icons = icons },
@@ -30,6 +32,7 @@ return {
         trigger = { show_on_keyword = true },
         menu = {
           draw = {
+            treesitter = { "lsp" },
             columns = { { "kind_icon", "label" } },
             components = {
               kind_icon = {
@@ -48,7 +51,6 @@ return {
       },
       sources = {
         default = { "lsp", "path", "buffer" },
-        lua = { inherit_defaults = true, "lazydev" },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },
       signature = { enabled = true },
