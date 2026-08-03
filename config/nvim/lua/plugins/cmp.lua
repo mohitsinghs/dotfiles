@@ -3,10 +3,11 @@ local icons = require("core.icons")
 local function get_icon_and_hl(ctx)
   if ctx.source_name == "Path" then
     local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
-    return dev_icon or ctx.kind, dev_hl or ctx.kind_hl
-  else
-    return icons.icon_for(ctx.kind), ctx.kind_hl
+    if dev_icon then
+      return dev_icon .. " ", dev_hl
+    end
   end
+  return icons.icon_for(ctx.kind), ctx.kind_hl
 end
 
 return {
