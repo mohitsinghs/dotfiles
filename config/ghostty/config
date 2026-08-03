@@ -1,14 +1,13 @@
 # Theme
 theme = TokyoNight Storm
 
-# Fonts
-font-family = Operator Mono
-font-family-bold = Operator Mono Bold
-font-family-italic = Operator Mono Bold Italic
-font-family-bold-italic = Operator Mono Bold Italic
-font-family = Symbols Nerd Font
-font-family = DejaVu Sans Mono
-font-size = 12
+# Font family and fallback
+font-family = "Operator Mono"
+font-family = "Symbols Nerd Font"
+font-family = "DejaVu Sans Mono"
+
+# Font size and spacing
+font-size = 12.5
 adjust-cell-height = 25%
 
 # Splits
@@ -22,9 +21,6 @@ gtk-toolbar-style = flat
 gtk-titlebar-style = tabs
 window-theme = ghostty
 window-titlebar-background = #1f2335
-window-padding-x = 0
-window-padding-y = 0
-gtk-custom-css = style.css
 
 # Keybindings
 keybind = ctrl+b>shift+quote=new_split:down
