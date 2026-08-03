@@ -24,7 +24,6 @@ M.fugitive = function()
   -- Git
   nmap("<leader>gs", "Git")
   nmap("<leader>gp", "Git push")
-  nmap("<leader>gf", "Git push --force")
   nmap("<leader>gu", "Git pull")
 end
 
